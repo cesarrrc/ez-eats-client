@@ -41,17 +41,29 @@ const Locations = (props: Props) => {
               hoveredLocation={hoveredLocation}
               setHoveredLocation={setHoveredLocation}
               hoveringLocation={hoveringLocation}
-              />
-              ))}
+            />
+          ))}
         </section>
         <div className={classes.map_outer}>
           <div className={classes.map}>
             {isLoaded ? (
-              <Map
-              hoveredLocation={hoveredLocation}
-              setHoveredLocation={setHoveredLocation}
-              hoveringLocation={hoveringLocation}
-              />
+              <>
+                {/* <div
+                  style={{
+                    display: "flex",
+                    width: "100%",
+                    height: 200,
+                    backgroundColor: "red",
+                    position: "absolute",
+                    zIndex: 5,
+                  }}
+                ></div> */}
+                <Map
+                  hoveredLocation={hoveredLocation}
+                  setHoveredLocation={setHoveredLocation}
+                  hoveringLocation={hoveringLocation}
+                />
+              </>
             ) : (
               "Loading..."
             )}

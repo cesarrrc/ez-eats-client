@@ -71,6 +71,7 @@
 .map {
   display: flex;
   flex: 1;
+  position: relative;
 }
 
 @media (max-width: 800px) {
