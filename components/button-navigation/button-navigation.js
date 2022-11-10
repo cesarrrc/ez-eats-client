@@ -11,8 +11,8 @@ export default function ButtonNavigation({ content, img, path, img2 }) {
         <Image className={classes.img2} src={img2} alt={content} fill />
         <Link href={`${path}`}>
           <h3 className={classes.content}>
-            {content.split("\\n").map((el) => (
-              <div>{el}</div>
+            {content.split("\\n").map((el, i) => (
+              <div key={i}>{el}</div>
             ))}
           </h3>
         </Link>
