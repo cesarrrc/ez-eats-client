@@ -66,7 +66,8 @@ const Map = ({
       }
       // mapRef.current?.panTo(latLng);
       mapRef.current?.panTo(latLng);
-      mapRef.current?.setZoom(11);
+      mapRef.current?.setZoom(12);
+      // mapRef.current?.setZoom(10);
       setTimeout(() => {
         mapRef.current?.setZoom(14);
       }, 1000);
@@ -75,33 +76,31 @@ const Map = ({
   );
 
   useEffect(() => {
-    if (!hoveredLocation) {
-      mapRef.current?.setZoom(10);
-      setTimeout(() => {
-        mapRef.current?.panTo(center);
-      }, 500);
-      return;
-    }
-
     if (!hoveringLocation) {
-      mapRef.current?.panTo(center);
-      mapRef.current?.setZoom(10);
+      return;
+    }
+    if (!hoveredLocation) {
       return;
     }
 
+    mapRef.current?.setZoom(11);
     let timeout = setTimeout(() => {
       getLocationForMarker(hoveredLocation.address);
     }, 1000);
-
+    
     return () => {
-      mapRef.current?.setZoom(12);
       clearTimeout(timeout);
+      mapRef.current?.setZoom(12);
+      setTimeout(() => {
+        mapRef.current?.setZoom(9);
+        mapRef.current?.panTo(center);
+      }, 600);
     };
   }, [hoveredLocation, hoveringLocation]);
 
   return (
     <GoogleMap
-      zoom={10}
+      zoom={9}
       center={center}
       mapContainerClassName={classes.map_container}
       options={options}
