@@ -14,7 +14,6 @@ const Layout = ({ children }: Props) => {
       <main
         style={{
           display: "flex",
-          // flexGrow: 1,
           width: "100%",
           height: "100%",
           justifyContent: "center",
