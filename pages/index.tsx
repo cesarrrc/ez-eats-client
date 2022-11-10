@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import Head from "next/head";
-import ButtonNavigation from "../components/ButtonNavigation/ButtonNavigation";
+import ButtonNavigation from "../components/button-navigation/button-navigation";
 
 import styles from "../styles/Home.module.css";
 import classes from "./home.module.css";

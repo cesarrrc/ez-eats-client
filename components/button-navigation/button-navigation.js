@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "./ButtonNavigation.module.css";
+import classes from "./button-navigation.module.css";
 import Link from "next/link";
 import Image from "next/image";
 
