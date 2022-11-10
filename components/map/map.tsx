@@ -15,6 +15,7 @@ import { GoogleMap, Marker } from "@react-google-maps/api";
 import { Location } from "../../lib/data";
 import { LatLngLiteral, MapOptions } from "../../lib/types";
 import classes from "./map.module.css";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 type Props = {
   hoveredLocation: Location | null;
@@ -28,6 +29,8 @@ const Map = ({
   hoveringLocation,
 }: Props) => {
   const [mapInstance, setMapInstance] = useState<null | google.maps.Map>(null);
+
+  const windowSize = useWindowDimensions();
 
   const mapRef = useRef<google.maps.Map>();
 
@@ -52,30 +55,47 @@ const Map = ({
     }, 100);
   }, []);
 
-  const getLocationForMarker = useCallback(async (address: string) => {
-    const result = await getGeocode({ address });
-    console.log(result, "RESULTS!!");
-    const latLng = await getLatLng(result[0]);
-    console.log(latLng);
-    mapRef.current?.panTo(latLng);
-    mapRef.current?.setZoom(12);
-  }, []);
+  const getLocationForMarker = useCallback(
+    async (address: string) => {
+      const result = await getGeocode({ address });
+      const latLng = await getLatLng(result[0]);
+      if (windowSize.innerWidth > 800) {
+        latLng.lat = latLng.lat + 0.01;
+      } else {
+        latLng.lng = latLng.lng - 0.01;
+      }
+      // mapRef.current?.panTo(latLng);
+      mapRef.current?.panTo(latLng);
+      mapRef.current?.setZoom(11);
+      setTimeout(() => {
+        mapRef.current?.setZoom(14);
+      }, 1000);
+    },
+    [windowSize]
+  );
 
   useEffect(() => {
-    console.log(hoveredLocation);
-
-    if (hoveredLocation) {
-      console.log(mapRef.current);
-      getLocationForMarker(hoveredLocation.address);
+    if (!hoveredLocation) {
+      mapRef.current?.setZoom(10);
+      setTimeout(() => {
+        mapRef.current?.panTo(center);
+      }, 500);
       return;
     }
+
     if (!hoveringLocation) {
       mapRef.current?.panTo(center);
       mapRef.current?.setZoom(10);
+      return;
     }
 
+    let timeout = setTimeout(() => {
+      getLocationForMarker(hoveredLocation.address);
+    }, 1000);
+
     return () => {
-      setHoveredLocation(null);
+      mapRef.current?.setZoom(12);
+      clearTimeout(timeout);
     };
   }, [hoveredLocation, hoveringLocation]);
 
@@ -97,6 +117,7 @@ const Map = ({
               url: "/img/ez-marker.png",
               scaledSize: new google.maps.Size(70, 70),
             }}
+            animation={window.google.maps.Animation.DROP}
           />
           <Marker
             position={{ lat: 29.931086529440847, lng: -98.07150050052239 }}
@@ -105,6 +126,7 @@ const Map = ({
               url: "/img/ez-marker.png",
               scaledSize: new google.maps.Size(70, 70),
             }}
+            animation={window.google.maps.Animation.DROP}
           />
           <Marker
             position={{ lat: 30.061958411230297, lng: -98.09287987726255 }}
@@ -113,6 +135,7 @@ const Map = ({
               url: "/img/ez-marker.png",
               scaledSize: new google.maps.Size(70, 70),
             }}
+            animation={window.google.maps.Animation.DROP}
           />
         </>
       )}
