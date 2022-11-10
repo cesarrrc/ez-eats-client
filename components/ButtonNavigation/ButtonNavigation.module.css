@@ -1,0 +1,113 @@
+.button_nav_container {
+  border-radius: 15px;
+  max-width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border: 4px solid transparent;
+}
+
+.button_nav_container:hover {
+  border: 4px solid whitesmoke;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.image_container {
+  overflow: hidden;
+  border-radius: 15px;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  cursor: pointer;
+  position: relative;
+}
+
+/* img {
+  overflow: hidden;
+  border-radius: 15px;
+} */
+
+.image_container .img1 {
+  overflow: hidden;
+  opacity: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 2s ease-in-out;
+  border-radius: 15px;
+}
+
+.image_container:hover .img1 {
+  overflow: hidden;
+  border-radius: 15px;
+  opacity: 0;
+  transform: scale(1.25);
+}
+
+.img2 {
+  overflow: hidden;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 2s ease-in-out;
+  border-radius: 15px;
+  transform: scale(1.25);
+}
+
+.image_container:hover .img2 {
+  overflow: hidden;
+  border-radius: 15px;
+  opacity: 0.75;
+  transform: scale(1);
+}
+
+.content {
+  border-radius: 15px;
+  opacity: 0;
+  position: absolute;
+  color: whitesmoke;
+  padding: 10px;
+  font-size: 18px;
+  top: 45%;
+  left: 50%;
+  width: auto;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  pointer-events: pointer;
+  transition: 2.5s ease-in-out;
+  pointer-events: none;
+  visibility: hidden;
+  white-space: pre-wrap;
+
+  background-color: rgb(0, 0, 0, 0.5);
+
+  /* z-index: 4; */
+}
+
+.button_nav_container:hover .content {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+  border-radius: 15px;
+  animation: disable-pointer-events 500ms;
+  transition: 0.5s ease-in-out;
+}
+
+.button_nav_container:hover .content:hover {
+  background-color: rgb(0, 0, 0);
+}
+
+.image_container a {
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+@keyframes disable-pointer-events {
+  0%,
+  10% {
+    pointer-events: none;
+  }
+}

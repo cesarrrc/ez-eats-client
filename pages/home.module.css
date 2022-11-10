@@ -1,0 +1,20 @@
+.grid_container {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: repeat(2, 350px);
+  grid-auto-rows: 300px;
+  grid-gap: 20px;
+}
+
+@media (max-width: 800px) {
+    .grid_container {
+        grid-template-columns: minmax(200px, 400px);
+    }
+}
+@media (max-width: 400px) {
+    .grid_container {
+        grid-template-columns: minmax(200px, 400px);
+        grid-auto-rows: 250px;
+  }
+}

@@ -1,0 +1,156 @@
+.nav_container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 100%;
+  height: auto;
+  background-color: black;
+  align-items: center;
+}
+
+.logo_container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.button_logo {
+  align-self: center;
+  align-self: start;
+  width: auto;
+  height: 140px;
+  justify-content: flex-start;
+  color: white !important;
+  margin-left: 40px !important;
+  border-radius: 10px !important;
+}
+
+.button_logo img {
+  width: auto;
+  height: 100%;
+}
+
+.nav {
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  margin-right: 20px !important;
+  flex-direction: column;
+}
+
+.nav ul {
+  display: flex;
+  flex-direction: "row";
+  list-style-type: none;
+}
+
+.nav_2 {
+  padding-right: 30px;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  font-size: large;
+  display: none;
+}
+
+.logo_container_2 {
+  display: none;
+}
+
+.hamburger {
+  display: none;
+}
+
+.drawer {
+  background-color: rgb(23, 23, 23) !important;
+  border-radius: 15px 0px 0px 15px;
+  opacity: 0.9;
+  justify-content: space-between;
+}
+
+.drawer_nav {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.drawer_nav button {
+  font-size: 12px;
+  padding: 0 !important;
+  margin: 14px 40px !important;
+  color: whitesmoke !important;
+}
+
+.drawer_nav li {
+  font-size: 12px;
+  padding: 0;
+  margin: 0;
+}
+
+.button_main {
+  width: auto;
+  color: whitesmoke !important;
+  font-size: 16px !important;
+  padding-left: 3px !important;
+  text-transform: none !important;
+  font-family: "Cinzel", Cursive;
+}
+
+.button {
+  width: auto;
+  color: white !important;
+  margin: 20px !important;
+}
+
+.nav_order_social {
+  display: flex;
+  width: 100%;
+  justify-content: space-around !important;
+  align-items: center;
+}
+
+.nav_order_social {
+  margin: 0 0;
+}
+
+.responsive_order_button {
+  display: none;
+}
+
+@media (max-width: 1000px) {
+  .logo_container {
+    display: none;
+  }
+
+  .button_logo {
+    margin-left: 20px !important;
+  }
+
+  .logo_container_2 {
+    margin-top: 10px;
+    display: block;
+  }
+}
+
+@media (max-width: 800px) {
+  .nav {
+    display: none;
+  }
+
+  .nav_2 {
+    display: flex;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .nav_order_social {
+    display: none;
+  }
+
+  .responsive_order_button {
+    display: flex;
+    justify-content: center;
+  }
+}

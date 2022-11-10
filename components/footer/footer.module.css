@@ -1,0 +1,29 @@
+.footer_container {
+  height: 100px;
+  background-color: black;
+  margin-top: 20px;
+}
+
+.grid_container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 100px;
+}
+
+.grid_container p {
+  font-size: 10px;
+  display: flex;
+  justify-content: right;
+  margin-right: 20px;
+  align-items: center;
+}
+
+@media (max-width: 800px) {
+  .grid_container p {
+    font-size: 8px;
+  }
+
+  nav .icon {
+    font-size: 30px;
+  }
+}
