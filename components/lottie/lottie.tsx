@@ -22,18 +22,9 @@ const LottieControl = ({ lottie, wh, style }: Props) => {
   const lottieRef = useRef();
 
   // const winDim = useWindowDimensions();
-  // const defaultOptions = {
-  //   loop: true,
-  //   autoplay: true,
-  //   animationData: lottie,
-  //   rendererSettings: {
-  //     preserveAspectRatio: "xMidYMid slice",
-  //   },
-  // };
 
   useEffect(() => {
-    console.log(lottieRef.current);
-    lottieRef.current.setSpeed(0.5);
+    lottieRef?.current?.setSpeed(0.5);
   }, []);
 
   return (
@@ -46,11 +37,6 @@ const LottieControl = ({ lottie, wh, style }: Props) => {
         preserveAspectRatio: "xMidYMid slice",
       }}
       style={style}
-      // width={500}
-      // height={500}
-      // options={defaultOptions}
-      // height={wh.h}
-      // width={wh.w}
     />
   );
 };
