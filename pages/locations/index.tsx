@@ -28,11 +28,8 @@ const GET_RESTAURANTS = gql`
     }
   }
 `;
-const Locations = (
-  {
-    /*data*/
-  }
-) => {
+const Locations = ({ data }) => {
+  console.log(data);
   const [hoveringLocation, setHoveringLocation] = useState<boolean>(false);
   const [hoveredLocation, setHoveredLocation] = useState<Location | null>(null);
   const { isLoaded } = useLoadScript({
