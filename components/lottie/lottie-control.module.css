@@ -1,0 +1,13 @@
+.lottie {
+  overflow: visible !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+}
+
+.lottie svg {
+  /* width: 100% !important; */
+  /* height: 100% !important; */
+}

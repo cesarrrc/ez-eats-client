@@ -17,3 +17,16 @@ export enum ContactDataInitial {
 export type LatLngLiteral = google.maps.LatLngLiteral;
 export type DirectionsResult = google.maps.DirectionsResult;
 export type MapOptions = google.maps.MapOptions;
+
+export type NotificationData = {
+  title: string;
+  message: string;
+  status: string;
+  lottie?: any | null;
+};
+
+export type NotificationContextType = {
+  notification: null | NotificationData | undefined;
+  showNotification: (notificationData: NotificationData) => void;
+  hideNotification: () => void;
+};

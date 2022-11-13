@@ -12,9 +12,8 @@ h5,
 h6,
 label,
 button {
-  display: block;
+  /* display: block; */
   font-family: "Cinzel", Cursive !important;
-  white-space: pre;
   text-transform: none !important;
   /* font-size: 44px; */
 }
@@ -36,6 +35,15 @@ textarea {
 a {
   text-decoration: none;
   color: inherit;
+}
+
+.notification_container {
+  /* position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10000; */
 }
 
 .App {

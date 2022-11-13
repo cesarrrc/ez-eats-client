@@ -8,12 +8,27 @@ import PageHeading from "../../components/page-heading/page-heading";
 import classes from "./locations.module.css";
 import { Location, LOCATION_LIST } from "../../lib/data";
 import LocationItem from "../../components/location-item/location-item";
+import { gql } from "@apollo/client";
+import client from "../../lib/apollo";
 
 type Props = {};
 
 const googleMapsLibraries: LoadScriptProps["libraries"] = ["places"];
 
-const Locations = (props: Props) => {
+const GET_RESTAURANTS = gql`
+  query {
+    allRestaurant {
+      _id
+      name
+      address
+      type
+      slug {
+        current
+      }
+    }
+  }
+`;
+const Locations = ({ data }) => {
   const [hoveringLocation, setHoveringLocation] = useState<boolean>(false);
   const [hoveredLocation, setHoveredLocation] = useState<Location | null>(null);
   const { isLoaded } = useLoadScript({
@@ -75,3 +90,18 @@ const Locations = (props: Props) => {
 };
 
 export default Locations;
+
+export async function getStaticProps() {
+  try {
+    const { data } = await client.query({
+      query: GET_RESTAURANTS,
+    });
+    return {
+      props: {
+        data: data,
+      },
+    };
+  } catch (error) {
+    console.log(error);
+  }
+}
