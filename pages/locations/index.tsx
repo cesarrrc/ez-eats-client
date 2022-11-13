@@ -10,8 +10,7 @@ import { Location, LOCATION_LIST } from "../../lib/data";
 import LocationItem from "../../components/location-item/location-item";
 import { gql } from "@apollo/client";
 import client from "../../lib/apollo";
-
-type Props = {};
+import { AllRestaurantsType } from "../../lib/types";
 
 const googleMapsLibraries: LoadScriptProps["libraries"] = ["places"];
 
@@ -28,7 +27,12 @@ const GET_RESTAURANTS = gql`
     }
   }
 `;
-const Locations = ({ data }) => {
+
+type Props = {
+  data: AllRestaurantsType;
+};
+
+const Locations = ({ data }: Props) => {
   console.log(data);
   const [hoveringLocation, setHoveringLocation] = useState<boolean>(false);
   const [hoveredLocation, setHoveredLocation] = useState<Location | null>(null);

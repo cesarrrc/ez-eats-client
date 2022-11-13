@@ -30,3 +30,17 @@ export type NotificationContextType = {
   showNotification: (notificationData: NotificationData) => void;
   hideNotification: () => void;
 };
+
+export type Slug = {};
+
+export type AllRestaurantsType = {
+  _typename: "restaurant";
+  _id: string;
+  name: string;
+  address: string;
+  type: string;
+  slug: {
+    current: string;
+    _typename: string;
+  };
+};
