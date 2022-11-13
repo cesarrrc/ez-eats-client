@@ -6,7 +6,7 @@ import React, {
   MutableRefObject,
   RefObject,
 } from "react";
-import Lottie from "lottie-react";
+import Lottie, { LottieRef, LottieRefCurrentProps } from "lottie-react";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import * as animationData from "../../lib/lottie/thumbs-up.json";
 
@@ -19,7 +19,7 @@ type Props = {
 };
 
 const LottieControl = ({ lottie, wh, style }: Props) => {
-  const lottieRef = useRef();
+  const lottieRef: LottieRef = useRef<LottieRef>(null);
 
   // const winDim = useWindowDimensions();
 

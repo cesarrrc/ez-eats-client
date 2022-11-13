@@ -44,22 +44,22 @@ const Contact = (props: Props) => {
     e.preventDefault();
     setIsSubmit(true);
     try {
-      const response = await sendEmail(contactBody);
-      console.log(response);
+      // const response = await sendEmail(contactBody);
+      throw new Error("oops!");
       notificationCtx.showNotification({
         title: "Your message was sent!",
         message: "Thanks for reaching out, we will get back to you soon!",
         status: "success",
         lottie: thumbsUp,
       });
-      if (!response) {
-        throw new Error("Something went wrong");
-      }
-      if (!response.ok) {
-        throw new Error(
-          "Unable to send a message at this time, please try again later. Call or message us here:"
-        );
-      }
+      // if (!response) {
+      //   throw new Error("Something went wrong");
+      // }
+      // if (!response.ok) {
+      //   throw new Error(
+      //     "Unable to send a message at this time, please try again later. Call or message us here:"
+      //   );
+      // }
       setIsSubmit(false);
     } catch (error: any) {
       console.log(error);

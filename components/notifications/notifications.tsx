@@ -20,7 +20,7 @@ const Notifications = ({ title, message, status, lottie }: Props) => {
 
   useEffect(() => {
     setIsBrowser(typeof window !== "undefined");
-  }, []);
+  }, [isBrowser]);
 
   if (isBrowser) {
     return ReactDOM.createPortal(
