@@ -1,4 +1,9 @@
-import React, { useContext } from "react";
+import React, {
+  DetailedHTMLProps,
+  HTMLAttributes,
+  MouseEventHandler,
+  useContext,
+} from "react";
 import NotificationContext from "../../store/notification-context";
 
 import classes from "./overlay.module.css";
@@ -15,15 +20,11 @@ const Overlay = ({ children, closeModal }: Props) => {
       <div
         id="overlay"
         className={classes.overlay}
-        onClick={(e) => {
-          // e.stopPropagation();
-          // e.nativeEvent.stopImmediatePropagation();
-          console.log(e.target.id);
-          if (e.target.id !== "overlay") {
+        onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+          if (e.currentTarget.id !== "overlay") {
             console.log("overlay1");
             return;
           }
-          console.log("overlay2");
 
           closeModal();
         }}
