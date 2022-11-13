@@ -19,7 +19,7 @@ type Props = {
 };
 
 const LottieControl = ({ lottie, wh, style }: Props) => {
-  const lottieRef: LottieRef = useRef<LottieRef>(null);
+  const lottieRef = useRef<LottieRefCurrentProps | null>(null);
 
   // const winDim = useWindowDimensions();
 
