@@ -14,11 +14,10 @@ import classes from "./lottie-control.module.css";
 
 type Props = {
   lottie: any | null;
-  wh: { w: number; h: number };
   style: any;
 };
 
-const LottieControl = ({ lottie, wh, style }: Props) => {
+const LottieControl = ({ lottie, style }: Props) => {
   const lottieRef = useRef<LottieRefCurrentProps | null>(null);
 
   // const winDim = useWindowDimensions();
