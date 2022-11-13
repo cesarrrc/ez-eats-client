@@ -33,14 +33,16 @@ export type NotificationContextType = {
 
 export type Slug = {};
 
-export type AllRestaurantsType = {
-  _typename: "restaurant";
-  _id: string;
-  name: string;
-  address: string;
-  type: string;
-  slug: {
-    current: string;
+export type AllRestaurantsType = [
+  {
     _typename: string;
-  };
-};
+    _id: string;
+    name: string;
+    address: string;
+    type: string;
+    slug: {
+      current: string;
+      _typename: string;
+    };
+  }
+];

@@ -11,6 +11,7 @@ import LocationItem from "../../components/location-item/location-item";
 import { gql } from "@apollo/client";
 import client from "../../lib/apollo";
 import { AllRestaurantsType } from "../../lib/types";
+import { GetStaticProps, NextPage } from "next";
 
 const googleMapsLibraries: LoadScriptProps["libraries"] = ["places"];
 
@@ -33,7 +34,7 @@ type Props = {
 };
 
 const Locations = ({ data }: Props) => {
-  console.log(data);
+  console.log(data, "data");
   const [hoveringLocation, setHoveringLocation] = useState<boolean>(false);
   const [hoveredLocation, setHoveredLocation] = useState<Location | null>(null);
   const { isLoaded } = useLoadScript({
@@ -96,11 +97,12 @@ const Locations = ({ data }: Props) => {
 
 export default Locations;
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
   try {
     const { data } = await client.query({
       query: GET_RESTAURANTS,
     });
+    console.log(data, "data2");
     return {
       props: {
         data: data,
@@ -109,4 +111,4 @@ export async function getStaticProps() {
   } catch (error) {
     console.log(error);
   }
-}
+};
