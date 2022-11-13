@@ -23,10 +23,6 @@ const LottieControl = ({ lottie, wh, style }: Props) => {
 
   // const winDim = useWindowDimensions();
 
-  useEffect(() => {
-    lottieRef?.current?.setSpeed(0.5);
-  }, []);
-
   return (
     <Lottie
       lottieRef={lottieRef}
@@ -37,6 +33,25 @@ const LottieControl = ({ lottie, wh, style }: Props) => {
         preserveAspectRatio: "xMidYMid slice",
       }}
       style={style}
+      onDataReady={() => {
+        console.info("DATA READY!");
+      }}
+      onConfigReady={() => {
+        console.info("CONFIG READY!");
+      }}
+      onSegmentStart={(x) => {
+        console.info("SEGMENT START!", x);
+      }}
+      onDOMLoaded={() => {
+        console.info("DOM LOADED!");
+        lottieRef?.current?.setSpeed(0.5);
+      }}
+      onLoadedImages={() => {
+        console.info("IMAGES LOADED!");
+      }}
+      onLoopComplete={() => {
+        console.info("LOOP COMPLETE!");
+      }}
     />
   );
 };
