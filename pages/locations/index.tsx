@@ -15,20 +15,6 @@ import { GetStaticProps, NextPage } from "next";
 
 const googleMapsLibraries: LoadScriptProps["libraries"] = ["places"];
 
-const GET_RESTAURANTS = gql`
-  query {
-    allRestaurant {
-      _id
-      name
-      address
-      type
-      slug {
-        current
-      }
-    }
-  }
-`;
-
 type Props = {
   data: AllRestaurantsType;
 };
@@ -98,6 +84,20 @@ const Locations = ({ data }: Props) => {
 export default Locations;
 
 export const getStaticProps: GetStaticProps = async () => {
+  const GET_RESTAURANTS = gql`
+    query {
+      allRestaurant {
+        _id
+        name
+        address
+        type
+        slug {
+          current
+        }
+      }
+    }
+  `;
+
   const results = await client.query({
     query: GET_RESTAURANTS,
   });
