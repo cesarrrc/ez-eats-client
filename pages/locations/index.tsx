@@ -101,6 +101,10 @@ export const getStaticProps: GetStaticProps = async () => {
   const { data } = await client.query({
     query: GET_RESTAURANTS,
   });
+
+  if (!data) {
+    return { notFound: true };
+  }
   console.log(data, "data2");
   return {
     props: {
