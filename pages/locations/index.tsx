@@ -98,17 +98,17 @@ const Locations = ({ data }: Props) => {
 export default Locations;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { data } = await client.query({
+  const results = await client.query({
     query: GET_RESTAURANTS,
   });
-
-  if (!data) {
+  console.log(results);
+  if (!results) {
     return { notFound: true };
   }
-  console.log(data, "data2");
+  console.log(results, "data2");
   return {
     props: {
-      data: data,
+      data: results,
     },
   };
 };
