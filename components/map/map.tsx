@@ -9,11 +9,8 @@ import React, {
 } from "react";
 import { getGeocode, getLatLng } from "use-places-autocomplete";
 import { GoogleMap, Marker } from "@react-google-maps/api";
-// import Places from "./places";
-// import Distance from "./distance";
 
-import { Location } from "../../lib/data";
-import { LatLngLiteral, MapOptions } from "../../lib/types";
+import { LatLngLiteral, MapOptions, Location } from "../../lib/types";
 import classes from "./map.module.css";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 
@@ -21,16 +18,18 @@ type Props = {
   hoveredLocation: Location | null;
   setHoveredLocation: Dispatch<SetStateAction<Location | null>>;
   hoveringLocation: boolean;
+  marker_locations: string[];
 };
 
 const Map = ({
   hoveredLocation,
-  setHoveredLocation,
   hoveringLocation,
+  marker_locations,
 }: Props) => {
   const [mapInstance, setMapInstance] = useState<null | google.maps.Map>(null);
+  const [markers, setMarkers] = useState<LatLngLiteral[] | null>(null);
 
-  const windowSize = useWindowDimensions();
+  const winDim = useWindowDimensions();
 
   const mapRef = useRef<google.maps.Map>();
 
@@ -47,8 +46,26 @@ const Map = ({
     }),
     []
   );
+  console.log(marker_locations);
 
-  const onLoad = useCallback((map: google.maps.Map) => {
+  const getGeos = async (address: string[]) => {
+    const newLocations = await Promise.all(
+      address.map(async (location) => {
+        const res = await getGeocode({ address: location });
+        const latLng = getLatLng(res[0]);
+        return latLng;
+      })
+    );
+    setMarkers(await Promise.all(newLocations));
+  };
+
+  useEffect(() => {
+    if (marker_locations) {
+      getGeos(marker_locations);
+    }
+  }, []);
+
+  const onLoad = useCallback(async (map: google.maps.Map) => {
     mapRef.current = map;
     setTimeout(() => {
       setMapInstance(map);
@@ -59,7 +76,7 @@ const Map = ({
     async (address: string) => {
       const result = await getGeocode({ address });
       const latLng = await getLatLng(result[0]);
-      if (windowSize.innerWidth > 800) {
+      if (typeof winDim.width === "number" && winDim.width > 800) {
         latLng.lat = latLng.lat + 0.01;
       } else {
         latLng.lng = latLng.lng - 0.01;
@@ -72,7 +89,7 @@ const Map = ({
         mapRef.current?.setZoom(14);
       }, 1000);
     },
-    [windowSize]
+    [winDim]
   );
 
   useEffect(() => {
@@ -85,9 +102,11 @@ const Map = ({
 
     mapRef.current?.setZoom(11);
     let timeout = setTimeout(() => {
-      getLocationForMarker(hoveredLocation.address);
+      getLocationForMarker(
+        `${hoveredLocation.address.street_address} ${hoveredLocation.address.city_state_zip}`
+      );
     }, 1000);
-    
+
     return () => {
       clearTimeout(timeout);
       mapRef.current?.setZoom(12);
@@ -96,7 +115,7 @@ const Map = ({
         mapRef.current?.panTo(center);
       }, 600);
     };
-  }, [hoveredLocation, hoveringLocation]);
+  }, [hoveredLocation, hoveringLocation, markers]);
 
   return (
     <GoogleMap
@@ -107,10 +126,10 @@ const Map = ({
       onLoad={onLoad}
       mapTypeId="508945d8f58a5f97"
     >
-      {mapInstance && (
-        <>
+      {mapInstance &&
+        markers?.map((marker) => (
           <Marker
-            position={{ lat: 29.89860911020278, lng: -97.91561292603804 }}
+            position={marker}
             title="EZ-Eats"
             icon={{
               url: "/img/ez-marker.png",
@@ -118,26 +137,7 @@ const Map = ({
             }}
             animation={window.google.maps.Animation.DROP}
           />
-          <Marker
-            position={{ lat: 29.931086529440847, lng: -98.07150050052239 }}
-            title="EZ-Eats"
-            icon={{
-              url: "/img/ez-marker.png",
-              scaledSize: new google.maps.Size(70, 70),
-            }}
-            animation={window.google.maps.Animation.DROP}
-          />
-          <Marker
-            position={{ lat: 30.061958411230297, lng: -98.09287987726255 }}
-            title="EZ-Eats"
-            icon={{
-              url: "/img/ez-marker.png",
-              scaledSize: new google.maps.Size(70, 70),
-            }}
-            animation={window.google.maps.Animation.DROP}
-          />
-        </>
-      )}
+        ))}
     </GoogleMap>
   );
 };

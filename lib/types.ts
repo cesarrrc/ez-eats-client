@@ -33,16 +33,51 @@ export type NotificationContextType = {
 
 export type Slug = {};
 
+export type Location = {
+  image_src: string;
+  title: string;
+  business_phone: string;
+  slug: string;
+  address: Record<string, string>;
+};
+
 export type AllRestaurantsType = [
   {
-    _typename: string;
+    _typename?: string;
     _id: string;
     name: string;
-    address: string;
+    address: {
+      street_address: string;
+      city_state_zip: string;
+    };
+    phone_number: string;
     type: string;
+    description: string;
+    menu_categories: {
+      name: string;
+      dishes: {
+        price: string;
+        slug: {
+          current: string;
+        };
+      };
+    };
     slug: {
       current: string;
       _typename: string;
+    };
+    image: {
+      asset: {
+        title: string;
+        path: string;
+        url: string;
+        description: string;
+      };
+    };
+    meta_data: {
+      meta_title: string;
+      meta_description: string;
+      keywords: string;
     };
   }
 ];

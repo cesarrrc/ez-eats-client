@@ -10,9 +10,6 @@ import MailIcon from "@mui/icons-material/Mail";
 import EventIcon from "@mui/icons-material/Event";
 import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import SocialNav from "../social-nav-container/social-nav";
 import OrderOnlineButton from "../order-online-button/order-online-button";
 
