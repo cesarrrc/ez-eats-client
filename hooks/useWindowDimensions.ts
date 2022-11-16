@@ -1,31 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-// function getWindowSize() {
-//   const { innerWidth, innerHeight } = window;
-//   return { innerWidth, innerHeight };
-// }
-
-// const useWindowDimensions = () => {
-//   const [windowSize, setWindowSize] = useState(getWindowSize());
-
-//   useEffect(() => {
-//     console.log('effect')
-//     function handleWindowResize() {
-//       setWindowSize(getWindowSize());
-//     }
-
-//     window.addEventListener("resize", handleWindowResize);
-
-//     return () => {
-//       window.removeEventListener("resize", handleWindowResize);
-//     };
-//   }, []);
-
-//   return windowSize;
-// };
-
-export default useWindowDimensions;
-
 function useWindowDimensions() {
   // Initialize state with undefined width/height so server and client renders match
   // Learn more here: https://joshwcomeau.com/react/the-perils-of-rehydration/
@@ -58,3 +32,5 @@ function useWindowDimensions() {
   }, []); // Empty array ensures that effect is only run on mount
   return windowSize;
 }
+
+export default useWindowDimensions;
