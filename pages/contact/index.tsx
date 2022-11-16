@@ -1,4 +1,9 @@
-import React, { BaseSyntheticEvent, useState } from "react";
+import React, {
+  BaseSyntheticEvent,
+  ErrorInfo,
+  useContext,
+  useState,
+} from "react";
 import PageHeading from "../../components/page-heading/page-heading";
 import { IconButton, Button, Drawer } from "@mui/material";
 
@@ -6,11 +11,18 @@ import classes from "./contact.module.css";
 import formatPhoneNumber from "../../lib/formatPhoneNumber";
 import sendEmail from "../../lib/sendEmail";
 import { ContactDataInitial } from "../../lib/types";
+import LottieControl from "../../components/lottie/lottie";
+import NotificationContext from "../../store/notification-context";
+import spinner from "../../lib/lottie/spinner.json";
+import * as thumbsUp from "../../lib/lottie/thumbs-up.json";
+import * as errorLottie from "../../lib/lottie/error.json";
 
 type Props = {};
 
 const Contact = (props: Props) => {
+  const notificationCtx = useContext(NotificationContext);
   const [contactBody, setContactBody] = useState(ContactDataInitial);
+  const [isSubmit, setIsSubmit] = useState<boolean>(false);
 
   const handleChange = (e: BaseSyntheticEvent) => {
     const { name, value } = e.target;
@@ -26,14 +38,39 @@ const Contact = (props: Props) => {
     });
   };
 
-  console.log(contactBody);
+  console.log(isSubmit);
 
   const handleSubmit = async (e: BaseSyntheticEvent) => {
     e.preventDefault();
+    setIsSubmit(true);
+    try {
+      const response = await sendEmail(contactBody);
 
-    const response = await sendEmail(contactBody);
-
-    console.log(response, "response");
+      notificationCtx.showNotification({
+        title: "Your message was sent!",
+        message: "Thanks for reaching out, we will get back to you soon!",
+        status: "success",
+        lottie: thumbsUp,
+      });
+      if (!response) {
+        throw new Error("Something went wrong");
+      }
+      if (!response.ok) {
+        throw new Error(
+          "Unable to send a message at this time, please try again later. Call or message us here:"
+        );
+      }
+      setIsSubmit(false);
+    } catch (error: any) {
+      console.log(error);
+      setIsSubmit(false);
+      notificationCtx.showNotification({
+        title: "There was an error sending your message...",
+        message: error.message,
+        status: "error",
+        lottie: errorLottie,
+      });
+    }
   };
 
   const reset = () => {
@@ -64,7 +101,7 @@ const Contact = (props: Props) => {
               type="email"
               name="email"
               id="email"
-              required
+              // required
               onChange={handleChange}
               value={contactBody.email}
             />
@@ -100,8 +137,22 @@ const Contact = (props: Props) => {
             />
           </div>
           <div>
-            <Button type="submit" className={classes.submit}>
-              Submit
+            <Button
+              type="submit"
+              className={classes.submit}
+              disabled={isSubmit}
+            >
+              {isSubmit ? (
+                <LottieControl
+                  lottie={spinner}
+                  style={{
+                    width: 80,
+                    height: 80,
+                  }}
+                />
+              ) : (
+                "Submit"
+              )}
             </Button>
           </div>
           <div>

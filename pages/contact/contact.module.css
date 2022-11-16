@@ -73,6 +73,7 @@
   padding: 0 30px;
   border-radius: 10px;
   border: 2px black solid;
+  height: 32px;
 }
 .submit:hover {
   background-color: none !important;
@@ -80,6 +81,12 @@
 .submit:active {
   background-color: none !important;
   outline: none !important;
+}
+
+@media (max-width: 400px) {
+  .form_container {
+    padding: 0 10px;
+  }
 }
 
 @media (max-width: 800px) {

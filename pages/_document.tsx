@@ -38,6 +38,7 @@ class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
+          <div id="notifications" className="notification_container"></div>
         </body>
       </Html>
     );
