@@ -145,6 +145,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       return location.slug.current === params?.slug;
     }
   );
+  
   console.log(foundLocation);
   return {
     props: {
