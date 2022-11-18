@@ -120,7 +120,8 @@ export const getStaticPaths = async () => {
   const paths: { params: { slug: string } }[] = [];
   results.data.allRestaurant.forEach((location: LocationDetails) => {
     if (location.hidden) {
-      return null;
+      console.log("hiddden");
+      return;
     }
     return paths.push({ params: { slug: location.slug.current } });
   });
@@ -135,6 +136,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const results = await client.query({
     query: GET_RESTAURANTS,
   });
+  console.log(results);
   if (!results) {
     return { notFound: true };
   }
@@ -143,6 +145,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       return location.slug.current === params?.slug;
     }
   );
+  console.log(foundLocation);
   return {
     props: {
       data: foundLocation,
