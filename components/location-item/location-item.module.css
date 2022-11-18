@@ -99,7 +99,6 @@
   flex-direction: column;
   align-items: center;
   margin: 12px;
-  cursor: grab;
 }
 
 .responsive_container .responsive_container_header {

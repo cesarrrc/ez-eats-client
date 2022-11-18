@@ -2,7 +2,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 23px 13px;
+  border-radius: 15px;
   gap: 10px;
+  justify-content: center;
+  align-self: center;
+}
+.menu_item_container:hover {
+  border: whitesmoke solid 3px;
+  padding: 20px 10px;
 }
 
 .image_container {

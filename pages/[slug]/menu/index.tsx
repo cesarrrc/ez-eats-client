@@ -7,7 +7,7 @@ import MenuItem from "../../../components/menu-item/menu-item";
 import PageHeading from "../../../components/page-heading/page-heading";
 import construction from "../../../lib/lottie/construction.json";
 import client from "../../../lib/apollo";
-import { LocationDetails } from "../../../lib/types";
+import { AllRestaurantsType, LocationDetails } from "../../../lib/types";
 
 type Props = {
   data: LocationDetails;
@@ -113,15 +113,18 @@ export const getStaticPaths = async () => {
   const results = await client.query({
     query: GET_RESTAURANTS,
   });
+  console.log(results, "RSULTSSSSSSSS");
   if (!results) {
     return { notFound: true };
   }
-  const paths = results.data.allRestaurant.map((location: LocationDetails) => {
+  const paths: { params: { slug: string } }[] = [];
+  results.data.allRestaurant.forEach((location: LocationDetails) => {
     if (location.hidden) {
-      return;
+      return null;
     }
-    return { params: { slug: location.slug.current } };
+    return paths.push({ params: { slug: location.slug.current } });
   });
+  console.log(paths);
   return {
     paths,
     fallback: "blocking",
