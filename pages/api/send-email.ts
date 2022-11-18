@@ -14,7 +14,6 @@ export default async function handler(
   res: NextApiResponse<{ result: string; message: string; error?: string }>
 ) {
   const { name, email, phone, subject, message } = req.body;
-  console.log(req.body);
   try {
     const results = await mailClient.sendMail({
       to: "cesarcisneros9@gmail.com",
@@ -30,7 +29,6 @@ export default async function handler(
       .status(200)
       .json({ result: "success", message: "You're message has been sent." });
   } catch (error) {
-    console.log(error, "error!!!");
     res.status(400).json({
       result: "failure",
       message: "There was an error processing your request.",

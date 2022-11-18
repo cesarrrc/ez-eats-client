@@ -12,6 +12,7 @@ import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import SocialNav from "../social-nav-container/social-nav";
 import OrderOnlineButton from "../order-online-button/order-online-button";
+import { useRouter } from "next/router";
 
 export default function NavBar() {
   const [drawer, setDrawer] = useState(false);
@@ -19,6 +20,10 @@ export default function NavBar() {
   const toggleDrawer = () => {
     setDrawer(!drawer);
   };
+
+  const router = useRouter();
+
+  const menusPage = router.pathname === "/menus";
 
   return (
     <header>
@@ -98,8 +103,12 @@ export default function NavBar() {
             </li>
           </ul>
           <div className={classes.nav_order_social}>
-            <OrderOnlineButton />
-            <SocialNav header />
+            {!menusPage && (
+              <>
+                <OrderOnlineButton />
+                <SocialNav header />
+              </>
+            )}
           </div>
         </nav>
         <nav className={classes.nav_2}>
@@ -199,9 +208,11 @@ export default function NavBar() {
           <SocialNav />
         </Drawer>
       </div>
-      <div className={classes.responsive_order_button}>
-        <OrderOnlineButton />
-      </div>
+      {!menusPage && (
+        <div className={classes.responsive_order_button}>
+          <OrderOnlineButton />
+        </div>
+      )}
     </header>
   );
 }

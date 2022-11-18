@@ -4,28 +4,20 @@ import Map from "../../components/map/map";
 import PageHeading from "../../components/page-heading/page-heading";
 
 import classes from "./locations.module.css";
-import { Location } from "../../lib/types";
+import { Location, LocationDetails } from "../../lib/types";
 import LocationItem from "../../components/location-item/location-item";
 import { gql } from "@apollo/client";
 import client from "../../lib/apollo";
 import { AllRestaurantsType } from "../../lib/types";
 import { GetStaticProps, NextPage } from "next";
 
-const googleMapsLibraries: LoadScriptProps["libraries"] = ["places"];
-
 type Props = {
-  data: {
-    allRestaurant: AllRestaurantsType;
-  };
+  data: AllRestaurantsType;
 };
 
-const Locations = ({ data: { allRestaurant } }: Props) => {
+const Locations = ({ data }: Props) => {
   const [hoveringLocation, setHoveringLocation] = useState<boolean>(false);
   const [hoveredLocation, setHoveredLocation] = useState<Location | null>(null);
-  const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
-    libraries: googleMapsLibraries,
-  });
 
   return (
     <div className={classes.locations_page}>
@@ -41,7 +33,7 @@ const Locations = ({ data: { allRestaurant } }: Props) => {
           className={classes.locations_container}
           onMouseEnter={() => setHoveringLocation(true)}
         >
-          {allRestaurant.map((location, i, arr) => {
+          {data.map((location, i, arr) => {
             return (
               <LocationItem
                 title={location.name}
@@ -59,23 +51,17 @@ const Locations = ({ data: { allRestaurant } }: Props) => {
         </section>
         <div className={classes.map_outer}>
           <div className={classes.map}>
-            {isLoaded ? (
-              <>
-                <Map
-                  hoveredLocation={hoveredLocation}
-                  setHoveredLocation={setHoveredLocation}
-                  hoveringLocation={hoveringLocation}
-                  marker_locations={allRestaurant.map(
-                    (location) =>
-                      location.address.street_address +
-                      " " +
-                      location.address.city_state_zip
-                  )}
-                />
-              </>
-            ) : (
-              "Loading..."
-            )}
+            <Map
+              hoveredLocation={hoveredLocation}
+              setHoveredLocation={setHoveredLocation}
+              hoveringLocation={hoveringLocation}
+              marker_locations={data.map(
+                (location) =>
+                  location.address.street_address +
+                  " " +
+                  location.address.city_state_zip
+              )}
+            />
           </div>
         </div>
       </div>
@@ -88,16 +74,22 @@ export default Locations;
 export const getStaticProps: GetStaticProps = async () => {
   const GET_RESTAURANTS = gql`
     # Write your query or mutation here
-    query {
+    {
       allRestaurant {
         _id
         name
+        type
+        phone_number
+        description
+        hidden
+        hours {
+          days
+          hours
+        }
         address {
           street_address
           city_state_zip
         }
-        type
-        description
         image {
           asset {
             title
@@ -106,7 +98,6 @@ export const getStaticProps: GetStaticProps = async () => {
             description
           }
         }
-        phone_number
         menu_categories {
           name
         }
@@ -125,14 +116,17 @@ export const getStaticProps: GetStaticProps = async () => {
   const results = await client.query({
     query: GET_RESTAURANTS,
   });
-  console.log(results);
   if (!results) {
     return { notFound: true };
   }
-  console.log(results, "data2");
+  const newResults = results.data.allRestaurant.filter(
+    (location: LocationDetails) => {
+      return !location.hidden;
+    }
+  );
   return {
     props: {
-      data: results.data,
+      data: newResults,
     },
   };
 };

@@ -8,24 +8,35 @@ import React, {
   useEffect,
 } from "react";
 import { getGeocode, getLatLng } from "use-places-autocomplete";
-import { GoogleMap, Marker } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  LoadScriptNextProps,
+  Marker,
+  useLoadScript,
+} from "@react-google-maps/api";
 
 import { LatLngLiteral, MapOptions, Location } from "../../lib/types";
 import classes from "./map.module.css";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 type Props = {
-  hoveredLocation: Location | null;
-  setHoveredLocation: Dispatch<SetStateAction<Location | null>>;
-  hoveringLocation: boolean;
+  hoveredLocation?: Location | null;
+  setHoveredLocation?: Dispatch<SetStateAction<Location | null>>;
+  hoveringLocation?: boolean;
   marker_locations: string[];
 };
+
+const googleMapsLibraries: LoadScriptNextProps["libraries"] = ["places"];
 
 const Map = ({
   hoveredLocation,
   hoveringLocation,
   marker_locations,
 }: Props) => {
+  const { isLoaded } = useLoadScript({
+    googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
+    libraries: googleMapsLibraries,
+  });
   const [mapInstance, setMapInstance] = useState<null | google.maps.Map>(null);
   const [markers, setMarkers] = useState<LatLngLiteral[] | null>(null);
 
@@ -46,24 +57,25 @@ const Map = ({
     }),
     []
   );
-  console.log(marker_locations);
 
   const getGeos = async (address: string[]) => {
-    const newLocations = await Promise.all(
-      address.map(async (location) => {
-        const res = await getGeocode({ address: location });
-        const latLng = getLatLng(res[0]);
-        return latLng;
-      })
-    );
-    setMarkers(await Promise.all(newLocations));
+    if (mapInstance) {
+      const newLocations = await Promise.all(
+        address.map(async (location) => {
+          const res = await getGeocode({ address: location });
+          const latLng = getLatLng(res[0]);
+          return latLng;
+        })
+      );
+      setMarkers(await Promise.all(newLocations));
+    }
   };
 
   useEffect(() => {
-    if (marker_locations) {
+    if (marker_locations && mapInstance) {
       getGeos(marker_locations);
     }
-  }, []);
+  }, [mapInstance]);
 
   const onLoad = useCallback(async (map: google.maps.Map) => {
     mapRef.current = map;
@@ -118,28 +130,38 @@ const Map = ({
   }, [hoveredLocation, hoveringLocation, markers]);
 
   return (
-    <GoogleMap
-      zoom={9}
-      center={center}
-      mapContainerClassName={classes.map_container}
-      options={options}
-      onLoad={onLoad}
-      mapTypeId="508945d8f58a5f97"
-    >
-      {mapInstance &&
-        markers?.map((marker) => (
-          <Marker
-            position={marker}
-            title="EZ-Eats"
-            icon={{
-              url: "/img/ez-marker.png",
-              scaledSize: new google.maps.Size(70, 70),
-            }}
-            animation={window.google.maps.Animation.DROP}
-          />
-        ))}
-    </GoogleMap>
+    <>
+      {isLoaded && (
+        <GoogleMap
+          zoom={9}
+          center={center}
+          mapContainerClassName={classes.map_container}
+          options={options}
+          onLoad={onLoad}
+          mapTypeId="508945d8f58a5f97"
+        >
+          {mapInstance &&
+            markers?.map((marker) => (
+              <Marker
+                position={marker}
+                title="EZ-Eats"
+                icon={{
+                  url: "/img/ez-marker.png",
+                  scaledSize: new google.maps.Size(70, 70),
+                }}
+                animation={window.google.maps.Animation.DROP}
+              />
+            ))}
+        </GoogleMap>
+      )}
+    </>
   );
+};
+
+Map.defaultProps = {
+  hoveredLocation: null,
+  hoveringLocation: null,
+  setHoveredLocation: null,
 };
 
 export default Map;

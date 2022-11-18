@@ -1,0 +1,13 @@
+.menu_item_container {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  justify-content: space-evenly;
+}
+
+@media (max-width: 800px) {
+  .menu_item_container {
+    flex-direction: column;
+    gap: 80px;
+  }
+}

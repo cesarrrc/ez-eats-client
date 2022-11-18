@@ -1,7 +1,6 @@
 import { ContactData } from "./types";
 
 const sendEmail = async (data: ContactData) => {
-  console.log(data, "data");
   try {
     const response = await fetch(
       `/api/send-email`,

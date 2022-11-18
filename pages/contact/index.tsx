@@ -28,7 +28,6 @@ const Contact = (props: Props) => {
     const { name, value } = e.target;
     let formattedPhoneNumber;
     if (name === "phone") {
-      console.log(value);
 
       formattedPhoneNumber = formatPhoneNumber(e.target.value);
     }
@@ -37,8 +36,6 @@ const Contact = (props: Props) => {
       [name]: formattedPhoneNumber || value,
     });
   };
-
-  console.log(isSubmit);
 
   const handleSubmit = async (e: BaseSyntheticEvent) => {
     e.preventDefault();
@@ -62,7 +59,6 @@ const Contact = (props: Props) => {
       }
       setIsSubmit(false);
     } catch (error: any) {
-      console.log(error);
       setIsSubmit(false);
       notificationCtx.showNotification({
         title: "There was an error sending your message...",
