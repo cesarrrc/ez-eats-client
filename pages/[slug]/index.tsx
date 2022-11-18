@@ -147,15 +147,19 @@ export const getStaticPaths = async () => {
   const results = await client.query({
     query: GET_RESTAURANTS,
   });
+  console.log(results, "RSULTSSSSSSSS");
   if (!results) {
     return { notFound: true };
   }
-  const paths = results.data.allRestaurant.map((location: LocationDetails) => {
+  const paths: { params: { slug: string } }[] = [];
+  results.data.allRestaurant.forEach((location: LocationDetails) => {
     if (location.hidden) {
+      console.log("hiddden");
       return;
     }
-    return { params: { slug: location.slug.current } };
+    return paths.push({ params: { slug: location.slug.current } });
   });
+  console.log(paths);
   return {
     paths,
     fallback: "blocking",
@@ -166,6 +170,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const results = await client.query({
     query: GET_RESTAURANTS,
   });
+  console.log(results)
   if (!results) {
     return { notFound: true };
   }
@@ -174,6 +179,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       return location.slug.current === params?.slug;
     }
   );
+  console.log(foundLocation)
   return {
     props: {
       data: foundLocation,
