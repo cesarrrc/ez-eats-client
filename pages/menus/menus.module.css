@@ -1,9 +1,10 @@
 .menu_item_container {
   display: flex;
   align-items: center;
-  width: 100%;
+  width: 100% !important;
   max-width: 1200px;
 }
+
 .ul_container {
   display: flex;
   width: 100%;
