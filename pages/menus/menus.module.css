@@ -1,6 +1,5 @@
 .menu_item_container {
   display: flex;
-  justify-content: center;
   align-items: center;
   width: 100%;
   max-width: 1200px;
