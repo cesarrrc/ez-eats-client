@@ -27,7 +27,6 @@ const Notifications = ({ title, message, status, lottie }: Props) => {
       <Overlay closeModal={notificationCtx.hideNotification}>
         <div
           className={classes.notifications}
-          onMouseDown={() => console.log("hello")}
         >
           <div className={classes.lottie_container}>
             <LottieControl

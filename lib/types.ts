@@ -41,43 +41,60 @@ export type Location = {
   address: Record<string, string>;
 };
 
-export type AllRestaurantsType = [
-  {
-    _typename?: string;
-    _id: string;
-    name: string;
-    address: {
-      street_address: string;
-      city_state_zip: string;
-    };
-    phone_number: string;
-    type: string;
-    description: string;
-    menu_categories: {
+export type LocationDetails = {
+  _typename?: string;
+  _id: string;
+  name: string;
+  address: {
+    street_address: string;
+    city_state_zip: string;
+  };
+  phone_number: string;
+  type: string;
+  description: string;
+  hidden: boolean;
+  hours: [
+    {
+      days: string;
+      hours: string;
+    }
+  ];
+  menu_categories: [
+    {
       name: string;
+      location: string;
       dishes: {
+        name: string;
+        short_description: string;
         price: string;
+        image: {
+          asset: {
+            url: string;
+          };
+        };
         slug: {
           current: string;
         };
       };
+    }
+  ];
+  slug: {
+    current: string;
+    _typename: string;
+  };
+  image: {
+    asset: {
+      title: string;
+      path: string;
+      url: string;
+      description: string;
     };
-    slug: {
-      current: string;
-      _typename: string;
-    };
-    image: {
-      asset: {
-        title: string;
-        path: string;
-        url: string;
-        description: string;
-      };
-    };
-    meta_data: {
-      meta_title: string;
-      meta_description: string;
-      keywords: string;
-    };
-  }
-];
+  };
+  meta_data: {
+    meta_title: string;
+    meta_description: string;
+    keywords: string;
+  };
+};
+
+export type AllRestaurantsType = [LocationDetails];

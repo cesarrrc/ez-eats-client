@@ -16,7 +16,6 @@ export function NotificationContextProvider({ children }: Props) {
     useState<NotificationData | null>();
 
   const showNotificationHandler = (notificationData: NotificationData) => {
-    console.log(notificationData);
     setActiveNotification(notificationData);
   };
   const hideNotificationHandler = () => {

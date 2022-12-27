@@ -1,17 +1,10 @@
 import React, { useState, useEffect, Dispatch, SetStateAction } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { IconButton, Button, Drawer } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import HomeIcon from "@mui/icons-material/HomeOutlined";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
-import MailIcon from "@mui/icons-material/Mail";
-import EventIcon from "@mui/icons-material/Event";
-import EmojiPeopleIcon from "@mui/icons-material/EmojiPeople";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import WebIcon from "@mui/icons-material/Web";
-
 import { Location } from "../../lib/types";
 import classes from "./location-item.module.css";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
@@ -49,7 +42,6 @@ const LocationItem = ({
       slug,
       address,
     });
-    console.log("hover over");
   };
 
   const winDim = useWindowDimensions();
@@ -88,7 +80,7 @@ const LocationItem = ({
             hovering && classes.hovering_location_force
           }`}
         >
-          <Link href={"/"} className={classes.img_container}>
+          <Link href={`/${slug}`} className={classes.img_container}>
             <Image
               className={classes.img}
               src={image_src}
@@ -133,7 +125,7 @@ const LocationItem = ({
             </Link>
             <div className={classes.menu_container}>
               <Link
-                href={`/menu/${slug}`}
+                href={`/${slug}/menu`}
                 className={!hovering ? classes.disabled : ""}
                 target="_blank"
               >
@@ -163,7 +155,7 @@ const LocationItem = ({
       style={{ opacity: hovering ? 1 : undefined }}
       // onMouseLeave={handleMouseExit}
     >
-      <Link href={"/"} className={classes.img_container}>
+      <Link href={`/${slug}`} className={classes.img_container}>
         <Image
           className={classes.img}
           src={image_src}
@@ -174,9 +166,12 @@ const LocationItem = ({
         />
       </Link>
       <div className={classes.content}>
-        <div>
+        <Link
+          href={`/${slug}`}
+          className={`${!hovering ? classes.disabled : ""} ${classes.title}`}
+        >
           <h1>
-            {title.split("-")[0]}{" "}
+            {title.split("-")[0]}
             {hovering && (
               <WebIcon
                 style={{
@@ -188,8 +183,8 @@ const LocationItem = ({
               />
             )}
           </h1>
-          <h2> {title.split("-")[1]}</h2>
-        </div>
+          <h2>{title.split("-")[1]}</h2>
+        </Link>
         <Link
           className={!hovering ? classes.disabled : ""}
           href={`https://www.google.com/maps/search/${title.replace("-", "+")}${
@@ -233,7 +228,7 @@ const LocationItem = ({
         </Link>
         <div className={classes.menu_container}>
           <Link
-            href={`/menu/${slug}`}
+            href={`/${slug}/menu`}
             className={!hovering ? classes.disabled : ""}
             target="_blank"
           >

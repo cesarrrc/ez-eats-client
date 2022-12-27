@@ -22,7 +22,6 @@ const Overlay = ({ children, closeModal }: Props) => {
         className={classes.overlay}
         onClick={(e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
           if (e.currentTarget.id !== "overlay") {
-            console.log("overlay1");
             return;
           }
 
