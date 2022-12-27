@@ -32,8 +32,9 @@ textarea {
   /* font-size: 14px; */
 }
 
-section {
-  display: inherit;
+.menus_section {
+  display: flex;
+  width: 100%;
 }
 
 a {

@@ -13,7 +13,7 @@ type Props = {
 
 const Menus = ({ data }: Props) => {
   return (
-    <section className={classes.menu_item_container}>
+    <section className={`${classes.menu_item_container} menus_section`}>
       <ul className={classes.ul_container}>
         {data.map((location) => (
           <MenuItem location={location} />
