@@ -52,7 +52,7 @@ export default function NavBar() {
           </Button>
         </div>
         <nav className={classes.nav}>
-          <ul>
+          <ul className={classes.nav_buttons}>
             <li>
               <Link href="/">
                 <Button className={classes.button_main}>
@@ -102,14 +102,7 @@ export default function NavBar() {
               </Link>
             </li>
           </ul>
-          <div className={classes.nav_order_social}>
-            {!menusPage && (
-              <>
-                <OrderOnlineButton />
-                <SocialNav header />
-              </>
-            )}
-          </div>
+          <SocialNav style={{ justifyContent: "right" }} header />
         </nav>
         <nav className={classes.nav_2}>
           <IconButton
@@ -208,11 +201,6 @@ export default function NavBar() {
           <SocialNav />
         </Drawer>
       </div>
-      {!menusPage && (
-        <div className={classes.responsive_order_button}>
-          <OrderOnlineButton />
-        </div>
-      )}
     </header>
   );
 }

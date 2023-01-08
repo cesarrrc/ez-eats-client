@@ -55,6 +55,7 @@ const Locations = ({ data }: Props) => {
               hoveredLocation={hoveredLocation}
               setHoveredLocation={setHoveredLocation}
               hoveringLocation={hoveringLocation}
+              
               marker_locations={data.map(
                 (location) =>
                   location.address.street_address +
@@ -128,5 +129,6 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       data: newResults,
     },
+    revalidate: 600
   };
 };

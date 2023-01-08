@@ -13,7 +13,14 @@ export default async function handler(
   try {
     // this should be the actual path not a rewritten path
     // e.g. for "/blog/[slug]" this should be "/blog/post-1"
+    await res.revalidate("/");
     await res.revalidate("/locations");
+    await res.revalidate("/menus");
+    await res.revalidate("/ez-eats-trailer-middleton");
+    await res.revalidate("/ez-eats-trailer-middleton/menu");
+    await res.revalidate("/ez-eats-kitchen-mill-street");
+    await res.revalidate("/ez-eats-kitchen-mill-street/menu");
+    await res.revalidate("/about");
     return res.json({ revalidated: true });
   } catch (err) {
     // If there was an error, Next.js will continue

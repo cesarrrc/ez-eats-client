@@ -7,13 +7,15 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 
 import classes from "./social-nav.module.css";
+import TikTokIcon from "../icons/tiktik-icon";
 
 type Props = {
   footer?: boolean;
   header?: boolean;
+  style?: React.CSSProperties;
 };
 
-const SocialNav = ({ footer, header }: Props) => {
+const SocialNav = ({ footer, header, style }: Props) => {
   return (
     <nav
       className={
@@ -23,6 +25,7 @@ const SocialNav = ({ footer, header }: Props) => {
           ? classes.header_social_container
           : classes.drawer_social_container
       }
+      style={style}
     >
       <ul>
         <li>
@@ -33,10 +36,12 @@ const SocialNav = ({ footer, header }: Props) => {
           </Link>
         </li>
         <li>
-          <FacebookIcon className={classes.icon} />
+          <Link href="https://www.facebook.com/EZEatsKitchenTX" target="_blank">
+            <FacebookIcon className={classes.icon} />
+          </Link>
         </li>
         <li>
-          <AlternateEmailIcon className={classes.icon} />
+          <TikTokIcon className={classes.custom_icon} />
         </li>
       </ul>
     </nav>
@@ -46,6 +51,7 @@ const SocialNav = ({ footer, header }: Props) => {
 export type SocialNavProps = {
   footer: false;
   header: false;
+  style: null;
 };
 
 export default SocialNav;

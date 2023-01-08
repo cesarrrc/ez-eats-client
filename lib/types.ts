@@ -45,6 +45,7 @@ export type LocationDetails = {
   _typename?: string;
   _id: string;
   name: string;
+  tagline?: string;
   address: {
     street_address: string;
     city_state_zip: string;
@@ -75,7 +76,7 @@ export type LocationDetails = {
         slug: {
           current: string;
         };
-      };
+      }[];
     }
   ];
   slug: {

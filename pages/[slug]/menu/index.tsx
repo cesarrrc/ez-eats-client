@@ -2,12 +2,12 @@ import { gql } from "@apollo/client";
 import { GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import React from "react";
-import LottieControl from "../../../components/lottie/lottie";
 import MenuItem from "../../../components/menu-item/menu-item";
 import PageHeading from "../../../components/page-heading/page-heading";
-import construction from "../../../lib/lottie/construction.json";
 import client from "../../../lib/apollo";
-import { AllRestaurantsType, LocationDetails } from "../../../lib/types";
+import { LocationDetails } from "../../../lib/types";
+
+import classes from "./menu.module.css";
 
 type Props = {
   data: LocationDetails;
@@ -15,39 +15,53 @@ type Props = {
 
 const Menu = ({ data }: Props) => {
   const params = useRouter();
+  console.log(data, "data");
   return (
-    <div>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          flexDirection: "column",
-        }}
-      >
-        <h1 style={{ textAlign: "center" }}>Currently Under Construction</h1>
-        <div
-          style={{
-            width: 350,
-            height: 350,
-          }}
-        >
-          <LottieControl lottie={construction} />
-        </div>
-        <p style={{ textAlign: "center" }}>Please check back later.</p>
-      </div>
-      {/* <PageHeading
+    <div className={classes.body_container}>
+      <PageHeading
         title={data.name.split("-")[0]}
-        description={data.description}
+        description={
+          data.address.street_address + "\n" + data.address.city_state_zip
+        }
+        address={{
+          streetAddress: data.address.street_address,
+          city_state_zip: data.address.city_state_zip,
+        }}
       />
-      {data.menu_categories.map((category) => (
-        <>
-          <h2>{category.name}</h2>
-          {category.dishes.map((item) => (
-            <div>{item.name}</div>
-          ))}
-        </>
-      ))}
-      <MenuItem location={data} /> */}
+      {/* <PageHeading title={data.name.split("-")[0]} description={data.tagline} /> */}
+      {!!data.menu_categories &&
+        data.menu_categories.map((category) => (
+          <section className={classes.menu_category} key={category.name}>
+            <h2 className={classes.menu_category_title}>{category.name}</h2>
+            <div className={classes.bottom_border_bar}></div>
+            <ul className={classes.menu_category_list}>
+              {!!category.dishes &&
+                category.dishes.map((item) => (
+                  <li
+                    className={classes.menu_category_list_item}
+                    key={item.name}
+                  >
+                    <div
+                      className={
+                        classes.menu_category_list_item_title_container
+                      }
+                    >
+                      <h4>{item.name}</h4>
+                      <h4>{Number(item.price).toFixed(2)}</h4>
+                    </div>
+                    <div
+                      className={
+                        classes.menu_category_list_item_description_container
+                      }
+                    >
+                      <p>{item.short_description}</p>
+                    </div>
+                  </li>
+                ))}
+            </ul>
+          </section>
+        ))}
+      <MenuItem location={data} noBorder />
     </div>
   );
 };
@@ -60,10 +74,13 @@ const GET_RESTAURANTS = gql`
     allRestaurant {
       _id
       name
+      tagline
       type
       phone_number
       description
       hidden
+      pickup_link
+      delivery_link
       hours {
         days
         hours
@@ -113,19 +130,16 @@ export const getStaticPaths = async () => {
   const results = await client.query({
     query: GET_RESTAURANTS,
   });
-  console.log(results, "RSULTSSSSSSSS");
   if (!results) {
     return { notFound: true };
   }
   const paths: { params: { slug: string } }[] = [];
   results.data.allRestaurant.forEach((location: LocationDetails) => {
     if (location.hidden) {
-      console.log("hiddden");
       return;
     }
     return paths.push({ params: { slug: location.slug.current } });
   });
-  console.log(paths);
   return {
     paths,
     fallback: "blocking",
@@ -136,7 +150,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const results = await client.query({
     query: GET_RESTAURANTS,
   });
-  console.log(results)
   if (!results) {
     return { notFound: true };
   }
@@ -145,10 +158,15 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       return location.slug.current === params?.slug;
     }
   );
-  console.log(foundLocation)
+
+  foundLocation.menu_categories.forEach((element: { dishes: {}[] }) => {
+    element.dishes.forEach((el: object) => {});
+  });
+
   return {
     props: {
       data: foundLocation,
     },
+    revalidate: 600,
   };
 };

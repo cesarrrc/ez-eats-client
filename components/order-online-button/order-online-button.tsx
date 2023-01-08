@@ -6,9 +6,34 @@ import classes from "./order-online-button.module.css";
 
 type Props = {
   drawer?: boolean;
+  href?: string | null;
+  title?: string | null;
 };
 
-const OrderOnlineButton = ({ drawer }: Props) => {
+const OrderOnlineButton = ({ drawer, href, title }: Props) => {
+  console.log(href);
+  if (href == "coming soon") {
+    return (
+      <nav
+        className={
+          drawer
+            ? classes.order_online_button_drawer
+            : classes.order_online_button
+        }
+      >
+        <ul>
+          <li>
+            <Button className={`${classes.coming_soon} ${classes.button}`}>
+              <span className={classes.coming_soon_pre}>
+                {title ? title : "Order Online"}
+              </span>
+              <span className={classes.coming_soon_post}>Coming Soon</span>
+            </Button>
+          </li>
+        </ul>
+      </nav>
+    );
+  }
   return (
     <nav
       className={
@@ -21,11 +46,11 @@ const OrderOnlineButton = ({ drawer }: Props) => {
         <li>
           <Button
             component={Link}
-            href="https://www.toasttab.com/ez-eats-brick-and-mortar-641-mill-street/v3"
+            href={href ? href : "/menus"}
             className={classes.button}
-            target="_blank"
+            target={href ? "_blank" : ""}
           >
-            Order Online
+            {title ? title : "Order Online"}
           </Button>
         </li>
       </ul>
@@ -35,6 +60,8 @@ const OrderOnlineButton = ({ drawer }: Props) => {
 
 export type OrderOnlineButtonProps = {
   drawer: false;
+  href: null;
+  title: null;
 };
 
 export default OrderOnlineButton;

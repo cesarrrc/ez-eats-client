@@ -50,6 +50,18 @@
 .header_social_container .icon {
   font-size: 40px;
 }
+.header_social_container .custom_icon {
+  width: 40px;
+  height: 40px;
+}
+
+.custom_icon {
+  color: whitesmoke !important;
+  width: 60px;
+  height: 60px;
+  margin: 0 10px;
+  padding-left: 10px;
+}
 
 .icon {
   color: whitesmoke !important;
@@ -59,6 +71,11 @@
 }
 
 @media (max-width: 800px) {
+  .custom_icon {
+    margin: 0 0;
+    width: 48px;
+    height: 48px;
+  }
   .icon {
     margin: 0 0;
     font-size: 48px;

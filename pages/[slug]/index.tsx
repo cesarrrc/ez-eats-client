@@ -11,6 +11,7 @@ import Image from "next/image";
 import classes from "./location.module.css";
 import Map from "../../components/map/map";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
+import OrderOnlineButton from "../../components/order-online-button/order-online-button";
 
 type Props = {
   data: LocationDetails;
@@ -18,42 +19,46 @@ type Props = {
 const Location = ({ data }: Props) => {
   const winDim = useWindowDimensions();
 
+  console.log(data);
+
   if (!!winDim.width && winDim?.width <= 800) {
     return (
-      <div>
-        <div className={classes.resp_location_container}>
-          <div>
-            <PageHeading
-              title={data.name.split("-")[0]}
-              description={
-                data.address.street_address + "\n" + data.address.city_state_zip
-              }
+      <div className={classes.resp_location_container}>
+        <PageHeading
+          title={data.name.split("-")[0]}
+          description={
+            data.address.street_address + "\n" + data.address.city_state_zip
+          }
+          address={{
+            streetAddress: data.address.street_address,
+            city_state_zip: data.address.city_state_zip,
+          }}
+        />
+        <OrderOnlineButton href={data.pickup_link} />
+        <OrderOnlineButton href={data.delivery_link} title="Order Delivery" />
+        <div className={classes.resp_tagline_grid_container}>
+          <h4>{data.tagline}</h4>
+        </div>
+        <div className={classes.resp_grid_container}>
+          <div className={classes.resp_image_grid_container}>
+            <Image src={data.image.asset.url} alt={data.name} fill />
+          </div>
+          <div className={classes.resp_description_grid_container}>
+            <p>{data.description}</p>
+          </div>
+
+          <div className={classes.resp_map_grid_container}>
+            <Map
+              marker_locations={[data].map(
+                (location) =>
+                  location.address.street_address +
+                  " " +
+                  location.address.city_state_zip
+              )}
             />
           </div>
-          <div className={classes.resp_tagline_grid_container}>
-            <h4>{data.description}</h4>
-          </div>
-          <div className={classes.resp_grid_container}>
-            <div className={classes.resp_image_grid_container}>
-              <Image src={data.image.asset.url} alt={data.name} fill />
-            </div>
-            <div className={classes.resp_description_grid_container}>
-              <p>{data.description}</p>
-            </div>
-
-            <div className={classes.resp_map_grid_container}>
-              <Map
-                marker_locations={[data].map(
-                  (location) =>
-                    location.address.street_address +
-                    " " +
-                    location.address.city_state_zip
-                )}
-              />
-            </div>
-            <div className={classes.resp_details}>
-              <MenuItem location={data} noImage />
-            </div>
+          <div className={classes.resp_details}>
+            <MenuItem noBorder={true} location={data} noImage />
           </div>
         </div>
       </div>
@@ -61,14 +66,16 @@ const Location = ({ data }: Props) => {
   }
   return (
     <div className={classes.location_container}>
-      <div>
-        <PageHeading
-          title={data.name.split("-")[0]}
-          description={
-            data.address.street_address + " " + data.address.city_state_zip
-          }
-        />
-      </div>
+      <PageHeading
+        title={data.name.split("-")[0]}
+        description={
+          data.address.street_address + " " + data.address.city_state_zip
+        }
+        address={{
+          streetAddress: data.address.street_address,
+          city_state_zip: data.address.city_state_zip,
+        }}
+      />
       <div className={classes.grid_container}>
         <div className={classes.description_grid_container}>
           <p>{data.description}</p>
@@ -79,7 +86,7 @@ const Location = ({ data }: Props) => {
         </div>
       </div>
       <div className={classes.tagline_grid_container}>
-        <h4>{data.description}</h4>
+        <h4>{data.tagline}</h4>
       </div>
       <div className={classes.grid_container_two}>
         <div className={classes.map_grid_container}>
@@ -93,7 +100,7 @@ const Location = ({ data }: Props) => {
           />
         </div>
         <div className={classes.details}>
-          <MenuItem location={data} noImage />
+          <MenuItem location={data} noImage noBorder />
         </div>
       </div>
     </div>
@@ -108,10 +115,13 @@ const GET_RESTAURANTS = gql`
     allRestaurant {
       _id
       name
+      tagline
       type
       phone_number
       description
       hidden
+      pickup_link
+      delivery_link
       hours {
         days
         hours
@@ -130,6 +140,20 @@ const GET_RESTAURANTS = gql`
       }
       menu_categories {
         name
+        location
+        dishes {
+          name
+          short_description
+          price
+          image {
+            asset {
+              url
+            }
+          }
+          slug {
+            current
+          }
+        }
       }
       slug {
         current
@@ -147,7 +171,6 @@ export const getStaticPaths = async () => {
   const results = await client.query({
     query: GET_RESTAURANTS,
   });
-  console.log(results, "RSULTSSSSSSSS");
   if (!results) {
     return { notFound: true };
   }
@@ -159,7 +182,6 @@ export const getStaticPaths = async () => {
     }
     return paths.push({ params: { slug: location.slug.current } });
   });
-  console.log(paths);
   return {
     paths,
     fallback: "blocking",
@@ -170,7 +192,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const results = await client.query({
     query: GET_RESTAURANTS,
   });
-  console.log(results)
   if (!results) {
     return { notFound: true };
   }
@@ -179,10 +200,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       return location.slug.current === params?.slug;
     }
   );
-  console.log(foundLocation)
   return {
     props: {
       data: foundLocation,
     },
+    revalidate: 600
   };
 };

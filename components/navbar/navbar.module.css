@@ -40,11 +40,15 @@
   margin-top: 30px;
 }
 
+.nav_buttons {
+  align-items: right;
+  justify-content: right;
+}
+
 .nav ul {
   display: flex;
   flex-direction: row;
   list-style-type: none;
-  /* align-items: flex-start; */
 }
 
 .nav_2 {
