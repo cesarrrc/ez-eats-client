@@ -30,6 +30,9 @@
   margin: 0;
   padding: 0;
 }
+.footer_social_container .icon {
+  font-size: 60px;
+}
 
 .header_social_container {
   display: flex;
