@@ -23,12 +23,15 @@
 .footer_social_container ul {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
 }
 
 .footer_social_container button {
   margin: 0;
   padding: 0;
+}
+.footer_social_container .icon {
+  font-size: 60px;
 }
 
 .header_social_container {
@@ -50,6 +53,18 @@
 .header_social_container .icon {
   font-size: 40px;
 }
+.header_social_container .custom_icon {
+  width: 40px;
+  height: 40px;
+}
+
+.custom_icon {
+  color: whitesmoke !important;
+  width: 60px;
+  height: 60px;
+  margin: 0 10px;
+  padding-left: 10px;
+}
 
 .icon {
   color: whitesmoke !important;
@@ -59,6 +74,15 @@
 }
 
 @media (max-width: 800px) {
+  .custom_icon {
+    margin: 0 0;
+    width: 48px;
+    height: 48px;
+  }
+  .footer_social_container .icon {
+    margin: 0 0;
+    font-size: 48px;
+  }
   .icon {
     margin: 0 0;
     font-size: 48px;

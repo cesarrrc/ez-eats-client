@@ -77,7 +77,7 @@ const Contact = (props: Props) => {
     <div className={classes.contact_container}>
       <PageHeading
         title="Contact Us"
-        description="If you would like to plan ask us a question, plan an event, or would like to give us feedback, please fill this form out below ."
+        description="If you would like to plan ask us a question, plan an event, or would like to give us feedback, please fill this form out below."
       />
       <section className={classes.form_container}>
         <form className={classes.contact_form} onSubmit={handleSubmit}>

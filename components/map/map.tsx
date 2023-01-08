@@ -18,12 +18,14 @@ import {
 import { LatLngLiteral, MapOptions, Location } from "../../lib/types";
 import classes from "./map.module.css";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
+import { useRouter } from "next/router";
 
 type Props = {
   hoveredLocation?: Location | null;
   setHoveredLocation?: Dispatch<SetStateAction<Location | null>>;
   hoveringLocation?: boolean;
   marker_locations: string[];
+  address?: Record<string, string>;
 };
 
 const googleMapsLibraries: LoadScriptNextProps["libraries"] = ["places"];
@@ -32,7 +34,9 @@ const Map = ({
   hoveredLocation,
   hoveringLocation,
   marker_locations,
+  address,
 }: Props) => {
+  const router = useRouter();
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY,
     libraries: googleMapsLibraries,
@@ -141,7 +145,7 @@ const Map = ({
           mapTypeId="508945d8f58a5f97"
         >
           {mapInstance &&
-            markers?.map((marker) => (
+            markers?.map((marker, i) => (
               <Marker
                 position={marker}
                 title="EZ-Eats"
@@ -150,6 +154,12 @@ const Map = ({
                   scaledSize: new google.maps.Size(70, 70),
                 }}
                 animation={window.google.maps.Animation.DROP}
+                onClick={() => {
+                    window.open(
+                      `https://www.google.com/maps/search/ez+eats+${marker_locations[i]}`,
+                      "_blank"
+                    );
+                }}
               />
             ))}
         </GoogleMap>

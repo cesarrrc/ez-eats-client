@@ -13,9 +13,9 @@
   border-radius: 25px;
   text-transform: none;
   font-weight: 700;
-  font-size: 24px;
+  font-size: 20px;
   padding: 0 20px;
-  margin: 20px 0;
+  margin: 10px 0;
 }
 
 .button {
@@ -41,4 +41,14 @@
   font-size: 16px;
   padding: 0 14px;
   margin: 20px 0;
+}
+
+.coming_soon .coming_soon_post {
+  display: none;
+}
+.coming_soon:hover .coming_soon_pre {
+  display: none;
+}
+.coming_soon:hover .coming_soon_post {
+  display: inline;
 }

@@ -104,6 +104,11 @@
   border-radius: 15px;
   overflow: hidden;
 }
+.button_nav_container:hover a {
+  border-radius: 15px;
+  overflow: hidden;
+  animation: disable-pointer-events 500ms;
+}
 
 @keyframes disable-pointer-events {
   0%,

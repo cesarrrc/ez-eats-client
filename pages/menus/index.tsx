@@ -13,17 +13,15 @@ type Props = {
 
 const Menus = ({ data }: Props) => {
   return (
-    <section className={classes.menu_item_container}>
-      <ul className={classes.ul_container}>
-        {data.map((location) => (
-          <MenuItem location={location} />
-        ))}
-      </ul>
+    <section className={`${classes.menu_item_container} menus_section`}>
+      {data.map((location) => (
+        <MenuItem location={location} />
+      ))}
     </section>
   );
 };
 
-console.log('hello')
+console.log("hello");
 
 export default Menus;
 
@@ -34,10 +32,13 @@ export const getStaticProps: GetStaticProps = async () => {
       allRestaurant {
         _id
         name
+        tagline
         type
         phone_number
         description
         hidden
+        pickup_link
+        delivery_link
         hours {
           days
           hours
@@ -56,6 +57,20 @@ export const getStaticProps: GetStaticProps = async () => {
         }
         menu_categories {
           name
+          location
+          dishes {
+            name
+            short_description
+            price
+            image {
+              asset {
+                url
+              }
+            }
+            slug {
+              current
+            }
+          }
         }
         slug {
           current
@@ -84,5 +99,6 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       data: newResults,
     },
+    revalidate: 600,
   };
 };
