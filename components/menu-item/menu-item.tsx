@@ -15,16 +15,12 @@ type Props = {
   location: LocationDetails;
   noImage?: boolean;
   noBorder?: boolean;
-  pickup_link: string;
-  delivery_link: string;
 };
 
 const MenuItem = ({
   location,
   noImage,
-  noBorder,
-  pickup_link,
-  delivery_link,
+  noBorder
 }: Props) => {
   const [hover, setHover] = React.useState<boolean>(false);
   const winDim = useWindowDimensions();

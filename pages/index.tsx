@@ -25,7 +25,7 @@ const HomePage = ({ data }: Props) => {
       <OrderOnlineButton />
       <div className={classes.grid_container}>
         {data &&
-          data.allHomePage.map((content) => {
+          data.allHomePage.map((content: any) => {
             return (
               <ButtonNavigation
                 content={content.tile_name.replace("-", "\n")}

@@ -50,6 +50,8 @@ export type LocationDetails = {
     street_address: string;
     city_state_zip: string;
   };
+  pickup_link: string;
+  delivery_link: string;
   phone_number: string;
   type: string;
   description: string;

@@ -165,7 +165,7 @@ const About = ({ data }: Props) => {
           <BlockContent blocks={data.allAboutPageDocument[0].detail_bodyRaw} />
         </div>
       </section>
-      {data.allAboutPageDocument.map((content, i) => {
+      {data.allAboutPageDocument.map((content: any, i: any) => {
         console.log(content.detail_number != 1);
         return (
           content.detail_number != 1 && (
