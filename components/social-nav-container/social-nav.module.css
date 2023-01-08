@@ -23,7 +23,7 @@
 .footer_social_container ul {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
 }
 
 .footer_social_container button {
@@ -78,6 +78,10 @@
     margin: 0 0;
     width: 48px;
     height: 48px;
+  }
+  .footer_social_container .icon {
+    margin: 0 0;
+    font-size: 48px;
   }
   .icon {
     margin: 0 0;

@@ -36,7 +36,7 @@ const PageHeading = ({ title, description, address }: Props) => {
             }}
           />
           <div>
-            <h3 style={{ margin: 0 }}>
+            <h3 style={{ margin: "0 20px" }} className={classes.sub}>
               {!!winDim.width && winDim.width <= 800 ? (
                 <>
                   {description?.split("\n")[0]}
@@ -52,8 +52,9 @@ const PageHeading = ({ title, description, address }: Props) => {
       ) : (
         <h3
           style={{
-            margin: 0,
+            margin: "0 20px",
           }}
+          className={classes.sub}
         >
           {!!winDim.width && winDim.width <= 800 ? (
             <>
