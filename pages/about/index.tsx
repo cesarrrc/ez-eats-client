@@ -19,7 +19,13 @@ const About = ({ data }: Props) => {
 
   if (!!winDim.width && winDim.width <= 800) {
     return (
-      <div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+        }}
+      >
         <PageHeading title="About Us" description="" />
         <section style={{ display: "flex", flexDirection: "column", flex: 1 }}>
           <div
@@ -30,7 +36,7 @@ const About = ({ data }: Props) => {
               minHeight: "400px",
               position: "relative",
               flex: 1,
-              margin: "100px",
+              margin: " 0px 30px",
             }}
           >
             <Image
@@ -49,7 +55,7 @@ const About = ({ data }: Props) => {
             style={{
               display: "flex",
               flex: 1,
-              margin: "100px",
+              margin: " 0px 30px",
             }}
             className={classes.main_block_content}
           >
@@ -84,10 +90,10 @@ const About = ({ data }: Props) => {
                       // width: 400,
                       // height: 400,
                       display: "flex",
-                      minHeight: "400px",
+                      minHeight: "200px",
                       position: "relative",
                       flex: 1,
-                      margin: "20px 60px",
+                      margin: "20px 30px",
                     }}
                   >
                     <Image
