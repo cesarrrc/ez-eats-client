@@ -21,6 +21,10 @@ const HomePage = ({ data }: Props) => {
       <Head>
         <title>EZ Eats</title>
         <meta
+          name="google-site-verification"
+          content="dGgcHDV_aeDQv-M8FyRbO7cAqjuwhdEsKfOflz4Qc_A"
+        />
+        <meta
           name="description"
           content="EZ Eats is a restaurant brand located in San Marcos and Wimberly, TX 78666, in between Austin and San Antonio."
         />
