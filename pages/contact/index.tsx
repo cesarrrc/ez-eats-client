@@ -16,6 +16,7 @@ import NotificationContext from "../../store/notification-context";
 import spinner from "../../lib/lottie/spinner.json";
 import * as thumbsUp from "../../lib/lottie/thumbs-up.json";
 import * as errorLottie from "../../lib/lottie/error.json";
+import Head from "next/head";
 
 type Props = {};
 
@@ -28,7 +29,6 @@ const Contact = (props: Props) => {
     const { name, value } = e.target;
     let formattedPhoneNumber;
     if (name === "phone") {
-
       formattedPhoneNumber = formatPhoneNumber(e.target.value);
     }
     setContactBody({
@@ -75,6 +75,11 @@ const Contact = (props: Props) => {
 
   return (
     <div className={classes.contact_container}>
+      <Head>
+        <title>Contact Us</title>
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+      </Head>
       <PageHeading
         title="Contact Us"
         description="If you would like to plan ask us a question, plan an event, or would like to give us feedback, please fill this form out below."

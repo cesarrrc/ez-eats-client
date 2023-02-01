@@ -78,6 +78,11 @@ export type LocationDetails = {
         slug: {
           current: string;
         };
+        meta_data: {
+          meta_title: string,
+          meta_description: string,
+          keywords: string
+        }
       }[];
     }
   ];

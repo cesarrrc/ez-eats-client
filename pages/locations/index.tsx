@@ -10,6 +10,7 @@ import { gql } from "@apollo/client";
 import client from "../../lib/apollo";
 import { AllRestaurantsType } from "../../lib/types";
 import { GetStaticProps, NextPage } from "next";
+import Head from "next/head";
 
 type Props = {
   data: AllRestaurantsType;
@@ -21,6 +22,17 @@ const Locations = ({ data }: Props) => {
 
   return (
     <div className={classes.locations_page}>
+      <Head>
+        <title>Locations</title>
+        <meta
+          name="description"
+          content="EZ Eats is a restaurant brand located in San Marcos and Wimberly, TX 78666, in between Austin and San Antonio."
+        />
+        <meta
+          name="keywords"
+          content="food, san marcos, tx, texas, kolache, taco, burger, breakfast, lunch, dinner, restaurant"
+        />
+      </Head>
       <PageHeading title="Locations" />
       <div
         className={classes.map_container}
@@ -55,7 +67,6 @@ const Locations = ({ data }: Props) => {
               hoveredLocation={hoveredLocation}
               setHoveredLocation={setHoveredLocation}
               hoveringLocation={hoveringLocation}
-              
               marker_locations={data.map(
                 (location) =>
                   location.address.street_address +
@@ -129,6 +140,6 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       data: newResults,
     },
-    revalidate: 600
+    revalidate: 600,
   };
 };
