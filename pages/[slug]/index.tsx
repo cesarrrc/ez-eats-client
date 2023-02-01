@@ -12,6 +12,8 @@ import classes from "./location.module.css";
 import Map from "../../components/map/map";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import OrderOnlineButton from "../../components/order-online-button/order-online-button";
+import Head from "next/head";
+import { GET_ALL_RESTAURANTS } from "../../apollo/gql";
 
 type Props = {
   data: LocationDetails;
@@ -24,6 +26,11 @@ const Location = ({ data }: Props) => {
   if (!!winDim.width && winDim?.width <= 800) {
     return (
       <div className={classes.resp_location_container}>
+        <Head>
+          <title>{data.name}</title>
+          <meta name="description" content={data.meta_data.meta_description} />
+          <meta name="keywords" content={data.meta_data.keywords} />
+        </Head>
         <PageHeading
           title={data.name.split("-")[0]}
           description={
@@ -109,63 +116,7 @@ const Location = ({ data }: Props) => {
 
 export default Location;
 
-const GET_RESTAURANTS = gql`
-  # Write your query or mutation here
-  {
-    allRestaurant {
-      _id
-      name
-      tagline
-      type
-      phone_number
-      description
-      hidden
-      pickup_link
-      delivery_link
-      hours {
-        days
-        hours
-      }
-      address {
-        street_address
-        city_state_zip
-      }
-      image {
-        asset {
-          title
-          path
-          url
-          description
-        }
-      }
-      menu_categories {
-        name
-        location
-        dishes {
-          name
-          short_description
-          price
-          image {
-            asset {
-              url
-            }
-          }
-          slug {
-            current
-          }
-        }
-      }
-      slug {
-        current
-      }
-      meta_data {
-        meta_title
-        meta_description
-        meta_description
-      }
-    }
-  }
-`;
+const GET_RESTAURANTS = GET_ALL_RESTAURANTS;
 
 export const getStaticPaths = async () => {
   const results = await client.query({
@@ -177,7 +128,7 @@ export const getStaticPaths = async () => {
   const paths: { params: { slug: string } }[] = [];
   results.data.allRestaurant.forEach((location: LocationDetails) => {
     if (location.hidden) {
-      console.log("hiddden");
+      console.log("hidden");
       return;
     }
     return paths.push({ params: { slug: location.slug.current } });
@@ -204,6 +155,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     props: {
       data: foundLocation,
     },
-    revalidate: 600
+    revalidate: 600,
   };
 };

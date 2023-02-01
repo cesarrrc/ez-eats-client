@@ -1,7 +1,9 @@
 import { gql } from "@apollo/client";
 import { GetStaticProps } from "next";
+import Head from "next/head";
 import { useRouter } from "next/router";
 import React from "react";
+import { GET_ALL_RESTAURANTS } from "../../../apollo/gql";
 import MenuItem from "../../../components/menu-item/menu-item";
 import PageHeading from "../../../components/page-heading/page-heading";
 import client from "../../../lib/apollo";
@@ -18,6 +20,11 @@ const Menu = ({ data }: Props) => {
   console.log(data, "data");
   return (
     <div className={classes.body_container}>
+      <Head>
+        <title>{data.name}</title>
+        <meta name="description" content={data.meta_data.meta_description} />
+        <meta name="keywords" content={data.meta_data.keywords} />
+      </Head>
       <PageHeading
         title={data.name.split("-")[0]}
         description={
@@ -68,63 +75,7 @@ const Menu = ({ data }: Props) => {
 
 export default Menu;
 
-const GET_RESTAURANTS = gql`
-  # Write your query or mutation here
-  {
-    allRestaurant {
-      _id
-      name
-      tagline
-      type
-      phone_number
-      description
-      hidden
-      pickup_link
-      delivery_link
-      hours {
-        days
-        hours
-      }
-      address {
-        street_address
-        city_state_zip
-      }
-      image {
-        asset {
-          title
-          path
-          url
-          description
-        }
-      }
-      menu_categories {
-        name
-        location
-        dishes {
-          name
-          short_description
-          price
-          image {
-            asset {
-              url
-            }
-          }
-          slug {
-            current
-          }
-        }
-      }
-      slug {
-        current
-      }
-      meta_data {
-        meta_title
-        meta_description
-        meta_description
-      }
-    }
-  }
-`;
+const GET_RESTAURANTS = GET_ALL_RESTAURANTS;
 
 export const getStaticPaths = async () => {
   const results = await client.query({

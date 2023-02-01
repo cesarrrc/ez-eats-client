@@ -8,6 +8,7 @@ import BlockContent from "@sanity/block-content-to-react";
 import classes from "./about.module.css";
 import PageHeading from "../../components/page-heading/page-heading";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
+import Head from "next/head";
 
 type Props = {
   data: any;
@@ -26,6 +27,11 @@ const About = ({ data }: Props) => {
           justifyContent: "center",
         }}
       >
+        <Head>
+          <title>Our Story</title>
+          <meta name="description" content="" />
+          <meta name="keywords" content="" />
+        </Head>
         <PageHeading title="About Us" description="" />
         <section style={{ display: "flex", flexDirection: "column", flex: 1 }}>
           <div
