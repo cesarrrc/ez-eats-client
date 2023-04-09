@@ -7,6 +7,7 @@ import { AllRestaurantsType, LocationDetails } from "../../lib/types";
 
 import classes from "./menus.module.css";
 import Head from "next/head";
+import { GET_ALL_RESTAURANTS } from "../../apollo/gql";
 
 type Props = {
   data: AllRestaurantsType;
@@ -38,63 +39,7 @@ console.log("hello");
 export default Menus;
 
 export const getStaticProps: GetStaticProps = async () => {
-  const GET_RESTAURANTS = gql`
-    # Write your query or mutation here
-    {
-      allRestaurant {
-        _id
-        name
-        tagline
-        type
-        phone_number
-        description
-        hidden
-        pickup_link
-        delivery_link
-        hours {
-          days
-          hours
-        }
-        address {
-          street_address
-          city_state_zip
-        }
-        image {
-          asset {
-            title
-            path
-            url
-            description
-          }
-        }
-        menu_categories {
-          name
-          location
-          dishes {
-            name
-            short_description
-            price
-            image {
-              asset {
-                url
-              }
-            }
-            slug {
-              current
-            }
-          }
-        }
-        slug {
-          current
-        }
-        meta_data {
-          meta_title
-          meta_description
-          meta_description
-        }
-      }
-    }
-  `;
+  const GET_RESTAURANTS = GET_ALL_RESTAURANTS;
 
   const results = await client.query({
     query: GET_RESTAURANTS,

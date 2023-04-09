@@ -111,7 +111,7 @@ const LocationItem = ({
               {address.city_state_zip}
             </Link>
             <Link
-              href={`tel:+${business_phone}`}
+              href={`tel:+1${business_phone}`}
               className={!hovering ? classes.disabled : ""}
             >
               <LocalPhoneIcon
@@ -209,7 +209,7 @@ const LocationItem = ({
           )}
         </Link>
         <Link
-          href={`tel:+${business_phone}`}
+          href={`tel:+1${business_phone}`}
           className={!hovering ? classes.disabled : ""}
         >
           {business_phone}

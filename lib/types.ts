@@ -62,27 +62,47 @@ export type LocationDetails = {
       hours: string;
     }
   ];
+  menu_pdf: {
+    file: {
+      asset: {
+        url: string;
+      };
+    };
+  };
   menu_categories: [
     {
       name: string;
       location: string;
-      dishes: {
+      sub_categories: {
         name: string;
-        short_description: string;
-        price: string;
-        image: {
-          asset: {
-            url: string;
-          };
-        };
+        includes: string;
+        info: string;
+        types: {
+          name: string;
+          dishes: {
+            _id: string;
+            name: string;
+            short_description: string;
+            price: string;
+            prices: {
+              size: string;
+              amount: number;
+            }[];
+            image: {
+              asset: {
+                url: string;
+              };
+            };
+          }[];
+        }[];
         slug: {
           current: string;
         };
         meta_data: {
-          meta_title: string,
-          meta_description: string,
-          keywords: string
-        }
+          meta_title: string;
+          meta_description: string;
+          keywords: string;
+        };
       }[];
     }
   ];

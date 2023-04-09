@@ -9,6 +9,10 @@
   margin: 0 30px;
 }
 
+.menu_category {
+  margin-bottom: 10px;
+}
+
 .menu_category_title {
   font-size: 36px;
   text-align: center;
@@ -52,6 +56,20 @@
   border: 1px solid whitesmoke;
 }
 
+.menu_category h4 {
+  font-size: 22px;
+  margin: 0;
+  text-decoration: underline;
+  font-family: "Fauna One", Serif !important;
+}
+
+.menu_category h5 {
+  font-family: "Fauna One", Serif !important;
+  font-size: 18px;
+  font-weight: lighter;
+  margin: 8px 0;
+}
+
 @media (max-width: 800px) {
   .menu_category_title {
     font-size: 26px;
@@ -66,4 +84,8 @@
   .menu_category_list {
     grid-template-columns: 1fr;
   }
+}
+
+.bold {
+  font-weight: bold;
 }

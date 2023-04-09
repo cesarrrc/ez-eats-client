@@ -18,7 +18,7 @@ const sendEmail = async (data: ContactData) => {
 
     return response;
   } catch (error) {
-    console.log(error);
+    console.log(error, 'errorrrrrrrr send email');
   }
 };
 

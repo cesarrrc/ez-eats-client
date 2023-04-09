@@ -61,17 +61,26 @@ export const GET_ALL_RESTAURANTS = gql`
       menu_categories {
         name
         location
-        dishes {
+        sub_categories {
           name
-          short_description
-          price
-          image {
-            asset {
-              url
+          includes
+          info
+          types {
+            name
+            dishes {
+              _id
+              name
+              short_description
+              price
+              price_by_size
+              prices {
+                size
+                amount
+              }
+              slug {
+                current
+              }
             }
-          }
-          slug {
-            current
           }
         }
       }

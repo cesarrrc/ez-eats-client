@@ -120,7 +120,7 @@ const MenuItem = ({
         </li>
         <li className={classes.a_tag}>
           <Link
-            href={`tel:+${location.phone_number}`}
+            href={`tel:+1${location.phone_number}`}
             className={classes.name_container}
           >
             <span>

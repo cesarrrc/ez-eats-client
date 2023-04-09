@@ -89,7 +89,7 @@ export default function NavBar() {
               <Link href="/about">
                 <Button className={classes.button_main}>
                   <EmojiPeopleIcon style={{ fontSize: "20px" }} />
-                  &nbsp;About
+                  &nbsp;Our Story
                 </Button>
               </Link>
             </li>

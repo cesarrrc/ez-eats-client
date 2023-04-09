@@ -15,7 +15,7 @@ type Props = {
 };
 
 const HomePage = ({ data }: Props) => {
-  console.log(data);
+  console.log(data, "dataaaa home");
   return (
     <div className={styles.container}>
       <Head>
