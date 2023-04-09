@@ -21,7 +21,7 @@ type Props = {
 const Location = ({ data }: Props) => {
   const winDim = useWindowDimensions();
 
-  console.log(data);
+  console.log(data, 'dataaaaaa');
 
   if (!!winDim.width && winDim?.width <= 800) {
     return (
