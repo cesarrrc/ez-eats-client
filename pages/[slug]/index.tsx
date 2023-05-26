@@ -133,6 +133,7 @@ export const getStaticPaths = async () => {
     }
     return paths.push({ params: { slug: location.slug.current } });
   });
+  console.log(paths, 'pathssssssssssssssssssss static propsssss')
   return {
     paths,
     fallback: "blocking",
@@ -146,11 +147,14 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   if (!results) {
     return { notFound: true };
   }
+  console.log(params, 'resultss *******************************************************************')
+  console.log(results, 'resultss *******************************************************************')
   const foundLocation = results.data.allRestaurant.find(
     (location: LocationDetails) => {
       return location.slug.current === params?.slug;
     }
   );
+  console.log(foundLocation, 'founddddddd locationnnnnnnnn')
   return {
     props: {
       data: foundLocation,

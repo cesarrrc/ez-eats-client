@@ -62,6 +62,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     return { notFound: true };
   }
 
+  console.log(results.data.allHomePage[1], "*********************************");
+
   return {
     props: {
       data: results.data,

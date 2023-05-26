@@ -70,20 +70,22 @@ const Menu = ({ data }: Props) => {
                           : "span 1",
                     }}
                   >
-                    <h3
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                        alignSelf: "center",
-                        padding: "4px 6px",
-                        borderRadius: 10,
-                        backgroundColor: "whitesmoke",
-                        color: "black",
-                        fontSize: 24,
-                      }}
-                    >
-                      {sub_category.name}
-                    </h3>
+                    {sub_category.name && (
+                      <h3
+                        style={{
+                          display: "flex",
+                          justifyContent: "center",
+                          alignSelf: "center",
+                          padding: "4px 6px",
+                          borderRadius: 10,
+                          backgroundColor: "whitesmoke",
+                          color: "black",
+                          fontSize: 24,
+                        }}
+                      >
+                        {sub_category.name}
+                      </h3>
+                    )}
                     {sub_category.info && sub_category.info.startsWith("$") && (
                       <div
                         style={{
@@ -198,7 +200,8 @@ const Menu = ({ data }: Props) => {
                                 marginRight: 10,
                               }}
                             >
-                              {type.dishes[0].prices &&
+                              {type.dishes !== null &&
+                                type.dishes[0].prices &&
                                 type.dishes[0].prices.map((price, i, arr) => {
                                   return arr.length - 1 === i
                                     ? price.size[0]
@@ -206,56 +209,61 @@ const Menu = ({ data }: Props) => {
                                 })}
                             </span>
                             <ul>
-                              {type.dishes.map((item) => (
-                                <li
-                                  className={classes.menu_category_list_item}
-                                  key={item.name}
-                                >
-                                  <div
-                                    className={
-                                      classes.menu_category_list_item_title_container
-                                    }
+                              {type.dishes !== null &&
+                                type.dishes.map((item) => (
+                                  <li
+                                    className={classes.menu_category_list_item}
+                                    key={item.name}
                                   >
-                                    <h5
-                                      style={{
-                                        fontWeight: !type.name
-                                          ? "bold"
-                                          : "lighter",
-                                      }}
+                                    <div
+                                      className={
+                                        classes.menu_category_list_item_title_container
+                                      }
                                     >
-                                      {item.name}
-                                    </h5>
-                                    {item.price ? (
-                                      <h5>${Number(item.price).toFixed(2)}</h5>
-                                    ) : item.prices ? (
-                                      <h5>
-                                        ${" "}
-                                        {item.prices.map((price, i) => (
-                                          <span>
-                                            {price.amount.toFixed(2)}{" "}
-                                            {item.prices.length - 1 == i
-                                              ? ""
-                                              : "/ "}
-                                          </span>
-                                        ))}
+                                      <h5
+                                        style={{
+                                          fontWeight: !type.name
+                                            ? "bold"
+                                            : "lighter",
+                                        }}
+                                      >
+                                        {item.name}
                                       </h5>
-                                    ) : (
-                                      <h5>${Number(item.price).toFixed(2)}</h5>
-                                    )}
-                                  </div>
-                                  <div
-                                    className={
-                                      classes.menu_category_list_item_description_container
-                                    }
-                                  >
-                                    <p>
-                                      {item.short_description
-                                        ?.split("\\n ")
-                                        .join("\n")}
-                                    </p>
-                                  </div>
-                                </li>
-                              ))}
+                                      {item.price ? (
+                                        <h5>
+                                          ${Number(item.price).toFixed(2)}
+                                        </h5>
+                                      ) : item.prices ? (
+                                        <h5>
+                                          ${" "}
+                                          {item.prices.map((price, i) => (
+                                            <span>
+                                              {price.amount.toFixed(2)}{" "}
+                                              {item.prices.length - 1 == i
+                                                ? ""
+                                                : "/ "}
+                                            </span>
+                                          ))}
+                                        </h5>
+                                      ) : (
+                                        <h5>
+                                          ${Number(item.price).toFixed(2)}
+                                        </h5>
+                                      )}
+                                    </div>
+                                    <div
+                                      className={
+                                        classes.menu_category_list_item_description_container
+                                      }
+                                    >
+                                      <p>
+                                        {item.short_description
+                                          ?.split("\\n ")
+                                          .join("\n")}
+                                      </p>
+                                    </div>
+                                  </li>
+                                ))}
                             </ul>
                           </li>
                         )
@@ -308,7 +316,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     }
   );
 
-  console.log(foundLocation, 'found location');
+  console.log(foundLocation, "found location");
 
   // foundLocation.menu_categories.forEach((element: { dishes: {}[] }) => {
   //   element.dishes.forEach((el: object) => {});
