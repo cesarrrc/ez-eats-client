@@ -42,6 +42,7 @@ const Contact = (props: Props) => {
     setIsSubmit(true);
     try {
       const response = await sendEmail(contactBody);
+      console.log(response)
       const data = await response?.json()
       notificationCtx.showNotification({
         title: "Your message was sent!",
