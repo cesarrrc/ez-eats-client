@@ -29,25 +29,28 @@ export default function NavBar() {
     <header>
       <div className={classes.nav_container}>
         <div className={classes.logo_container}>
-          <Link href="/">
-            <Button className={classes.button_logo}>
-              <Image
-                src={"/img/banner.png"}
-                alt="EZ Eats"
-                width={400}
-                height={400}
-              />
-            </Button>
-          </Link>
+          <Button className={classes.button_logo} component={Link} href="/">
+            <Image
+              src={"/img/logo5.png"}
+              alt="EZ Eats"
+              // width={400}
+              // height={400}
+              quality={100}
+              fill
+              priority
+            />
+          </Button>
         </div>
         <div className={classes.logo_container_2}>
           <Button className={classes.button_logo} component={Link} href="/">
             <Image
-              src={"/img/small-logo.png"}
+              src={"/img/small-logo4.png"}
               alt="EZ Eats"
-              width={400}
-              height={400}
-              layout
+              // width={400}
+              // height={400}
+              quality={100}
+              fill
+              priority
             />
           </Button>
         </div>

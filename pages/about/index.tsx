@@ -16,7 +16,6 @@ type Props = {
 
 const About = ({ data }: Props) => {
   const winDim = useWindowDimensions();
-  console.log(winDim);
 
   if (!!winDim.width && winDim.width <= 800) {
     return (
@@ -71,7 +70,6 @@ const About = ({ data }: Props) => {
           </div>
         </section>
         {data.allAboutPageDocument.map((content: any, i: any) => {
-          console.log(content.detail_number != 1);
           return (
             content.detail_number != 1 && (
               <section
@@ -178,7 +176,6 @@ const About = ({ data }: Props) => {
         </div>
       </section>
       {data.allAboutPageDocument.map((content: any, i: any) => {
-        console.log(content.detail_number != 1);
         return (
           content.detail_number != 1 && (
             <section

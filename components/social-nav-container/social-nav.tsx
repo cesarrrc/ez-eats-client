@@ -29,7 +29,7 @@ const SocialNav = ({ footer, header, style }: Props) => {
     >
       <ul>
         <li>
-          <Link href="https://www.instagram.com/ezeatstx/" target="_blank">
+          <Link href="https://www.instagram.com/ezeatskitchen" target="_blank">
             <IconButton style={{ color: "inherit" }}>
               <InstagramIcon className={classes.icon} />
             </IconButton>

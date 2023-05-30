@@ -42,7 +42,7 @@ const Contact = (props: Props) => {
     setIsSubmit(true);
     try {
       const response = await sendEmail(contactBody);
-
+      const data = await response?.json()
       notificationCtx.showNotification({
         title: "Your message was sent!",
         message: "Thanks for reaching out, we will get back to you soon!",
@@ -82,7 +82,7 @@ const Contact = (props: Props) => {
       </Head>
       <PageHeading
         title="Contact Us"
-        description="If you would like to plan ask us a question, plan an event, or would like to give us feedback, please fill this form out below."
+        description="If you would like to ask us a question, plan an event, or would like to give us feedback, please fill this form out below."
       />
       <section className={classes.form_container}>
         <form className={classes.contact_form} onSubmit={handleSubmit}>
@@ -125,6 +125,16 @@ const Contact = (props: Props) => {
               id="subject"
               onChange={handleChange}
               value={contactBody.subject}
+            />
+          </div>
+          <div>
+            <label htmlFor="subject">Event Type:</label>
+            <input
+              type="text"
+              name="event_type"
+              id="subject"
+              onChange={handleChange}
+              value={contactBody.event_type}
             />
           </div>
           <div className={classes.description}>

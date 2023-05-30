@@ -32,25 +32,25 @@ const LottieControl = ({ lottie, style }: Props) => {
         preserveAspectRatio: "xMidYMid slice",
       }}
       style={style}
-      onDataReady={() => {
-        console.info("DATA READY!");
-      }}
-      onConfigReady={() => {
-        console.info("CONFIG READY!");
-      }}
-      onSegmentStart={(x) => {
-        console.info("SEGMENT START!", x);
-      }}
-      onDOMLoaded={() => {
-        console.info("DOM LOADED!");
-        lottieRef?.current?.setSpeed(0.5);
-      }}
-      onLoadedImages={() => {
-        console.info("IMAGES LOADED!");
-      }}
-      onLoopComplete={() => {
-        console.info("LOOP COMPLETE!");
-      }}
+      // onDataReady={() => {
+      //   console.info("DATA READY!");
+      // }}
+      // onConfigReady={() => {
+      //   console.info("CONFIG READY!");
+      // }}
+      // onSegmentStart={(x) => {
+      //   console.info("SEGMENT START!", x);
+      // }}
+      // onDOMLoaded={() => {
+      //   console.info("DOM LOADED!");
+      //   lottieRef?.current?.setSpeed(0.5);
+      // }}
+      // onLoadedImages={() => {
+      //   console.info("IMAGES LOADED!");
+      // }}
+      // onLoopComplete={() => {
+      //   console.info("LOOP COMPLETE!");
+      // }}
     />
   );
 };

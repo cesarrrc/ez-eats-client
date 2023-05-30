@@ -4,7 +4,6 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function ButtonNavigation({ content, img, path, img2 }) {
-  console.log(path, 'pathhhhhhhhhh')
   return (
     <div className={classes.button_nav_container}>
       <div className={classes.image_container}>
