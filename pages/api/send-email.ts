@@ -13,16 +13,29 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse<{ result: string; message: string; error?: string }>
 ) {
-  const { name, email, phone, subject, message } = req.body;
+  const { name, email, phone, subject, event_type, message } = req.body;
   try {
     const results = await mailClient.sendMail({
       to: "cesarcisneros9@gmail.com",
       subject,
       text: `
-          name: ${name},
-          email: ${email || "not provided"},
-          phone: ${phone || "not provided"}
-          message: ${message}
+          Name: ${name}
+          Email: ${email || "not provided"}
+          Phone: ${phone || "not provided"}
+          Event type: ${event_type || "not provided"}
+          Message: ${message}
+        `,
+    });
+
+    await mailClient.sendMail({
+      to: "chefjacob@ezeatstx.com",
+      subject,
+      text: `
+          Name: ${name}
+          Email: ${email || "not provided"}
+          Phone: ${phone || "not provided"}
+          Event type: ${event_type || "not provided"}
+          Message: ${message}
         `,
     });
     res

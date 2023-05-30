@@ -34,8 +34,6 @@ const Menus = ({ data }: Props) => {
   );
 };
 
-console.log("hello");
-
 export default Menus;
 
 export const getStaticProps: GetStaticProps = async () => {

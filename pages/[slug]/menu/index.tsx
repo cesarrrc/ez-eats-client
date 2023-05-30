@@ -20,7 +20,6 @@ type Props = {
 const Menu = ({ data }: Props) => {
   const params = useRouter();
   const winDim = useWindowDimensions();
-  console.log(data, "data");
   return (
     <div className={classes.body_container}>
       <Head>
@@ -316,7 +315,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     }
   );
 
-  console.log(foundLocation, "found location");
 
   // foundLocation.menu_categories.forEach((element: { dishes: {}[] }) => {
   //   element.dishes.forEach((el: object) => {});

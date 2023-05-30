@@ -12,6 +12,7 @@ export enum ContactDataInitial {
   phone = "",
   subject = "",
   message = "",
+  event_type = "",
 }
 
 export type LatLngLiteral = google.maps.LatLngLiteral;

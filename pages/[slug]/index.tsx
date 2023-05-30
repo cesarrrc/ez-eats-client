@@ -21,8 +21,6 @@ type Props = {
 const Location = ({ data }: Props) => {
   const winDim = useWindowDimensions();
 
-  console.log(data, 'dataaaaaa');
-
   if (!!winDim.width && winDim?.width <= 800) {
     return (
       <div className={classes.resp_location_container}>
@@ -128,12 +126,10 @@ export const getStaticPaths = async () => {
   const paths: { params: { slug: string } }[] = [];
   results.data.allRestaurant.forEach((location: LocationDetails) => {
     if (location.hidden) {
-      console.log("hidden");
       return;
     }
     return paths.push({ params: { slug: location.slug.current } });
   });
-  console.log(paths, 'pathssssssssssssssssssss static propsssss')
   return {
     paths,
     fallback: "blocking",
@@ -147,14 +143,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   if (!results) {
     return { notFound: true };
   }
-  console.log(params, 'resultss *******************************************************************')
-  console.log(results, 'resultss *******************************************************************')
   const foundLocation = results.data.allRestaurant.find(
     (location: LocationDetails) => {
       return location.slug.current === params?.slug;
     }
   );
-  console.log(foundLocation, 'founddddddd locationnnnnnnnn')
   return {
     props: {
       data: foundLocation,

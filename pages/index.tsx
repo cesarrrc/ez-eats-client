@@ -15,7 +15,6 @@ type Props = {
 };
 
 const HomePage = ({ data }: Props) => {
-  console.log(data, "dataaaa home");
   return (
     <div className={styles.container}>
       <Head>
@@ -61,8 +60,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   if (!results) {
     return { notFound: true };
   }
-
-  console.log(results.data.allHomePage[1], "*********************************");
 
   return {
     props: {

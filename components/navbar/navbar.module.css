@@ -1,32 +1,32 @@
 .nav_container {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: auto auto;
   grid-template-rows: 100%;
-  height: auto;
+  height: 140px;
   background-color: black;
   align-items: center;
 }
 
 .logo_container {
-  width: 100%;
-  height: 100%;
+  height: 140px;
+  min-width: 400px;
+  max-width: 600px;
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .button_logo {
-  align-self: center;
-  align-self: start;
-  width: auto;
-  height: 140px;
-  justify-content: flex-start;
-  color: white !important;
-  margin-left: 40px !important;
-  border-radius: 10px !important;
+  height: 120px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .button_logo img {
-  width: auto;
-  height: 100%;
+  position: absolute;
+  object-fit: contain;
 }
 
 .nav {
@@ -35,17 +35,20 @@
   /* align-items: center; */
   margin-right: 20px !important;
   flex-direction: column;
-  flex: 1;
+  /* flex: 1; */
   height: 100%;
   margin-top: 30px;
+  align-self: center;
 }
 
 .nav_buttons {
+  align-self: right;
   align-items: right;
   justify-content: right;
 }
 
 .nav ul {
+  align-self: right;
   display: flex;
   flex-direction: row;
   list-style-type: none;
@@ -62,6 +65,7 @@
 
 .logo_container_2 {
   display: none;
+  height: 140px;
 }
 
 .hamburger {
@@ -132,11 +136,16 @@
 
   .button_logo {
     margin-left: 20px !important;
+    /* width: auto !important; */
   }
 
   .logo_container_2 {
     margin-top: 10px;
-    display: block;
+    display: flex;
+    /* width: auto !important; */
+  }
+  .logo_container_2 img {
+    width: auto !important;
   }
 }
 
