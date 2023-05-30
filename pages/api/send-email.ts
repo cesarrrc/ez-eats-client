@@ -11,7 +11,7 @@ const mailClient = nodemailer.createTransport({
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<{ result: string; message: string; error?: string }>
+  res: NextApiResponse<{ result: string; message: string; error?: any }>
 ) {
   const { name, email, phone, subject, event_type, message } = req.body;
   try {
@@ -42,10 +42,11 @@ export default async function handler(
       .status(200)
       .json({ result: "success", message: "You're message has been sent." });
   } catch (error) {
+    console.log(error);
     res.status(400).json({
       result: "failure",
       message: "There was an error processing your request.",
-      error: "error",
+      error,
     });
   }
 }

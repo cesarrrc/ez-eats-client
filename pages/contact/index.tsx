@@ -59,6 +59,7 @@ const Contact = (props: Props) => {
       }
       setIsSubmit(false);
     } catch (error: any) {
+      console.log(error, 'error')
       setIsSubmit(false);
       notificationCtx.showNotification({
         title: "There was an error sending your message...",
