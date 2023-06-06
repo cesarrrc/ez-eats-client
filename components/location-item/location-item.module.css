@@ -25,11 +25,12 @@
   max-width: 300px;
   margin: 10px 10px;
   align-items: center;
+  position: relative;
 }
 
 .img {
   border-radius: 15px;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .location_container h1 {

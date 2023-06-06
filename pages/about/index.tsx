@@ -78,6 +78,7 @@ const About = ({ data }: Props) => {
                   flexDirection: "column",
                   alignItems: "center",
                 }}
+                key={i}
               >
                 <h3 style={{ margin: "20px 0", fontSize: 30 }}>
                   {content.detail_header}
@@ -139,6 +140,11 @@ const About = ({ data }: Props) => {
   }
   return (
     <div>
+      <Head>
+        <title>Our Story</title>
+        <meta name="description" content="" />
+        <meta name="keywords" content="" />
+      </Head>
       <PageHeading title="About Us" description="" />
       <section style={{ display: "flex", flex: 1 }}>
         <div
@@ -179,6 +185,7 @@ const About = ({ data }: Props) => {
         return (
           content.detail_number != 1 && (
             <section
+              key={i}
               style={{
                 display: "flex",
                 flexDirection: "column",

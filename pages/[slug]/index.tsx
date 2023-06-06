@@ -54,12 +54,19 @@ const Location = ({ data }: Props) => {
 
           <div className={classes.resp_map_grid_container}>
             <Map
-              marker_locations={[data].map(
-                (location) =>
-                  location.address.street_address +
-                  " " +
-                  location.address.city_state_zip
-              )}
+              marker_locations={[data].map((location) => {
+                console.log(location.address.street_address.split("Suite")[0]);
+                return {
+                  address: location.address.street_address.includes("Suite")
+                    ? location.address.street_address.split("Suite")[0] +
+                      " " +
+                      location.address.city_state_zip
+                    : location.address.street_address +
+                      " " +
+                      location.address.city_state_zip,
+                  name: location.name,
+                };
+              })}
             />
           </div>
           <div className={classes.resp_details}>
@@ -71,6 +78,11 @@ const Location = ({ data }: Props) => {
   }
   return (
     <div className={classes.location_container}>
+      <Head>
+        <title>{data.name}</title>
+        <meta name="description" content={data.meta_data.meta_description} />
+        <meta name="keywords" content={data.meta_data.keywords} />
+      </Head>
       <PageHeading
         title={data.name.split("-")[0]}
         description={
@@ -96,12 +108,18 @@ const Location = ({ data }: Props) => {
       <div className={classes.grid_container_two}>
         <div className={classes.map_grid_container}>
           <Map
-            marker_locations={[data].map(
-              (location) =>
-                location.address.street_address +
-                " " +
-                location.address.city_state_zip
-            )}
+            marker_locations={[data].map((location) => {
+              return {
+                address: location.address.street_address.includes("Suite")
+                  ? location.address.street_address.split("Suite")[0] +
+                    " " +
+                    location.address.city_state_zip
+                  : location.address.street_address +
+                    " " +
+                    location.address.city_state_zip,
+                name: location.name,
+              };
+            })}
           />
         </div>
         <div className={classes.details}>

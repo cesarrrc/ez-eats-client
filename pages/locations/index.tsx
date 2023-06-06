@@ -67,12 +67,18 @@ const Locations = ({ data }: Props) => {
               hoveredLocation={hoveredLocation}
               setHoveredLocation={setHoveredLocation}
               hoveringLocation={hoveringLocation}
-              marker_locations={data.map(
-                (location) =>
-                  location.address.street_address +
-                  " " +
-                  location.address.city_state_zip
-              )}
+              marker_locations={data.map((location) => {
+                return {
+                  address: location.address.street_address.includes("Suite")
+                    ? location.address.street_address.split("Suite")[0] +
+                      " " +
+                      location.address.city_state_zip
+                    : location.address.street_address +
+                      " " +
+                      location.address.city_state_zip,
+                  name: location.name,
+                };
+              })}
             />
           </div>
         </div>
