@@ -40,9 +40,9 @@ const SocialNav = ({ footer, header, style }: Props) => {
             <FacebookIcon className={classes.icon} />
           </Link>
         </li>
-        <li>
+        {/* <li>
           <TikTokIcon className={classes.custom_icon} />
-        </li>
+        </li> */}
       </ul>
     </nav>
   );

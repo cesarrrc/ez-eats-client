@@ -71,7 +71,15 @@ const LocationItem = ({
                 }}
               />
             )}
-            <h2>{title.split("-")[1]}</h2>
+            <h2>
+              {" "}
+              <span
+                style={{ fontFamily: "Verdana, Arial, Helvetica, sans-serif" }}
+              >
+                @
+              </span>{" "}
+              {title.split("-")[1]}
+            </h2>
           </div>
         </Link>
         {!isLast && <div className={classes.bar}></div>}
@@ -81,14 +89,7 @@ const LocationItem = ({
           }`}
         >
           <Link href={`/${slug}`} className={classes.img_container}>
-            <Image
-              className={classes.img}
-              src={image_src}
-              alt={title}
-              width={400}
-              height={400}
-              layout="responsive"
-            />
+            <Image className={classes.img} src={image_src} alt={title} fill />
           </Link>
           <div className={classes.responsive_details}>
             <Link
@@ -156,14 +157,7 @@ const LocationItem = ({
       // onMouseLeave={handleMouseExit}
     >
       <Link href={`/${slug}`} className={classes.img_container}>
-        <Image
-          className={classes.img}
-          src={image_src}
-          alt={title}
-          width={400}
-          height={400}
-          layout="responsive"
-        />
+        <Image className={classes.img} src={image_src} alt={title} fill />
       </Link>
       <div className={classes.content}>
         <Link
@@ -183,7 +177,14 @@ const LocationItem = ({
               />
             )}
           </h1>
-          <h2>{title.split("-")[1]}</h2>
+          <h2>
+            <span
+              style={{ fontFamily: "Verdana, Arial, Helvetica, sans-serif" }}
+            >
+              @
+            </span>
+            {title.split("-")[1]}
+          </h2>
         </Link>
         <Link
           className={!hovering ? classes.disabled : ""}

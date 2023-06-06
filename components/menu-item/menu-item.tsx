@@ -17,11 +17,7 @@ type Props = {
   noBorder?: boolean;
 };
 
-const MenuItem = ({
-  location,
-  noImage,
-  noBorder
-}: Props) => {
+const MenuItem = ({ location, noImage, noBorder }: Props) => {
   const [hover, setHover] = React.useState<boolean>(false);
   const winDim = useWindowDimensions();
 
@@ -83,7 +79,17 @@ const MenuItem = ({
                 </div>
               )}
               <h1>{location.name.split("-")[0]}</h1>
-              <h4>{location.name.split("-")[1]}</h4>
+              <h4>
+                {" "}
+                <span
+                  style={{
+                    fontFamily: "Verdana, Arial, Helvetica, sans-serif",
+                  }}
+                >
+                  @
+                </span>
+                {location.name.split("-")[1]}
+              </h4>
             </span>
           </Link>
         </li>
