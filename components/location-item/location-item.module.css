@@ -8,7 +8,6 @@
 .hovering_location {
   opacity: 0.25;
 }
-
 .hovering_location .force {
   opacity: 1;
 }
@@ -66,10 +65,10 @@
 }
 
 .map_outer {
-  display: flex;
-  flex: 1;
-  width: auto;
-  height: auto;
+  /* display: flex; */
+  /* flex: 1; */
+  /* width: auto; */
+  /* height: auto; */
 }
 
 .map {
@@ -80,16 +79,16 @@
 .bar {
   width: 60%;
   height: 2px;
-  margin: 10px 0;
   background-color: whitesmoke;
+  margin: auto;
 }
 
-.bar:last-child {
+/* .bar:last-child {
   background-color: red;
   height: 200px;
   display: none;
   border: none !important;
-}
+} */
 
 .disabled {
   pointer-events: none;
@@ -109,6 +108,7 @@
   pointer-events: none;
 }
 .responsive_container:hover .responsive_container_header {
+  margin-bottom: 10px;
   pointer-events: auto;
   animation: disable-pointer-events 500ms;
 }
@@ -214,7 +214,7 @@
 
   .img {
     border-radius: 15px;
-    object-fit: contain;
+    /* object-fit: contain; */
     overflow: hidden;
   }
 

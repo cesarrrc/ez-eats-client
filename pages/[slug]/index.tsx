@@ -99,7 +99,12 @@ const Location = ({ data }: Props) => {
         </div>
 
         <div className={classes.image_grid_container}>
-          <Image src={data.image.asset.url} alt={data.name} fill />
+          <Image
+            src={data.image.asset.url}
+            alt={data.name}
+            fill
+            quality={100}
+          />
         </div>
       </div>
       <div className={classes.tagline_grid_container}>
