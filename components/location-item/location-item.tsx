@@ -50,100 +50,104 @@ const LocationItem = ({
 
   if (typeof winDim.width === "number" && winDim.width <= 800) {
     return (
-      <div
-        className={`${classes.responsive_container} ${
-          hoveringLocation && !hovering && classes.hovering_location
-        }`}
-        onMouseEnter={handleMouseEnter}
-      >
-        <Link
-          href={`/${slug}`}
-          className={`${classes.responsive_container_header}`}
-        >
-          <h1>{title.split("-")[0]} </h1>
-          <div>
-            {hovering && (
-              <WebIcon
-                style={{
-                  marginRight: "10px",
-                  width: 16,
-                  height: 16,
-                }}
-              />
-            )}
-            <h2>
-              {" "}
-              <span
-                style={{ fontFamily: "Verdana, Arial, Helvetica, sans-serif" }}
-              >
-                @
-              </span>{" "}
-              {title.split("-")[1]}
-            </h2>
-          </div>
-        </Link>
-        {!isLast && <div className={classes.bar}></div>}
+      <>
         <div
-          className={`${classes.responsive_container_details}   ${
-            hovering && classes.hovering_location_force
+          className={`${classes.responsive_container} ${
+            hoveringLocation && !hovering && classes.hovering_location
           }`}
+          onMouseEnter={handleMouseEnter}
         >
-          <Link href={`/${slug}`} className={classes.img_container}>
-            <Image className={classes.img} src={image_src} alt={title} fill />
-          </Link>
-          <div className={classes.responsive_details}>
-            <Link
-              className={!hovering ? classes.disabled : ""}
-              href={`https://www.google.com/maps/search/${title.replace(
-                "-",
-                "+"
-              )}${address.street_address} ${address.city_state_zip}`}
-              target="_blank"
-            >
-              <LocationOnIcon
-                style={{
-                  marginRight: 8,
-                  width: 16,
-                  height: 16,
-                }}
-              />
-              {address.street_address}
-              <br />
-              {address.city_state_zip}
-            </Link>
-            <Link
-              href={`tel:+1${business_phone}`}
-              className={!hovering ? classes.disabled : ""}
-            >
-              <LocalPhoneIcon
-                style={{
-                  marginRight: 8,
-                  width: 16,
-                  height: 16,
-                }}
-              />
-              {business_phone}
-            </Link>
-            <div className={classes.menu_container}>
-              <Link
-                href={`/${slug}/menu`}
-                className={!hovering ? classes.disabled : ""}
-                target="_blank"
-              >
-                <MenuBookIcon
+          <Link
+            href={`/${slug}`}
+            className={`${classes.responsive_container_header}`}
+          >
+            <h1>{title.split("-")[0]} </h1>
+            <div>
+              {hovering && (
+                <WebIcon
                   style={{
-                    marginRight: 8,
+                    marginRight: "10px",
                     width: 16,
-                    // position: "absolute",
                     height: 16,
                   }}
                 />
-                View Menu
+              )}
+              <h2>
+                {" "}
+                <span
+                  style={{
+                    fontFamily: "Verdana, Arial, Helvetica, sans-serif",
+                  }}
+                >
+                  @
+                </span>{" "}
+                {title.split("-")[1]}
+              </h2>
+            </div>
+          </Link>
+          <div
+            className={`${classes.responsive_container_details}   ${
+              hovering && classes.hovering_location_force
+            }`}
+          >
+            <Link href={`/${slug}`} className={classes.img_container}>
+              <Image className={classes.img} src={image_src} alt={title} fill />
+            </Link>
+            <div className={classes.responsive_details}>
+              <Link
+                className={!hovering ? classes.disabled : ""}
+                href={`https://www.google.com/maps/search/${title.replace(
+                  "-",
+                  "+"
+                )}${address.street_address} ${address.city_state_zip}`}
+                target="_blank"
+              >
+                <LocationOnIcon
+                  style={{
+                    marginRight: 8,
+                    width: 16,
+                    height: 16,
+                  }}
+                />
+                {address.street_address}
+                <br />
+                {address.city_state_zip}
               </Link>
+              <Link
+                href={`tel:+1${business_phone}`}
+                className={!hovering ? classes.disabled : ""}
+              >
+                <LocalPhoneIcon
+                  style={{
+                    marginRight: 8,
+                    width: 16,
+                    height: 16,
+                  }}
+                />
+                {business_phone}
+              </Link>
+              <div className={classes.menu_container}>
+                <Link
+                  href={`/${slug}/menu`}
+                  className={!hovering ? classes.disabled : ""}
+                  target="_blank"
+                >
+                  <MenuBookIcon
+                    style={{
+                      marginRight: 8,
+                      width: 16,
+                      // position: "absolute",
+                      height: 16,
+                    }}
+                  />
+                  View Menu
+                </Link>
+              </div>
             </div>
           </div>
         </div>
-      </div>
+        {!isLast && <div className={classes.bar}></div>}
+      </>
     );
   }
 
