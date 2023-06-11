@@ -19,8 +19,8 @@ export default async function handler(
     await res.revalidate("/menus");
     await res.revalidate("/ez-eats-trailer-middleton");
     await res.revalidate("/ez-eats-trailer-middleton/menu");
-    await res.revalidate("/ez-eats-kitchen-mill-street-market");
-    await res.revalidate("/ez-eats-kitchen-mill-street/menu");
+    await res.revalidate("/ez-eats-kitchen-mill-street-market-market");
+    await res.revalidate("/ez-eats-kitchen-mill-street-market/menu");
     await res.revalidate("/about");
     return res.json({ revalidated: true });
   } catch (err: any) {
