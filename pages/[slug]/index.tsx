@@ -153,6 +153,7 @@ export const getStaticPaths = async () => {
     }
     return paths.push({ params: { slug: location.slug.current } });
   });
+  console.log(paths, 'paths')
   return {
     paths,
     fallback: "blocking",
@@ -170,7 +171,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     (location: LocationDetails) => {
       return location.slug.current === params?.slug;
     }
-  );
+    );
+    console.log(foundLocation, 'location gsp')
   return {
     props: {
       data: foundLocation,
