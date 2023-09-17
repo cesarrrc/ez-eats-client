@@ -62,13 +62,15 @@
   transform: scale(1);
 }
 
-.content {
+.content2 {
+  font-family: "Fauna One", Serif !important;
+  font-weight: 100;
   border-radius: 15px;
   opacity: 0;
   position: absolute;
   color: whitesmoke;
   padding: 10px;
-  font-size: 18px;
+  font-size: 14px;
   top: 45%;
   left: 50%;
   width: auto;
@@ -87,7 +89,7 @@
   /* z-index: 4; */
 }
 
-.button_nav_container:hover .content {
+.button_nav_container:hover .content2 {
   opacity: 1;
   pointer-events: auto;
   visibility: visible;
@@ -96,8 +98,46 @@
   transition: 0.5s ease-in-out;
 }
 
-.button_nav_container:hover .content:hover {
+.button_nav_container:hover .content2:hover {
   background-color: rgb(0, 0, 0);
+}
+
+.content {
+  /* border-radius: 15px;
+  opacity: 1;
+  position: absolute;
+  color: whitesmoke;
+  padding: 10px;
+  font-size: 18px;
+  top: 45%;
+  left: 50%;
+  width: auto;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  pointer-events: pointer;
+  transition: 2.5s ease-in-out;
+  pointer-events: none;
+  visibility: hidden;
+  white-space: pre-wrap;
+
+  background-color: rgb(0, 0, 0, 0.5); */
+
+  /* z-index: 4; */
+}
+
+.button_nav_container:hover .content {
+  /* opacity: 0;
+  pointer-events: auto;
+  visibility: visible;
+  border-radius: 15px;hover
+  animation: disable-pointer-events 500ms;
+  transition: 0.5s ease-in-out; */
+}
+
+.button_nav_container:hover .content:hover {
+  /* background-color: rgb(0, 0, 0); */
 }
 
 .image_container a {

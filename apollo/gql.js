@@ -6,6 +6,7 @@ export const GET_HOME = gql`
       _id
       tile_number
       tile_name
+      tile_name_hover
       tile_image {
         asset {
           url
