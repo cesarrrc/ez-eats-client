@@ -13,6 +13,8 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import SocialNav from "../social-nav-container/social-nav";
 import OrderOnlineButton from "../order-online-button/order-online-button";
 import { useRouter } from "next/router";
+import ezLogo from "../../public/img/logo_original_plain.svg";
+import ezLogoSmall from "../../public/img/logo_original_plain_small.svg";
 
 export default function NavBar() {
   const [drawer, setDrawer] = useState(false);
@@ -31,11 +33,12 @@ export default function NavBar() {
         <div className={classes.logo_container}>
           <Button className={classes.button_logo} component={Link} href="/">
             <Image
-              src={"/img/logo5.png"}
+              src={ezLogo}
               alt="EZ Eats"
               // width={400}
               // height={400}
               quality={100}
+              // unoptimized={true}
               fill
               priority
             />
@@ -44,7 +47,7 @@ export default function NavBar() {
         <div className={classes.logo_container_2}>
           <Button className={classes.button_logo} component={Link} href="/">
             <Image
-              src={"/img/small-logo4.png"}
+              src={ezLogoSmall}
               alt="EZ Eats"
               // width={400}
               // height={400}
@@ -195,7 +198,7 @@ export default function NavBar() {
                     style={{ color: "black" }}
                   >
                     <EmojiPeopleIcon />
-                    &nbsp;About
+                    &nbsp;Our Story
                   </Button>
                 </Link>
               </li>
