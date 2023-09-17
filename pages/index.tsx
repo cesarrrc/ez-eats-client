@@ -37,12 +37,27 @@ const HomePage = ({ data }: Props) => {
         {data &&
           data.allHomePage.map((content: any) => {
             return (
-              <ButtonNavigation
-                content={content.tile_name.replace("-", "\n")}
-                img={content.tile_icon.asset.url}
-                img2={content.tile_image.asset.url}
-                path={content.slug.current}
-              />
+              <div
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  display: "flex",
+                  flexDirection: "column",
+                  // justifyContent: "center",
+                  // alignItems: "center",
+                }}
+              >
+                <h3 style={{ textAlign: "center", margin: 0 }}>
+                  {content.tile_name}
+                </h3>
+                <ButtonNavigation
+                  content={content.tile_name.replace("@", "\n@")}
+                  content2={content.tile_name_hover.replace("@", "\n@")}
+                  img={content.tile_icon.asset.url}
+                  img2={content.tile_image.asset.url}
+                  path={content.slug.current}
+                />
+              </div>
             );
           })}
       </div>
