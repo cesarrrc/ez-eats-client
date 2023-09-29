@@ -1,9 +1,6 @@
-.main_block_content {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.main_block_content p {
   font-size: 30px;
-  text-align: center;
+  text-align: justify;
   line-height: 1.4;
 }
 
@@ -12,9 +9,13 @@
   justify-content: center;
   align-items: center;
   font-size: 22px;
-  text-align: center;
+  text-align: justify;
   word-spacing: 1px;
   line-height: 1.6;
+  margin: 20px;
+}
+.block_content p{
+  margin: 20px;
 }
 
 .block_content a {
@@ -29,21 +30,12 @@
 }
 
 @media (max-width: 1000px) {
-  .main_block_content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 24px;
-    text-align: center;
-    line-height: 1.4;
-  }
-
   .block_content {
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 18px;
-    text-align: center;
+    text-align: justify;
     word-spacing: 1px;
     line-height: 1.6;
   }

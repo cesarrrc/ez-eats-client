@@ -14,7 +14,7 @@ type Props = {
 const PageHeading = ({ title, description, address }: Props) => {
   const winDim = useWindowDimensions();
   return (
-    <section className={`${classes.heading_container} ${'heading_container'}`}>
+    <section className={`${classes.heading_container} ${"heading_container"}`}>
       <h1>{title}</h1>
       <div className={classes.bar} />
       {address ? (
@@ -56,7 +56,7 @@ const PageHeading = ({ title, description, address }: Props) => {
           }}
           className={classes.sub}
         >
-          {!!winDim.width && winDim.width <= 800 ? (
+          {!!winDim.width && winDim.width <= 800 && description ? (
             <>
               {description?.split("\n")[0]}
               <br />

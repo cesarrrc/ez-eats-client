@@ -2,19 +2,19 @@
   display: grid;
   justify-content: center;
   align-items: center;
-  grid-template-columns: repeat(2, 350px);
+  grid-template-columns: repeat(2, minmax(350px, 400px));
   grid-auto-rows: 350px;
   grid-gap: 20px;
 }
 
 @media (max-width: 800px) {
-    .grid_container {
-        grid-template-columns: minmax(200px, 400px);
-    }
+  .grid_container {
+    grid-template-columns: minmax(200px, 400px);
+  }
 }
 @media (max-width: 400px) {
-    .grid_container {
-        grid-template-columns: minmax(200px, 400px);
-        grid-auto-rows: 275px;
+  .grid_container {
+    grid-template-columns: minmax(200px, 400px);
+    grid-auto-rows: 275px;
   }
 }
