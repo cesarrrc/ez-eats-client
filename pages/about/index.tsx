@@ -38,7 +38,7 @@ const About = ({ data }: Props) => {
               // width: 400,
               // height: 400,
               display: "flex",
-              minHeight: "400px",
+              minHeight: "140px",
               position: "relative",
               flex: 1,
               margin: " 0px 30px",
@@ -98,7 +98,7 @@ const About = ({ data }: Props) => {
                       minHeight: "200px",
                       position: "relative",
                       flex: 1,
-                      margin: "20px 30px",
+                      margin: "0 0",
                     }}
                   >
                     <Image
@@ -117,7 +117,7 @@ const About = ({ data }: Props) => {
                     style={{
                       display: "flex",
                       flex: 1,
-                      margin: "20px 60px",
+                      margin: "0 10px",
                     }}
                     className={classes.block_content}
                   >
@@ -146,40 +146,39 @@ const About = ({ data }: Props) => {
         <meta name="keywords" content="" />
       </Head>
       <PageHeading title="About Us" description="" />
-      <section style={{ display: "flex", flex: 1 }}>
+      <section
+        style={{
+          maxWidth: 1150,
+          margin: "auto",
+          textAlign: "center",
+          padding: 60,
+        }}
+        className={classes.main_block_content}
+      >
         <div
           style={{
-            // width: 400,
-            // height: 400,
-            display: "flex",
-            minHeight: "400px",
+            width: "40vw",
+            height: "10vw",
+            float: "left",
+            margin: "20px 20px 10px 0",
             position: "relative",
-            flex: 1,
-            margin: "100px",
+            // border: "solid #f1f1f1 10px",
           }}
         >
           <Image
             src={data.allAboutPageDocument[0].detail_image.asset.url}
-            // width={200}
+            // width={500}
             // height={200}
             fill
             alt={"about us"}
-            style={{
-              objectFit: "contain",
-              overflow: "hidden",
-            }}
+            style={{ objectFit: "contain" }}
           />
         </div>
-        <div
-          style={{
-            display: "flex",
-            flex: 1,
-            margin: "100px",
-          }}
+
+        <BlockContent
           className={classes.main_block_content}
-        >
-          <BlockContent blocks={data.allAboutPageDocument[0].detail_bodyRaw} />
-        </div>
+          blocks={data.allAboutPageDocument[0].detail_bodyRaw}
+        />
       </section>
       {data.allAboutPageDocument.map((content: any, i: any) => {
         return (
@@ -190,6 +189,8 @@ const About = ({ data }: Props) => {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
+                maxWidth: 1200,
+                margin: "20px",
               }}
             >
               <h3 style={{ margin: "20px 0", fontSize: 30 }}>
@@ -210,7 +211,7 @@ const About = ({ data }: Props) => {
                     minHeight: "400px",
                     position: "relative",
                     flex: 1,
-                    margin: "20px 60px",
+                    margin: "20px 20px",
                   }}
                 >
                   <Image
@@ -229,7 +230,7 @@ const About = ({ data }: Props) => {
                   style={{
                     display: "flex",
                     flex: 1,
-                    margin: "20px 60px",
+                    margin: "20px 0",
                   }}
                   className={classes.block_content}
                 >
