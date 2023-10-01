@@ -23,7 +23,8 @@ a,
 ul,
 li,
 input,
-textarea {
+textarea,
+option {
   font-family: "Fauna One", Serif !important;
   white-space: pre-wrap;
   list-style: none;

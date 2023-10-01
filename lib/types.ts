@@ -1,3 +1,6 @@
+import React from "react";
+import type { AppProps } from "next/app";
+
 export type ContactData = {
   name: string;
   email: string;
@@ -6,13 +9,33 @@ export type ContactData = {
   message: string;
 };
 
+export type EventData = {
+  name: string;
+  email: string;
+  eventType: string;
+  phone: string;
+  numberOfGuests: string;
+  date: string;
+  message: string;
+};
+
 export enum ContactDataInitial {
   name = "",
   email = "",
   phone = "",
+  event_type = "",
   subject = "",
   message = "",
-  event_type = "",
+}
+
+export enum EventDataInitial {
+  name = "",
+  email = "",
+  eventType = "",
+  phone = "",
+  numberOfGuests = "",
+  date = "",
+  message = "",
 }
 
 export type LatLngLiteral = google.maps.LatLngLiteral;
@@ -127,3 +150,9 @@ export type LocationDetails = {
 };
 
 export type AllRestaurantsType = [LocationDetails];
+
+export type ComponentWithPageLayout = AppProps & {
+  Component: AppProps["Component"] & {
+    PageLayout?: any;
+  };
+};

@@ -39,9 +39,11 @@ export default function NavBar() {
               // height={400}
               quality={100}
               // unoptimized={true}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               fill
               priority
-            />
+              style={{ width: "100%", height: "100%" }}
+              />
           </Button>
         </div>
         <div className={classes.logo_container_2}>
@@ -52,6 +54,8 @@ export default function NavBar() {
               // width={400}
               // height={400}
               quality={100}
+              style={{ width: "100%", height: "100%" }}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               fill
               priority
             />
