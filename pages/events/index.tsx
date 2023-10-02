@@ -38,7 +38,6 @@ const Events = (props: Props) => {
           content="catering, food, san marcos, tx, texas, kolache, taco, burger, breakfast, lunch, dinner, restaurant"
         />
       </Head>
-      events page
     </div>
   );
 };
