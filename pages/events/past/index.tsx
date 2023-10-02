@@ -37,7 +37,7 @@ const PastEvents = ({ data }: Props) => {
         rowGap: 24,
         columnGap: 24,
         margin: 10,
-        gridAutoRows: "auto",
+        gridAutoRows: "minmax(300px, auto)",
         maxWidth: 1800,
       }}
     >
