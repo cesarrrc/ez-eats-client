@@ -60,6 +60,8 @@ const PastEvents = ({ data }: Props) => {
               width: "50%",
               alignSelf: "center",
               cursor: "zoom-in",
+              // height: "100%",
+              overflow: "hidden",
             }}
           >
             <Carousel
@@ -68,16 +70,16 @@ const PastEvents = ({ data }: Props) => {
               onClickItem={() => {
                 setCarousel(event);
               }}
+              dynamicHeight={false}
             >
               {event.flyer?.map((flyer) => (
                 <div
-                  style={
-                    {
-                      // height: "100%",
-                      // position: "relative",
-                      // objectFit: "cover",
-                    }
-                  }
+                  style={{
+                    height: "100%",
+                    // position: "relative",
+                    // objectFit: "cover",
+                    overflow: "hidden",
+                  }}
                 >
                   <img style={{}} src={flyer.asset.url} />
                 </div>
