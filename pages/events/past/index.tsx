@@ -50,6 +50,7 @@ const PastEvents = ({ data }: Props) => {
             border: "#f1f1f1 solid 3px",
             borderRadius: 12,
             overflow: "hidden",
+            zIndex: 1000,
           }}
         >
           <div
