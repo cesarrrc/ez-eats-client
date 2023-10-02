@@ -181,7 +181,7 @@ const PastEvents = ({ data }: Props) => {
             height: "100vh",
             backgroundColor: "#000000c4",
             position: "fixed",
-            zIndex: 1000,
+            zIndex: 300000,
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
