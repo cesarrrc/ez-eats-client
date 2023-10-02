@@ -135,7 +135,7 @@ PastEvents.PageLayout = EventsPageLayout;
 
 const GET_PAST_EVENTS = gql`
   # Write your query or mutation here
-  query ($currentTime: DateTime!) {
+  query allEvents($currentTime: DateTime!) {
     allEvents(
       where: { event_date: { lte: $currentTime } }
       sort: { event_date: DESC }
@@ -159,9 +159,10 @@ const GET_PAST_EVENTS = gql`
 `;
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const results = await client.query<any>({
+  const currentTime = await new Date().toISOString();
+  const results = await client.query({
     query: GET_PAST_EVENTS,
-    variables: { currentTime: await new Date().toISOString() },
+    variables: { currentTime: new Date().toISOString() },
   });
   if (!results) {
     return { notFound: true };

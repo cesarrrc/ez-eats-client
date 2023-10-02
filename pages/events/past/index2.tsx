@@ -20,7 +20,7 @@ const PastEvents = ({ data }: Props) => {
   const winDim = useWindowDimensions();
 
   useEffect(() => {
-    console.log(data);
+    console.log(data, "data");
   }, [data]);
 
   return (
@@ -28,13 +28,18 @@ const PastEvents = ({ data }: Props) => {
       style={{
         display: "grid",
         gridTemplateColumns:
-          winDim.width && winDim.width <= 400 ? "1fr" : "1fr 1fr 1fr",
+          winDim.width && winDim.width <= 650
+            ? "1fr"
+            : winDim.width && winDim.width <= 1200
+            ? "1fr 1fr"
+            : "1fr 1fr 1fr",
         rowGap: 20,
         columnGap: 20,
         margin: 10,
+        gridAutoRows: "auto",
       }}
     >
-      {data.allEvents.map((event: EventDetails) => (
+      {data.map((event: EventDetails) => (
         <div
           style={{
             display: "flex",
@@ -129,9 +134,9 @@ const PastEvents = ({ data }: Props) => {
 PastEvents.PageLayout = EventsPageLayout;
 
 const GET_PAST_EVENTS = gql`
-  # Write your query or mutation here
   {
-    allEvents({where:{lte}}) {
+    # Write your query or mutation here
+    allEvents(sort: { event_date: DESC }) {
       _id
       event_date
       name
@@ -150,17 +155,20 @@ const GET_PAST_EVENTS = gql`
   }
 `;
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async () => {
   const results = await client.query({
     query: GET_PAST_EVENTS,
-    variables:{currentTime}
   });
   if (!results) {
     return { notFound: true };
   }
+  console.log(results);
   return {
     props: {
-      data: results.data,
+      data: results.data.allEvents.filter((event: any) => {
+        console.log(event);
+        return event.date_time <= new Date().toISOString();
+      }),
     },
     revalidate: 600,
   };

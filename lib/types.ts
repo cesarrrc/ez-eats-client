@@ -171,7 +171,7 @@ export type EventDetails = {
   website: string;
 };
 
-export type AllEventsType = { allEvents: [EventDetails] };
+export type AllEventsType = [EventDetails];
 
 export type ComponentWithPageLayout = AppProps & {
   Component: AppProps["Component"] & {
