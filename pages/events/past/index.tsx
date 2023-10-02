@@ -159,9 +159,10 @@ const GET_PAST_EVENTS = gql`
 `;
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const currentTime = await new Date().toISOString();
   const results = await client.query({
     query: GET_PAST_EVENTS,
-    variables: { currentTime: new Date().toISOString() },
+    variables: { currentTime: currentTime },
   });
   if (!results) {
     return { notFound: true };
