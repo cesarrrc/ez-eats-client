@@ -151,6 +151,28 @@ export type LocationDetails = {
 
 export type AllRestaurantsType = [LocationDetails];
 
+export type EventDetails = {
+  __typename: string;
+  _id: string;
+  name: string;
+  event_date: string;
+  event_descriptionRaw: any;
+  event_address: {
+    street_address: string;
+    city_state_zip: string;
+  };
+  flyer: [
+    {
+      asset: {
+        url: string;
+      };
+    }
+  ];
+  website: string;
+};
+
+export type AllEventsType = { allEvents: [EventDetails] };
+
 export type ComponentWithPageLayout = AppProps & {
   Component: AppProps["Component"] & {
     PageLayout?: any;

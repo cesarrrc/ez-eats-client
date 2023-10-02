@@ -28,15 +28,10 @@ const PastEvents = ({ data }: Props) => {
       style={{
         display: "grid",
         gridTemplateColumns:
-          winDim.width && winDim.width <= 650
-            ? "1fr"
-            : winDim.width && winDim.width <= 1200
-            ? "1fr 1fr"
-            : "1fr 1fr 1fr",
+          winDim.width && winDim.width <= 400 ? "1fr" : "1fr 1fr 1fr",
         rowGap: 20,
         columnGap: 20,
         margin: 10,
-        gridAutoRows: "auto",
       }}
     >
       {data.allEvents.map((event: EventDetails) => (
@@ -135,11 +130,8 @@ PastEvents.PageLayout = EventsPageLayout;
 
 const GET_PAST_EVENTS = gql`
   # Write your query or mutation here
-  query ($currentTime: DateTime!) {
-    allEvents(
-      where: { event_date: { lte: $currentTime } }
-      sort: { event_date: DESC }
-    ) {
+  {
+    allEvents({where:{lte}}) {
       _id
       event_date
       name
@@ -161,12 +153,11 @@ const GET_PAST_EVENTS = gql`
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const results = await client.query({
     query: GET_PAST_EVENTS,
-    variables: { currentTime: new Date().toISOString() },
+    variables:{currentTime}
   });
   if (!results) {
     return { notFound: true };
   }
-  console.log(results);
   return {
     props: {
       data: results.data,
