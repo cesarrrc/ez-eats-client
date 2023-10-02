@@ -160,7 +160,7 @@ const PastEvents = ({ data }: Props) => {
           <div style={{ display: "flex", justifyContent: "center" }}>
             <AddToCalendarButton
               name={event.name}
-              startDate={event.event_date}
+              startDate={new Date(event.event_date).toISOString().split("T")[0]}
               options={["Apple", "Google", "Yahoo", "iCal"]}
               listStyle="overlay"
               trigger="click"
