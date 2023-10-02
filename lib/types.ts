@@ -157,6 +157,7 @@ export type EventDetails = {
   name: string;
   event_date: string;
   event_descriptionRaw: any;
+  show_time: boolean;
   event_address: {
     street_address: string;
     city_state_zip: string;

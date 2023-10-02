@@ -2,6 +2,13 @@
   margin: 10px;
   font-size: 12px;
 }
+@media (max-width: 800px) {
+  .block_content p {
+    margin: 4px;
+    font-size: 12px;
+    font-weight: lighter;
+  }
+}
 
 .calendar-button {
   height: 100px;

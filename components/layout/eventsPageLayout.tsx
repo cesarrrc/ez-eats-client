@@ -5,6 +5,7 @@ import upcomingArrow from "../../public/img/Upcoming_Events.svg";
 import bookArrow from "../../public/img/Book_Now.svg";
 import pastArrow from "../../public/img/Past_Events.svg";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
+import { useRouter } from "next/router";
 
 type Props = {
   children: React.ReactNode;
@@ -13,11 +14,21 @@ type Props = {
 function eventsPageLayout({ children }: Props) {
   const [firstClick, setFirstClick] = useState("");
   const winDim = useWindowDimensions();
+  const router = useRouter();
 
   useEffect(() => {
     console.log(firstClick);
     // console.log(winDim);
-  }, [firstClick, winDim]);
+    console.log(router);
+  }, [firstClick, winDim, router]);
+
+  useEffect(() => {
+    let currentPath = router.pathname.split("/");
+    console.log(currentPath, "path");
+    if (currentPath[2]) {
+      setFirstClick(currentPath[2]);
+    }
+  }, [router]);
   return (
     <div
       style={{
@@ -36,7 +47,7 @@ function eventsPageLayout({ children }: Props) {
               : "1fr 1fr",
           width: "80%",
           maxWidth: firstClick ? 400 : 500,
-          margin: "0 40px 20px 40px",
+          margin: "0 40px 10px 40px",
           gridAutoRows:
             winDim.width && winDim.width <= 400 && firstClick
               ? 100
@@ -65,7 +76,7 @@ function eventsPageLayout({ children }: Props) {
           <div
             style={{
               backgroundColor: "#1b1b1b",
-              outline: firstClick === "past" ? "6px #f1f1f1 solid" : "none",
+              border: firstClick === "past" ? "6px #f1f1f1 solid" : "none",
               borderRadius: 10,
               overflow: "hidden",
               position: "relative",

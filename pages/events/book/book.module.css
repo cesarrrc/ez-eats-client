@@ -1,7 +1,6 @@
 .event_container {
   display: flex;
   flex-direction: column;
-  width: 100%;
 }
 
 .form_container {
@@ -33,29 +32,33 @@
   letter-spacing: 0.5px;
   font-size: 16px;
   border: none;
-  /* margin-top: 2px; */
+  margin: 3px;
 }
 
 .contact_form input:focus {
   outline: none;
-  outline: rgb(12, 192, 198) solid 3px;
-  margin-top: 0;
+  border: rgb(13, 192, 198) solid 3px;
+  margin: 0;
+  padding-left: 10px;
 }
 
 .contact_form select {
   letter-spacing: 1px;
   background-color: whitesmoke;
   border-radius: 25px;
+  margin: 3px;
   padding: 4px 10px;
   letter-spacing: 0.5px;
   font-size: 16px;
   border: none;
-  /* margin-top: 2px; */
 }
 
 .contact_form select:focus {
+  margin: 0;
   outline: none;
-  outline: rgb(12, 192, 198) solid 3px;
+  border: rgb(12, 192, 198) solid 3px;
+  margin: 0;
+  padding: 2px;
 }
 
 .description {

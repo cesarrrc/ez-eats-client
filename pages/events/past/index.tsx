@@ -9,6 +9,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from "react-responsive-carousel";
 import classes from "./past.module.css";
 import { AddToCalendarButton } from "add-to-calendar-button-react";
+import { useRouter } from "next/router";
 
 import { AllEventsType, EventDetails } from "../../../lib/types";
 import useWindowDimensions from "../../../hooks/useWindowDimensions";
@@ -20,10 +21,12 @@ type Props = {
 const PastEvents = ({ data }: Props) => {
   const [carousel, setCarousel] = useState<any>({});
   const winDim = useWindowDimensions();
+  const router = useRouter();
 
   useEffect(() => {
     console.log(data);
-  }, [data]);
+    console.log(router);
+  }, [data, router]);
 
   return (
     <div
@@ -94,10 +97,23 @@ const PastEvents = ({ data }: Props) => {
                 alignItems: "center",
                 textAlign: "center",
                 width: "100%",
+                justifyContent: "center",
               }}
             >
-              <h3 style={{ margin: "10px" }}>
-                <span>{event.name}</span>
+              <h3
+                style={{
+                  margin: "10px",
+                }}
+              >
+                <span
+                  style={{
+                    fontSize:
+                      winDim.width && winDim.width <= 650 ? "14px" : "20px",
+                    margin: 0,
+                  }}
+                >
+                  {event.name}
+                </span>
               </h3>
               <h4
                 style={{
@@ -125,14 +141,16 @@ const PastEvents = ({ data }: Props) => {
                     day: "numeric",
                   })}
                 </span>
-                <span style={{ fontFamily: "Fauna One, Serif" }}>
-                  @{" "}
-                  {new Date(event.event_date).toLocaleTimeString("en-US", {
-                    timeZone: "America/Chicago",
-                    hour: "numeric",
-                    minute: "numeric",
-                  })}
-                </span>
+                {event.show_time && (
+                  <span style={{ fontFamily: "Fauna One, Serif" }}>
+                    @{" "}
+                    {new Date(event.event_date).toLocaleTimeString("en-US", {
+                      timeZone: "America/Chicago",
+                      hour: "numeric",
+                      minute: "numeric",
+                    })}
+                  </span>
+                )}
               </h4>
               <div className={classes.block_content}>
                 <BlockContent blocks={event.event_descriptionRaw} />
@@ -224,6 +242,7 @@ const GET_PAST_EVENTS = gql`
       event_date
       name
       event_descriptionRaw
+      show_time
       event_address {
         street_address
         city_state_zip
