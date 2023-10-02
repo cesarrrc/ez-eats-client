@@ -1,4 +1,9 @@
 .block_content p {
   margin: 10px;
+  font-size: 12px;
 }
 
+.calendar-button {
+  height: 100px;
+  width: 100px;
+}
