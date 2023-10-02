@@ -162,7 +162,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const currentTime = await new Date().toISOString();
   const results = await client.query({
     query: GET_PAST_EVENTS,
-    variables: { currentTime: `${currentTime}` },
+    variables: { currentTime: 'hello' },
   });
   if (!results) {
     return { notFound: true };
