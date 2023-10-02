@@ -37,7 +37,7 @@ const PastEvents = ({ data }: Props) => {
         rowGap: 24,
         columnGap: 24,
         margin: 10,
-        gridAutoRows: "minmax(300px, auto)",
+        gridAutoRows: "minmax(200px, auto)",
         maxWidth: 1800,
       }}
     >
@@ -46,15 +46,18 @@ const PastEvents = ({ data }: Props) => {
           style={{
             display: "flex",
             width: "100%",
-            height: "100%",
-            outline: "#f1f1f1 solid 3px",
+            // height: "100%",
+            border: "#f1f1f1 solid 3px",
             borderRadius: 12,
             overflow: "hidden",
           }}
         >
           <div
             style={{
-              flex: 1.5,
+              // flex: 1.5,
+              minWidth: 150,
+              maxWidth: 200,
+              width: "50%",
               alignSelf: "center",
               cursor: "zoom-in",
             }}
@@ -67,15 +70,23 @@ const PastEvents = ({ data }: Props) => {
               }}
             >
               {event.flyer?.map((flyer) => (
-                <div>
-                  <img src={flyer.asset.url} />
+                <div
+                  style={
+                    {
+                      // height: "100%",
+                      // position: "relative",
+                      // objectFit: "cover",
+                    }
+                  }
+                >
+                  <img style={{}} src={flyer.asset.url} />
                 </div>
               ))}
             </Carousel>
           </div>
           <div
             style={{
-              flex: 2,
+              // flex: 2,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",

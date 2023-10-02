@@ -105,3 +105,27 @@ a {
     transform: rotate(360deg);
   }
 }
+
+.carousel {
+  /* height: 100%; */
+}
+
+.carousel-slider {
+  /* height: 100%; */
+}
+
+.carousel-root {
+  /* height: 100%; */
+}
+
+.carousel .slide img {
+  /* height: 100%; /* change this to whatever you want */
+  /* width: auto; */
+  /* width: 100%; */
+  /* object-fit: fill;  */
+}
+
+.slider-wrapper {
+  /* height: 100% !important;
+  width: 100% !important; */
+}
