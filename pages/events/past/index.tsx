@@ -7,6 +7,7 @@ import Image from "next/image";
 import BlockContent from "@sanity/block-content-to-react";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
+import classes from "./past.module.css";
 
 import { AllEventsType, EventDetails } from "../../../lib/types";
 import useWindowDimensions from "../../../hooks/useWindowDimensions";
@@ -33,10 +34,11 @@ const PastEvents = ({ data }: Props) => {
             : winDim.width && winDim.width <= 1200
             ? "1fr 1fr"
             : "1fr 1fr 1fr",
-        rowGap: 20,
-        columnGap: 20,
+        rowGap: 24,
+        columnGap: 24,
         margin: 10,
         gridAutoRows: "auto",
+        maxWidth: 1800,
       }}
     >
       {data.allEvents.map((event: EventDetails) => (
@@ -45,13 +47,16 @@ const PastEvents = ({ data }: Props) => {
             display: "flex",
             width: "100%",
             height: "100%",
-            outline: "#f1f1f1 solid 2px",
+            outline: "#f1f1f1 solid 3px",
+            borderRadius: 12,
+            overflow: "hidden",
           }}
         >
           <div
             style={{
               flex: 1.5,
               alignSelf: "center",
+              cursor: "zoom-in",
             }}
           >
             <Carousel
@@ -68,9 +73,56 @@ const PastEvents = ({ data }: Props) => {
               ))}
             </Carousel>
           </div>
-          <div style={{ flex: 2 }}>
-            <h3>{event.name}</h3>
-            <h4>{event.event_date}</h4>
+          <div
+            style={{
+              flex: 2,
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              textAlign: "center",
+            }}
+          >
+            <h3 style={{ margin: "10px" }}>
+              <span>{event.name}</span>
+            </h3>
+            <h4
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                margin: "0 0 12px 0",
+                fontFamily: "Fauna One, Serif",
+                fontWeight: "lighter",
+                fontSize: 14,
+                backgroundColor: "#f1f1f1",
+                color: "#1b1b1b",
+                padding: 5,
+                borderRadius: 10,
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: "Fauna One, Serif",
+                  fontWeight: "lighter",
+                }}
+              >
+                {new Date(event.event_date).toLocaleDateString("en-us", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
+                })}
+              </span>
+              <span style={{ fontFamily: "Fauna One, Serif" }}>
+                @{" "}
+                {new Date(event.event_date).toLocaleTimeString("en-US", {
+                  timeZone: "America/Chicago",
+                  hour: "numeric",
+                  minute: "numeric",
+                })}
+              </span>
+            </h4>
+            <div className={classes.block_content}>
+              <BlockContent blocks={event.event_descriptionRaw} />
+            </div>
           </div>
         </div>
       ))}
