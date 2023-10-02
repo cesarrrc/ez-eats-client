@@ -30,7 +30,7 @@ const PastEvents = ({ data }: Props) => {
       style={{
         display: "grid",
         gridTemplateColumns:
-          winDim.width && winDim.width <= 800
+          winDim.width && winDim.width <= 650
             ? "1fr"
             : winDim.width && winDim.width <= 1200
             ? "1fr 1fr"
@@ -38,7 +38,7 @@ const PastEvents = ({ data }: Props) => {
         rowGap: 24,
         columnGap: 24,
         margin: "10px 20px",
-        gridAutoRows: "minmax(200px, auto)",
+        gridAutoRows: "minmax(300px, auto)",
         maxWidth: 1800,
       }}
     >
@@ -49,9 +49,8 @@ const PastEvents = ({ data }: Props) => {
           <div
             style={{
               display: "flex",
-              // height: 300,
-              height: "100%",
               width: "100%",
+              height: "100%",
               border: "#f1f1f1 solid 3px",
               overflow: "hidden",
               zIndex: 1000,
