@@ -10,7 +10,7 @@ import { Carousel } from "react-responsive-carousel";
 import classes from "./past.module.css";
 import { AddToCalendarButton } from "add-to-calendar-button-react";
 import { useRouter } from "next/router";
-
+import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { AllEventsType, EventDetails } from "../../../lib/types";
 import useWindowDimensions from "../../../hooks/useWindowDimensions";
 
@@ -38,102 +38,33 @@ const PastEvents = ({ data }: Props) => {
   }, []);
 
   return (
-    <div
-      style={{
-        display: "grid",
-        gridTemplateColumns:
-          winDim.width && winDim.width <= 650
-            ? "1fr"
-            : winDim.width && winDim.width <= 1200
-            ? "1fr 1fr"
-            : "1fr 1fr 1fr",
-        rowGap: 24,
-        columnGap: 24,
-        margin: "10px 20px",
-        gridAutoRows: "minmax(300px, auto)",
-        maxWidth: 1800,
-      }}
-    >
+    <div className={classes.past_events_grid_container} style={{}}>
       {data.allEvents.map((event: EventDetails) => (
-        <div
-          style={{ display: "flex", flexDirection: "column", height: "100%" }}
-        >
-          <div
-            style={{
-              display: "flex",
-              width: "100%",
-              height: "100%",
-              justifyContent: "center",
-              alignItems: "center",
-              border: "#f1f1f1 solid 3px",
-              overflow: "hidden",
-              zIndex: 1000,
-              borderRadius: 12,
-            }}
-          >
+        <div className={classes.past_events_container}>
+          <div className={classes.past_events_card}>
             <Carousel
+              className={classes.crsl}
               showThumbs={false}
               axis="vertical"
               onClickItem={() => {
                 setCarousel(event);
               }}
               dynamicHeight={false}
-              className="crsl"
+              // className="crsl"
               autoPlay
               infiniteLoop
               interval={6000}
             >
               {event.flyer?.map((flyer) => (
-                <div style={{}}>
-                  <img style={{}} src={flyer.asset.url} />
-                </div>
+                <img src={flyer.asset.url} />
               ))}
             </Carousel>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-                textAlign: "center",
-                width: "100%",
-                justifyContent: "center",
-              }}
-            >
-              <h3
-                style={{
-                  margin: "10px",
-                }}
-              >
-                <span
-                  style={{
-                    fontSize:
-                      winDim.width && winDim.width <= 650 ? "14px" : "20px",
-                    margin: 0,
-                  }}
-                >
-                  {event.name}
-                </span>
+            <div className={classes.past_event_content}>
+              <h3>
+                <span>{event.name}</span>
               </h3>
-              <h4
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  margin: "0 0 12px 0",
-                  fontFamily: "Fauna One, Serif",
-                  fontWeight: "lighter",
-                  fontSize: 14,
-                  backgroundColor: "#f1f1f1",
-                  color: "#1b1b1b",
-                  padding: 5,
-                  borderRadius: 10,
-                }}
-              >
-                <span
-                  style={{
-                    fontFamily: "Fauna One, Serif",
-                    fontWeight: "lighter",
-                  }}
-                >
+              <h4>
+                <span>
                   {new Date(event.event_date).toLocaleDateString("en-us", {
                     year: "numeric",
                     month: "short",
@@ -141,7 +72,7 @@ const PastEvents = ({ data }: Props) => {
                   })}
                 </span>
                 {event.show_time && (
-                  <span style={{ fontFamily: "Fauna One, Serif" }}>
+                  <span>
                     @{" "}
                     {new Date(event.event_date).toLocaleTimeString("en-US", {
                       timeZone: "America/Chicago",
@@ -156,7 +87,7 @@ const PastEvents = ({ data }: Props) => {
               </div>
             </div>
           </div>
-          <div style={{ display: "flex", justifyContent: "center" }}>
+          <div className={classes.add_to_cal_button}>
             <AddToCalendarButton
               name={event.name}
               startDate={new Date(event.event_date).toISOString().split("T")[0]}
@@ -170,19 +101,8 @@ const PastEvents = ({ data }: Props) => {
       ))}
       {carousel.name ? (
         <div
-          style={{
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100vh",
-            backgroundColor: "#000000c4",
-            position: "fixed",
-            zIndex: 300000,
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            flexDirection: "column",
-          }}
+        className={classes.modal}
+
           onClick={(e) => {
             e.stopPropagation();
             setCarousel({});
@@ -193,7 +113,6 @@ const PastEvents = ({ data }: Props) => {
               display: "flex",
               justifyContent: "right",
               width: winDim.width && winDim.width < 400 ? "70%" : "50%",
-
               margin: 40,
               gap: 10,
             }}
@@ -211,7 +130,7 @@ const PastEvents = ({ data }: Props) => {
               e.stopPropagation();
             }}
           >
-            <Carousel axis="vertical">
+            <Carousel axis="vertical" className={classes.modal_crsl}>
               {carousel.flyer?.map((flyer: any) => (
                 <div>
                   <img src={flyer.asset.url} />
