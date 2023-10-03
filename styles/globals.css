@@ -107,12 +107,12 @@ a {
 }
 
 .atcb-list {
-  z-index: 2000;
-  position: absolute;
+  /* z-index: 2000; */
+  /* position: absolute; */
 }
 .atcb-light {
-  z-index: 2000;
-  position: absolute;
+  /* z-index: 2000;
+  position: absolute; */
 }
 .carousel {
   /* height: 100%; */
@@ -134,11 +134,13 @@ a {
 }
 
 .slider-wrapper {
-  /* height: 100% !important;
-  width: 100% !important; */
+  /* height: 100% !important; */
+  /* width: 100% !important;  */
 }
 
 .calendar-button {
-  height: 100px;
-  width: 100px;
+  /* height: 100px; */
+  /* width: 100px; */
 }
+
+

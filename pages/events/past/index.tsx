@@ -20,6 +20,7 @@ type Props = {
 
 const PastEvents = ({ data }: Props) => {
   const [carousel, setCarousel] = useState<any>({});
+  const [loading, setLoading] = useState<any>(true);
   const winDim = useWindowDimensions();
   const router = useRouter();
 
@@ -27,6 +28,14 @@ const PastEvents = ({ data }: Props) => {
     console.log(data);
     console.log(router);
   }, [data, router]);
+
+  useEffect(() => {
+    if (loading) {
+      setTimeout(() => {
+        setLoading(false);
+      }, 500);
+    }
+  }, []);
 
   return (
     <div
@@ -54,42 +63,32 @@ const PastEvents = ({ data }: Props) => {
               display: "flex",
               width: "100%",
               height: "100%",
+              justifyContent: "center",
+              alignItems: "center",
               border: "#f1f1f1 solid 3px",
               overflow: "hidden",
               zIndex: 1000,
               borderRadius: 12,
             }}
           >
-            <div
-              style={{
-                minWidth: 100,
-                maxWidth: 250,
-                width: "100%",
-                alignSelf: "center",
-                cursor: "zoom-in",
-                overflow: "hidden",
+            <Carousel
+              showThumbs={false}
+              axis="vertical"
+              onClickItem={() => {
+                setCarousel(event);
               }}
+              dynamicHeight={false}
+              className="crsl"
+              autoPlay
+              infiniteLoop
+              interval={6000}
             >
-              <Carousel
-                showThumbs={false}
-                axis="vertical"
-                onClickItem={() => {
-                  setCarousel(event);
-                }}
-                dynamicHeight={false}
-              >
-                {event.flyer?.map((flyer) => (
-                  <div
-                    style={{
-                      height: "100%",
-                      overflow: "hidden",
-                    }}
-                  >
-                    <img style={{}} src={flyer.asset.url} />
-                  </div>
-                ))}
-              </Carousel>
-            </div>
+              {event.flyer?.map((flyer) => (
+                <div style={{}}>
+                  <img style={{}} src={flyer.asset.url} />
+                </div>
+              ))}
+            </Carousel>
             <div
               style={{
                 display: "flex",
@@ -165,9 +164,6 @@ const PastEvents = ({ data }: Props) => {
               listStyle="overlay"
               trigger="click"
               styleLight="--btn-background: #f1f1f1; --btn-text: #1b1b1b; --font: Fauna One, Serif"
-
-              // buttonStyle="custom"
-              // customCss="../../styles/globals.css"
             ></AddToCalendarButton>
           </div>
         </div>
