@@ -1,3 +1,6 @@
+import React from "react";
+import type { AppProps } from "next/app";
+
 export type ContactData = {
   name: string;
   email: string;
@@ -6,13 +9,33 @@ export type ContactData = {
   message: string;
 };
 
+export type EventData = {
+  name: string;
+  email: string;
+  eventType: string;
+  phone: string;
+  numberOfGuests: string;
+  date: string;
+  message: string;
+};
+
 export enum ContactDataInitial {
   name = "",
   email = "",
   phone = "",
+  event_type = "",
   subject = "",
   message = "",
-  event_type = "",
+}
+
+export enum EventDataInitial {
+  name = "",
+  email = "",
+  eventType = "",
+  phone = "",
+  numberOfGuests = "",
+  date = "",
+  message = "",
 }
 
 export type LatLngLiteral = google.maps.LatLngLiteral;
@@ -127,3 +150,32 @@ export type LocationDetails = {
 };
 
 export type AllRestaurantsType = [LocationDetails];
+
+export type EventDetails = {
+  __typename: string;
+  _id: string;
+  name: string;
+  event_date: string;
+  event_descriptionRaw: any;
+  show_time: boolean;
+  event_address: {
+    street_address: string;
+    city_state_zip: string;
+  };
+  flyer: [
+    {
+      asset: {
+        url: string;
+      };
+    }
+  ];
+  website: string;
+};
+
+export type AllEventsType = { allEvents: [EventDetails] };
+
+export type ComponentWithPageLayout = AppProps & {
+  Component: AppProps["Component"] & {
+    PageLayout?: any;
+  };
+};

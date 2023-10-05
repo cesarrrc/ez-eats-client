@@ -5,15 +5,20 @@ import { NotificationContextProvider } from "../store/notification-context";
 import { ApolloProvider } from "@apollo/client/react";
 import client from "../lib/apollo";
 import { gql } from "@apollo/client";
+import { ComponentWithPageLayout } from "../lib/types";
 
-
-
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps }: ComponentWithPageLayout) {
   return (
     <ApolloProvider client={client}>
       <NotificationContextProvider>
         <Layout>
-          <Component {...pageProps} />
+          {Component.PageLayout ? (
+            <Component.PageLayout>
+              <Component {...pageProps} />
+            </Component.PageLayout>
+          ) : (
+            <Component {...pageProps} />
+          )}
         </Layout>
       </NotificationContextProvider>
     </ApolloProvider>
