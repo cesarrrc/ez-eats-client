@@ -106,41 +106,6 @@ a {
   }
 }
 
-.atcb-list {
-  /* z-index: 2000; */
-  /* position: absolute; */
+.modal_crsl .carousel .slide img {
+  max-height: 80vh; /* change this to whatever you want */
 }
-.atcb-light {
-  /* z-index: 2000;
-  position: absolute; */
-}
-.carousel {
-  /* height: 100%; */
-}
-
-.carousel-slider {
-  /* height: 100%; */
-}
-
-.carousel-root {
-  /* height: 100%; */
-}
-
-.carousel .slide img {
-  /* height: 100%; /* change this to whatever you want */
-  /* width: auto; */
-  /* width: 100%; */
-  /* object-fit: fill;  */
-}
-
-.slider-wrapper {
-  /* height: 100% !important; */
-  /* width: 100% !important;  */
-}
-
-.calendar-button {
-  /* height: 100px; */
-  /* width: 100px; */
-}
-
-

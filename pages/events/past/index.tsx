@@ -49,8 +49,6 @@ const PastEvents = ({ data }: Props) => {
               onClickItem={() => {
                 setCarousel(event);
               }}
-              dynamicHeight={false}
-              // className="crsl"
               autoPlay
               infiniteLoop
               interval={6000}
@@ -87,7 +85,7 @@ const PastEvents = ({ data }: Props) => {
               </div>
             </div>
           </div>
-          <div className={classes.add_to_cal_button}>
+          <div className={classes.button_container}>
             <AddToCalendarButton
               name={event.name}
               startDate={new Date(event.event_date).toISOString().split("T")[0]}
@@ -101,36 +99,32 @@ const PastEvents = ({ data }: Props) => {
       ))}
       {carousel.name ? (
         <div
-        className={classes.modal}
-
+          className={classes.modal}
           onClick={(e) => {
             e.stopPropagation();
             setCarousel({});
           }}
         >
           <div
-            style={{
-              display: "flex",
-              justifyContent: "right",
-              width: winDim.width && winDim.width < 400 ? "70%" : "50%",
-              margin: 40,
-              gap: 10,
-            }}
+            className={classes.close_modal_button}
             onClick={() => setCarousel({})}
           >
             <label htmlFor="closeCarousel">close</label>
             <button id="closeCarousel">X</button>
           </div>
           <div
-            style={{
-              width: winDim.width && winDim.width < 400 ? "70%" : "50%",
-              maxWidth: 600,
-            }}
             onClick={(e) => {
               e.stopPropagation();
             }}
           >
-            <Carousel axis="vertical" className={classes.modal_crsl}>
+            <Carousel
+              showThumbs={false}
+              axis="vertical"
+              autoPlay
+              infiniteLoop
+              interval={6000}
+              className={`${classes.modal_crsl} modal_crsl`}
+            >
               {carousel.flyer?.map((flyer: any) => (
                 <div>
                   <img src={flyer.asset.url} />
