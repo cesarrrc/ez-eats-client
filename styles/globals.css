@@ -24,6 +24,7 @@ ul,
 li,
 input,
 textarea,
+select,
 option {
   font-family: "Fauna One", Serif !important;
   white-space: pre-wrap;
@@ -123,3 +124,11 @@ a {
     max-height: 80vh; /* change this to whatever you want */
   }
 }
+
+/* input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  opacity: 1;
+  margin: 0;
+  width: 15px;
+  height: 35px;
+} */
