@@ -106,9 +106,13 @@ const BookAnEvent = (props: Props) => {
               onChange={handleChange}
               value={eventBody.eventType}
             >
-              <option>Wine Party</option>
-              <option>Beer Party</option>
-              <option>Private Party</option>
+              <option value="" selected disabled hidden>
+                Choose here
+              </option>
+              <option value="Wine Party">Wine Party</option>
+              <option value="Beer Party">Beer Party</option>
+              <option value="Private Party">Private Party</option>
+              <option value="Other">Other</option>
             </select>
           </div>
           <div>

@@ -56,11 +56,9 @@
 }
 
 .contact_form select:focus {
-  margin: 0;
   outline: none;
   border: rgb(12, 192, 198) solid 3px;
   margin: 0;
-  padding: 2px;
 }
 
 .description {
