@@ -85,7 +85,7 @@
 .close_modal_button {
   display: flex;
   justify-content: right;
-  width: 50%;
+  width: 60%;
   margin-bottom: 10px;
   gap: 10px;
 }
@@ -96,7 +96,7 @@
 }
 
 .crsl_container {
-  width: 80%;
+  width: 60%;
 }
 
 @media (max-width: 1300px) {
@@ -104,7 +104,7 @@
     grid-template-columns: 1fr 1fr;
   }
   .close_modal_button {
-    width: 80%;
+    width: 60%;
   }
 }
 
@@ -119,7 +119,27 @@
     font-size: 14px;
   }
   .close_modal_button {
+    width: 60%;
+  }
+}
+
+@media (max-width: 800px) {
+  .close_modal_button {
     width: 80%;
+  }
+  .crsl_container {
+    width: 80%;
+  }
+}
+.crsl_container button {
+  width: 40px;
+}
+@media (max-height: 400px) {
+  .crsl_container {
+    width: 100%;
+  }
+  .crsl_container button {
+    width: 100px;
   }
 }
 
