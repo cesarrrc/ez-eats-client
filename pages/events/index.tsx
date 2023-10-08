@@ -15,18 +15,11 @@ const Events = (props: Props) => {
   const ws = useWindowDimensions();
 
   useEffect(() => {
-    console.log(ws.width, 'yooo');
+    console.log(ws.width, "yooo");
   }, []);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        flexDirection: "column",
-        width: "100%",
-      }}
-    >
+    <div>
       <Head>
         <title>Events</title>
         <meta

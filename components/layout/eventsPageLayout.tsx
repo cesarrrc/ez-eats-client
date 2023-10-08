@@ -85,7 +85,7 @@ function eventsPageLayout({ children }: Props) {
           href="/events/book"
           className={`${firstClick && classes.selected} ${
             classes.book_container
-          }`}
+          } ${classes.no_selection}`}
         >
           <span>Book</span>
           <div
