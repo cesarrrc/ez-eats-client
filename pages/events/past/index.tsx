@@ -118,7 +118,7 @@ const PastEvents = ({ data }: Props) => {
             }}
           >
             <Carousel
-              showThumbs={false}
+              showThumbs={winDim.height && winDim.height < 600 ? false : true}
               axis="vertical"
               autoPlay
               infiniteLoop
