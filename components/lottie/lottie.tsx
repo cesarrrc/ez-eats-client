@@ -15,9 +15,10 @@ import classes from "./lottie-control.module.css";
 type Props = {
   lottie: any | null;
   style: any;
+  speed: number | null;
 };
 
-const LottieControl = ({ lottie, style }: Props) => {
+const LottieControl = ({ lottie, style, speed }: Props) => {
   const lottieRef = useRef<LottieRefCurrentProps | null>(null);
 
   // const winDim = useWindowDimensions();
@@ -41,10 +42,9 @@ const LottieControl = ({ lottie, style }: Props) => {
       // onSegmentStart={(x) => {
       //   console.info("SEGMENT START!", x);
       // }}
-      // onDOMLoaded={() => {
-      //   console.info("DOM LOADED!");
-      //   lottieRef?.current?.setSpeed(0.5);
-      // }}
+      onDOMLoaded={() => {
+        speed && lottieRef?.current?.setSpeed(speed);
+      }}
       // onLoadedImages={() => {
       //   console.info("IMAGES LOADED!");
       // }}
@@ -56,6 +56,7 @@ const LottieControl = ({ lottie, style }: Props) => {
 };
 LottieControl.defaultProps = {
   style: {},
+  speed: null,
 };
 
 export default LottieControl;

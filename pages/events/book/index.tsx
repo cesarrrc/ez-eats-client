@@ -36,6 +36,7 @@ const BookAnEvent = (props: Props) => {
     e.preventDefault();
     setIsSubmit(true);
     try {
+      console.log(eventBody);
       const response = await sendEmail(eventBody);
       console.log(response);
       const data = await response?.json();
@@ -85,6 +86,7 @@ const BookAnEvent = (props: Props) => {
               id="name"
               onChange={handleChange}
               value={eventBody.name}
+              required
             />
           </div>
           <div>
@@ -96,6 +98,7 @@ const BookAnEvent = (props: Props) => {
               // required
               onChange={handleChange}
               value={eventBody.email}
+              required
             />
           </div>
           <div>
@@ -105,6 +108,7 @@ const BookAnEvent = (props: Props) => {
               id="eventType"
               onChange={handleChange}
               value={eventBody.eventType}
+              required
             >
               <option value="" selected disabled hidden>
                 Choose here
@@ -123,6 +127,7 @@ const BookAnEvent = (props: Props) => {
               id="phone"
               onChange={handleChange}
               value={eventBody.phone}
+              required
             />
           </div>
           <div>

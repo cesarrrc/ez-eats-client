@@ -116,6 +116,7 @@ const PastEvents = ({ data }: Props) => {
             onClick={(e) => {
               e.stopPropagation();
             }}
+            className={classes.crsl_container}
           >
             <Carousel
               showThumbs={winDim.height && winDim.height < 600 ? false : true}

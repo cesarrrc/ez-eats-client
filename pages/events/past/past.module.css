@@ -2,7 +2,7 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-gap: 30px;
-  margin: 10px 20px;
+  margin: 30px 20px 20px 20px;
   grid-auto-rows: minmax(300px, auto);
   max-width: 1800px;
 }
@@ -85,7 +85,7 @@
 .close_modal_button {
   display: flex;
   justify-content: right;
-  width: 30%;
+  width: 50%;
   margin-bottom: 10px;
   gap: 10px;
 }
@@ -95,12 +95,16 @@
   height: auto;
 }
 
+.crsl_container {
+  width: 80%;
+}
+
 @media (max-width: 1300px) {
   .past_events_grid_container {
     grid-template-columns: 1fr 1fr;
   }
   .close_modal_button {
-    width: 40%;
+    width: 80%;
   }
 }
 
@@ -115,7 +119,7 @@
     font-size: 14px;
   }
   .close_modal_button {
-    width: 90%;
+    width: 80%;
   }
 }
 
