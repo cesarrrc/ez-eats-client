@@ -125,6 +125,7 @@ const BookAnEvent = (props: Props) => {
             <label htmlFor="numberOfGuests">Number of Guests:</label>
             <input
               type="number"
+              inputMode="numeric"
               name="numberOfGuests"
               id="numberOfGuests"
               onChange={handleChange}
