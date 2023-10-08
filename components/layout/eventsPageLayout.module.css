@@ -24,7 +24,6 @@
   grid-auto-rows: 140px;
 }
 .events_layout_grid_container a {
-  box-sizing: border-box;
   width: 100%;
   display: flex;
   flex-direction: column;

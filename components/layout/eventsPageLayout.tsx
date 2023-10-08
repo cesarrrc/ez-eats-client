@@ -35,7 +35,7 @@ function eventsPageLayout({ children }: Props) {
     <div className={classes.events_layout_container}>
       <div
         className={`${classes.events_layout_grid_container} ${
-          firstClick ? classes.event_clicked_grid_container : null
+          firstClick && classes.event_clicked_grid_container
         }`}
       >
         <Link href="/events/past" className={firstClick && classes.selected}>
@@ -85,7 +85,7 @@ function eventsPageLayout({ children }: Props) {
           href="/events/book"
           className={`${firstClick && classes.selected} ${
             classes.book_container
-          } ${classes.no_selection}`}
+          } ${!firstClick && classes.no_selection}`}
         >
           <span>Book</span>
           <div
