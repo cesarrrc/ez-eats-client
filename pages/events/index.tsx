@@ -1,21 +1,25 @@
 import Head from "next/head";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import LottieControl from "../../components/lottie/lottie";
 import construction from "../../lib/lottie/construction.json";
+import type { AppProps } from "next/app";
+import EventsPageLayout from "../../components/layout/eventsPageLayout";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
+useWindowDimensions;
 
 type Props = {};
 
 const Events = (props: Props) => {
   const [firstClick, setFirstClick] = useState(false);
+
+  const ws = useWindowDimensions();
+
+  useEffect(() => {
+    console.log(ws.width, "yooo");
+  }, []);
+
   return (
-    <div
-      style={{
-        display: "flex",
-        alignItems: "center",
-        flexDirection: "column",
-        width: "100%",
-      }}
-    >
+    <div>
       <Head>
         <title>Events</title>
         <meta
@@ -27,35 +31,11 @@ const Events = (props: Props) => {
           content="catering, food, san marcos, tx, texas, kolache, taco, burger, breakfast, lunch, dinner, restaurant"
         />
       </Head>
-      {/* <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: firstClick ? "1fr 1fr 1fr" : "1fr 1fr",
-          backgroundColor: "red",
-          width: "100%",
-          maxWidth: "500px",
-          gridColumnGap: "20px",
-          transition: "2s ease-in-out",
-        }}
-        onClick={() => setFirstClick(true)}
-      >
-        <div style={{}}>hello</div>
-        <div style={{}}>hello</div>
-        <div style={{}}>hello</div>
-      </div> */}
-      <h1 style={{ textAlign: "center" }}>Currently Under Construction</h1>
-      <div
-        style={{
-          width: 350,
-          height: 350,
-        }}
-      >
-        <LottieControl lottie={construction} />
-      </div>
-      <p style={{ textAlign: "center" }}>Please check back later.</p>
     </div>
   );
 };
+
+Events.PageLayout = EventsPageLayout;
 
 export default Events;
 

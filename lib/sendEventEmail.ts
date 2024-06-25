@@ -2,7 +2,7 @@ import { ContactData, EventData } from "./types";
 
 const sendEmail = async (data: ContactData | EventData) => {
   try {
-    const response = await fetch(`/api/send-email`, {
+    const response = await fetch(`/api/send-event-email`, {
       method: "POST",
       mode: "cors",
       credentials: "same-origin",
