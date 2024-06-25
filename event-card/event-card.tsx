@@ -3,7 +3,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from "react-responsive-carousel";
 import classes from "./event-card.module.css";
 import { AddToCalendarButton } from "add-to-calendar-button-react";
-import { AllEventsType, EventDetails } from "../lib/types";
+import { EventDetails } from "../lib/types";
 import BlockContent from "@sanity/block-content-to-react";
 
 type Props = {
@@ -59,14 +59,16 @@ const EventCard = ({ event, setCarousel }: Props) => {
         </div>
       </div>
       <div className={classes.button_container}>
-        <AddToCalendarButton
-          name={event.name}
-          startDate={new Date(event.event_date).toISOString().split("T")[0]}
-          options={["Apple", "Google", "Yahoo", "iCal"]}
-          listStyle="overlay"
-          trigger="click"
-          styleLight="--btn-background: #f1f1f1; --btn-text: #1b1b1b; --font: Fauna One, Serif"
-        ></AddToCalendarButton>
+        {new Date(event.event_date) > new Date() && (
+          <AddToCalendarButton
+            name={event.name}
+            startDate={new Date(event.event_date).toISOString().split("T")[0]}
+            options={["Apple", "Google"]}
+            listStyle="overlay"
+            trigger="click"
+            styleLight="--btn-background: #f1f1f1; --btn-text: #1b1b1b; --font: Fauna One, Serif"
+          ></AddToCalendarButton>
+        )}
       </div>
     </div>
   );

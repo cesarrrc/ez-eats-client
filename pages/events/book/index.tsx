@@ -2,7 +2,7 @@ import React, { BaseSyntheticEvent, useContext, useState } from "react";
 import EventsPageLayout from "../../../components/layout/eventsPageLayout";
 import PageHeading from "../../../components/page-heading/page-heading";
 import classes from "./book.module.css";
-import sendEmail from "../../../lib/sendEmail";
+import sendEventEmail from "../../../lib/sendEventEmail";
 import NotificationContext from "../../../store/notification-context";
 import { EventDataInitial } from "../../../lib/types";
 import formatPhoneNumber from "../../../lib/formatPhoneNumber";
@@ -26,6 +26,7 @@ const BookAnEvent = (props: Props) => {
     if (name === "phone") {
       formattedPhoneNumber = formatPhoneNumber(e.target.value);
     }
+    console.log(name, value);
     setEventBody({
       ...eventBody,
       [name]: formattedPhoneNumber || value,
@@ -37,7 +38,7 @@ const BookAnEvent = (props: Props) => {
     setIsSubmit(true);
     try {
       console.log(eventBody);
-      const response = await sendEmail(eventBody);
+      const response = await sendEventEmail(eventBody);
       console.log(response);
       const data = await response?.json();
       notificationCtx.showNotification({
@@ -110,7 +111,7 @@ const BookAnEvent = (props: Props) => {
               value={eventBody.eventType}
               required
             >
-              <option value="" selected disabled hidden>
+              <option value="" disabled hidden>
                 Choose here
               </option>
               <option value="Wine Party">Wine Party</option>

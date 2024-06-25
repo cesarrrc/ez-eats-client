@@ -3,14 +3,12 @@ import EventsPageLayout from "../../../components/layout/eventsPageLayout";
 import { gql } from "@apollo/client";
 import { GetStaticProps } from "next";
 import client from "../../../lib/apollo";
-import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import { Carousel } from "react-responsive-carousel";
 import classes from "./past.module.css";
 import { useRouter } from "next/router";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { AllEventsType, EventDetails } from "../../../lib/types";
-import useWindowDimensions from "../../../hooks/useWindowDimensions";
 import EventCard from "../../../event-card/event-card";
+import EventCarouselModal from "../../../components/carousel/event-carousel-modal";
 
 type Props = {
   data: AllEventsType;
@@ -19,7 +17,6 @@ type Props = {
 const PastEvents = ({ data }: Props) => {
   const [carousel, setCarousel] = useState<any>({});
   const [loading, setLoading] = useState<any>(true);
-  const winDim = useWindowDimensions();
   const router = useRouter();
 
   useEffect(() => {
@@ -41,42 +38,7 @@ const PastEvents = ({ data }: Props) => {
         <EventCard event={event} setCarousel={setCarousel} />
       ))}
       {carousel.name ? (
-        <div
-          className={classes.modal}
-          onClick={(e) => {
-            e.stopPropagation();
-            setCarousel({});
-          }}
-        >
-          <div
-            className={classes.close_modal_button}
-            onClick={() => setCarousel({})}
-          >
-            <label htmlFor="closeCarousel">close</label>
-            <button id="closeCarousel">X</button>
-          </div>
-          <div
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-            className={classes.crsl_container}
-          >
-            <Carousel
-              showThumbs={winDim.height && winDim.height < 600 ? false : true}
-              autoPlay
-              dynamicHeight
-              infiniteLoop
-              interval={6000}
-              className={`${classes.modal_crsl} modal_crsl`}
-            >
-              {carousel.flyer?.map((flyer: any) => (
-                <div>
-                  <img src={flyer.asset.url} />
-                </div>
-              ))}
-            </Carousel>
-          </div>
-        </div>
+        <EventCarouselModal setCarousel={setCarousel} carousel={carousel} />
       ) : null}
     </div>
   );
