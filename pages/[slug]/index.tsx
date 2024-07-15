@@ -39,8 +39,27 @@ const Location = ({ data }: Props) => {
             city_state_zip: data.address.city_state_zip,
           }}
         />
-        <OrderOnlineButton href={data.pickup_link} />
-        <OrderOnlineButton href={data.delivery_link} title="Order Delivery" />
+        <div style={{ display: "flex" }}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              marginBottom: 0,
+            }}
+          >
+            {data._id === "da1ec035-0055-4aef-8445-beea3296da5e" && (
+              <OrderOnlineButton
+                href={data.phone_number}
+                title="Order by Phone"
+              />
+            )}
+            <OrderOnlineButton href={data.pickup_link} />
+            <OrderOnlineButton
+              href={data.delivery_link}
+              title="Order Delivery"
+            />
+          </div>
+        </div>
         <div className={classes.resp_tagline_grid_container}>
           <h4>{data.tagline}</h4>
         </div>
@@ -93,6 +112,13 @@ const Location = ({ data }: Props) => {
           city_state_zip: data.address.city_state_zip,
         }}
       />
+      <div style={{ display: "flex", marginBottom: 10 }}>
+        {data._id === "da1ec035-0055-4aef-8445-beea3296da5e" && (
+          <OrderOnlineButton href={data.phone_number} title="Order by Phone" />
+        )}
+        <OrderOnlineButton href={data.pickup_link} />
+        <OrderOnlineButton href={data.delivery_link} title="Order Delivery" />
+      </div>
       <div className={classes.grid_container}>
         <div className={classes.description_grid_container}>
           <p>{data.description}</p>
@@ -153,7 +179,7 @@ export const getStaticPaths = async () => {
     }
     return paths.push({ params: { slug: location.slug.current } });
   });
-  console.log(paths, 'paths')
+  console.log(paths, "paths");
   return {
     paths,
     fallback: "blocking",
@@ -171,8 +197,8 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     (location: LocationDetails) => {
       return location.slug.current === params?.slug;
     }
-    );
-    console.log(foundLocation, 'location gsp')
+  );
+  console.log(foundLocation, "location gsp");
   return {
     props: {
       data: foundLocation,
