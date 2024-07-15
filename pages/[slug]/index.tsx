@@ -39,26 +39,23 @@ const Location = ({ data }: Props) => {
             city_state_zip: data.address.city_state_zip,
           }}
         />
-        <div style={{ display: "flex" }}>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              marginBottom: 0,
-            }}
-          >
-            {data._id === "da1ec035-0055-4aef-8445-beea3296da5e" && (
-              <OrderOnlineButton
-                href={data.phone_number}
-                title="Order by Phone"
-              />
-            )}
-            <OrderOnlineButton href={data.pickup_link} />
+
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            marginBottom: 0,
+            gap: 0,
+          }}
+        >
+          {data._id === "da1ec035-0055-4aef-8445-beea3296da5e" && (
             <OrderOnlineButton
-              href={data.delivery_link}
-              title="Order Delivery"
+              href={data.phone_number}
+              title="Order by Phone"
             />
-          </div>
+          )}
+          <OrderOnlineButton href={data.pickup_link} />
+          <OrderOnlineButton href={data.delivery_link} title="Order Delivery" />
         </div>
         <div className={classes.resp_tagline_grid_container}>
           <h4>{data.tagline}</h4>
@@ -112,7 +109,7 @@ const Location = ({ data }: Props) => {
           city_state_zip: data.address.city_state_zip,
         }}
       />
-      <div style={{ display: "flex", marginBottom: 10 }}>
+      <div style={{ display: "flex", marginBottom: 10, gap: 10 }}>
         {data._id === "da1ec035-0055-4aef-8445-beea3296da5e" && (
           <OrderOnlineButton href={data.phone_number} title="Order by Phone" />
         )}

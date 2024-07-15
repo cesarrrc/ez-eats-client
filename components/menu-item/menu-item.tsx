@@ -21,6 +21,7 @@ const MenuItem = ({ location, noImage, noBorder }: Props) => {
   const [hover, setHover] = React.useState<boolean>(false);
   const winDim = useWindowDimensions();
 
+  console.log(location, "*******");
   useEffect(() => {
     if (!!winDim.width && winDim.width < 800) {
       setHover(true);
@@ -167,6 +168,12 @@ const MenuItem = ({ location, noImage, noBorder }: Props) => {
           </Link>
         </li>
         <li>
+          {location._id === "da1ec035-0055-4aef-8445-beea3296da5e" && (
+            <OrderOnlineButton
+              href={location.phone_number}
+              title="Order by Phone"
+            />
+          )}
           <OrderOnlineButton href={location.pickup_link} />
           <OrderOnlineButton
             title="order delivery"
