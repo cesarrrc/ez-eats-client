@@ -50,9 +50,9 @@ const Location = ({ data }: Props) => {
         >
           {data._id === "da1ec035-0055-4aef-8445-beea3296da5e" && (
             <OrderOnlineButton
-              href={data.phone_number}
-              title="Order by Phone"
-            />
+            href={"tel:" + data.phone_number}
+            title="Order by Phone"
+          />
           )}
           <OrderOnlineButton href={data.pickup_link} />
           <OrderOnlineButton href={data.delivery_link} title="Order Delivery" />
@@ -111,7 +111,10 @@ const Location = ({ data }: Props) => {
       />
       <div style={{ display: "flex", marginBottom: 10, gap: 10 }}>
         {data._id === "da1ec035-0055-4aef-8445-beea3296da5e" && (
-          <OrderOnlineButton href={data.phone_number} title="Order by Phone" />
+          <OrderOnlineButton
+            href={"tel:" + data.phone_number}
+            title="Order by Phone"
+          />
         )}
         <OrderOnlineButton href={data.pickup_link} />
         <OrderOnlineButton href={data.delivery_link} title="Order Delivery" />
