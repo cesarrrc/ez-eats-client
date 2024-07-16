@@ -170,7 +170,7 @@ const MenuItem = ({ location, noImage, noBorder }: Props) => {
         <li>
           {location._id === "da1ec035-0055-4aef-8445-beea3296da5e" && (
             <OrderOnlineButton
-              href={location.phone_number}
+              href={"tel:" + location.phone_number}
               title="Order by Phone"
             />
           )}
