@@ -24,6 +24,24 @@ export const GET_HOME = gql`
   }
 `;
 
+export const GET_EVENTS_PAGE = gql`
+  {
+    allEventsPage {
+      tile_name
+      tile_image {
+        asset {
+          url
+        }
+      }
+      tile_icon {
+        asset {
+          url
+        }
+      }
+    }
+  }
+`;
+
 export const GET_ALL_RESTAURANTS = gql`
   {
     allRestaurant {

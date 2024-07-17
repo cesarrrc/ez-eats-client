@@ -1,36 +1,51 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import upcomingArrow from "../../public/img/Upcoming_Events.svg";
-import bookArrow from "../../public/img/Book_Now.svg";
-import pastArrow from "../../public/img/Past_Events.svg";
 import useWindowDimensions from "../../hooks/useWindowDimensions";
 import { useRouter } from "next/router";
 import classes from "./eventsPageLayout.module.css";
+import { GetStaticProps } from "next";
+import client from "../../lib/apollo";
+import { GET_EVENTS_PAGE } from "../../apollo/gql";
 
 type Props = {
-  children: React.ReactNode;
+  children: any;
+  data: any;
 };
 
-function eventsPageLayout({ children }: Props) {
+function eventsPageLayout(props: Props) {
   const [firstClick, setFirstClick] = useState("");
   const winDim = useWindowDimensions();
   const router = useRouter();
+  const [tileData, setTileData] = useState<any>(null);
+
+  console.log(props, "helloooooooo");
 
   useEffect(() => {
-    console.log(firstClick);
-    // console.log(winDim);
-    console.log(router);
-  }, [firstClick, winDim, router]);
+    if (router.pathname === "/events") {
+      setTileData({
+        upcomingTileData: props?.children.props.data.allEventsPage.filter(
+          (tile: any) => tile.tile_name === "Upcoming"
+        )[0],
+        bookTileData: props?.children.props.data.allEventsPage.filter(
+          (tile: any) => tile.tile_name === "Book"
+        )[0],
+        pastTileData: props?.children.props.data.allEventsPage.filter(
+          (tile: any) => tile.tile_name === "Past"
+        )[0],
+      });
+    }
+  }, []);
 
   useEffect(() => {
     let currentPath = router.pathname.split("/");
-    console.log(currentPath, "path");
     if (currentPath[2]) {
       return setFirstClick(currentPath[2]);
     }
     setFirstClick("");
   }, [router]);
+
+  if (!tileData) return;
   return (
     <div className={classes.events_layout_container}>
       <div
@@ -48,14 +63,27 @@ function eventsPageLayout({ children }: Props) {
               setFirstClick("past");
             }}
           >
-            <Image
-              src={pastArrow}
-              alt={""}
-              fill
-              quality={100}
-              priority
-              sizes="100%"
-            />
+            <div className={classes.image_container}>
+              <Image
+                className={classes.img1}
+                src={tileData?.pastTileData?.tile_icon.asset.url}
+                alt={""}
+                fill
+                quality={100}
+                priority
+                sizes="100%"
+              />
+              <Image
+                className={classes.img2}
+                src={tileData?.pastTileData?.tile_image.asset.url}
+                alt={""}
+                fill
+                quality={100}
+                priority
+                sizes="100%"
+                style={{ objectFit: "cover" }}
+              />
+            </div>
           </div>
         </Link>
         <Link
@@ -71,14 +99,26 @@ function eventsPageLayout({ children }: Props) {
               setFirstClick("upcoming");
             }}
           >
-            <Image
-              quality={100}
-              src={upcomingArrow}
-              alt={""}
-              fill
-              priority
-              sizes="100%"
-            />
+            <div className={classes.image_container}>
+              <Image
+                quality={100}
+                src={tileData.upcomingTileData?.tile_icon.asset.url}
+                alt={""}
+                fill
+                priority
+                sizes="100%"
+              />
+              <Image
+                className={classes.img2}
+                src={tileData.upcomingTileData?.tile_image.asset.url}
+                alt={""}
+                fill
+                quality={100}
+                priority
+                sizes="100%"
+                style={{ objectFit: "cover" }}
+              />
+            </div>
           </div>
         </Link>
         <Link
@@ -87,7 +127,7 @@ function eventsPageLayout({ children }: Props) {
             classes.book_container
           } ${!firstClick && classes.no_selection}`}
         >
-          <span>Book</span>
+          <span>Book Now</span>
           <div
             className={`${classes.past_events_image_container} ${
               firstClick === "book" && classes.selected_container
@@ -96,20 +136,48 @@ function eventsPageLayout({ children }: Props) {
               setFirstClick("book");
             }}
           >
-            <Image
-              quality={100}
-              src={bookArrow}
-              alt={""}
-              fill
-              priority
-              sizes="100%"
-            />
+            <div className={classes.image_container}>
+              <Image
+                quality={100}
+                src={tileData.bookTileData?.tile_icon.asset.url}
+                alt={""}
+                fill
+                priority
+                sizes="100%"
+              />
+              <Image
+                className={classes.img2}
+                src={tileData.bookTileData?.tile_image.asset.url}
+                alt={""}
+                fill
+                quality={100}
+                priority
+                sizes="100%"
+                style={{ objectFit: "cover" }}
+              />
+            </div>
           </div>
         </Link>
       </div>
-      {children}
+      {props.children}
     </div>
   );
 }
 
 export default eventsPageLayout;
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const results = await client.query({
+    query: GET_EVENTS_PAGE,
+  });
+  if (!results) {
+    return { notFound: true };
+  }
+
+  return {
+    props: {
+      data: results.data,
+    },
+    revalidate: 600,
+  };
+};

@@ -13,9 +13,21 @@ export default function ButtonNavigation({
   return (
     <div className={classes.button_nav_container}>
       <div className={classes.image_container}>
-        <Image className={classes.img1} src={img} alt={content} fill />
+        <Image
+          className={classes.img1}
+          src={img}
+          alt={content}
+          fill
+          sizes="100%"
+        />
         <Link href={`${path}`}>
-          <Image className={classes.img2} src={img2} alt={content} fill />
+          <Image
+            className={classes.img2}
+            src={img2}
+            alt={content}
+            fill
+            sizes="100%"
+          />
           <h4 className={classes.content2}>{content2}</h4>
         </Link>
       </div>
