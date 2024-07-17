@@ -38,6 +38,7 @@ const HomePage = ({ data }: Props) => {
           data.allHomePage.map((content: any) => {
             return (
               <div
+                key={content._id}
                 style={{
                   width: "100%",
                   height: "100%",

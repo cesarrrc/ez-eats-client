@@ -66,7 +66,7 @@ const UpcomingEvents = ({ data }: Props) => {
     return (
       <div className={classes.past_events_grid_container}>
         {data.allEvents.map((event: EventDetails) => (
-          <EventCard event={event} setCarousel={setCarousel} />
+          <EventCard event={event} setCarousel={setCarousel} key={event._id} />
         ))}
         {carousel.name ? (
           <EventCarouselModal setCarousel={setCarousel} carousel={carousel} />

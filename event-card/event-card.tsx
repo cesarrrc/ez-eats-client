@@ -13,7 +13,7 @@ type Props = {
 
 const EventCard = ({ event, setCarousel }: Props) => {
   return (
-    <div className={classes.past_events_container}>
+    <div className={classes.past_events_container} key={event._id}>
       <div className={classes.past_events_card}>
         <Carousel
           className={classes.crsl}

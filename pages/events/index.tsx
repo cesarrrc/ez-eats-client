@@ -1,22 +1,16 @@
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
-import LottieControl from "../../components/lottie/lottie";
-import construction from "../../lib/lottie/construction.json";
-import type { AppProps } from "next/app";
 import EventsPageLayout from "../../components/layout/eventsPageLayout";
-import useWindowDimensions from "../../hooks/useWindowDimensions";
-useWindowDimensions;
+import { GET_EVENTS_PAGE, GET_HOME } from "../../apollo/gql";
+import client from "../../lib/apollo";
+import { GetStaticProps } from "next";
+// import useWindowDimensions from "../../hooks/useWindowDimensions";
 
-type Props = {};
+type Props = {
+  data: any;
+};
 
-const Events = (props: Props) => {
-  const [firstClick, setFirstClick] = useState(false);
-
-  const ws = useWindowDimensions();
-
-  useEffect(() => {
-    console.log(ws.width, "yooo");
-  }, []);
+const Events = ({ data }: Props) => {
 
   return (
     <div>
@@ -36,17 +30,20 @@ const Events = (props: Props) => {
 };
 
 Events.PageLayout = EventsPageLayout;
-
 export default Events;
 
-const style = {
-  ["button-container"]: {
-    display: "grid",
-    gridTemplateColumns: "repeat(2, 1fr)",
-    backgroundColor: "red",
-    width: "100%",
-    maxWidth: "500px",
-    gridColumnGap: "20px",
-  },
-  ["button"]: {},
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const results = await client.query({
+    query: GET_EVENTS_PAGE,
+  });
+  if (!results) {
+    return { notFound: true };
+  }
+
+  return {
+    props: {
+      data: results.data,
+    },
+    revalidate: 600,
+  };
 };
