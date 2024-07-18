@@ -1,12 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import useWindowDimensions from "../../hooks/useWindowDimensions";
 import { useRouter } from "next/router";
 import classes from "./eventsPageLayout.module.css";
-import { GetStaticProps } from "next";
-import client from "../../lib/apollo";
-import { GET_EVENTS_PAGE } from "../../apollo/gql";
 
 type Props = {
   children: any;
@@ -15,26 +11,22 @@ type Props = {
 
 function eventsPageLayout(props: Props) {
   const [firstClick, setFirstClick] = useState("");
-  const winDim = useWindowDimensions();
   const router = useRouter();
   const [tileData, setTileData] = useState<any>(null);
 
-  console.log(props, "helloooooooo");
-
   useEffect(() => {
-    if (router.pathname === "/events") {
-      setTileData({
-        upcomingTileData: props?.children.props.data.allEventsPage.filter(
-          (tile: any) => tile.tile_name === "Upcoming"
-        )[0],
-        bookTileData: props?.children.props.data.allEventsPage.filter(
-          (tile: any) => tile.tile_name === "Book"
-        )[0],
-        pastTileData: props?.children.props.data.allEventsPage.filter(
-          (tile: any) => tile.tile_name === "Past"
-        )[0],
-      });
-    }
+    setTileData({
+      upcomingTileData: props?.children?.props?.eventsPageTiles?.filter(
+        (tile: any) => tile.tile_name === "Upcoming"
+      )[0],
+      bookTileData: props?.children?.props?.eventsPageTiles?.filter(
+        (tile: any) => tile.tile_name === "Book"
+      )[0],
+      pastTileData: props?.children?.props?.eventsPageTiles?.filter(
+        (tile: any) => tile.tile_name === "Past"
+      )[0],
+    });
+    // }
   }, []);
 
   useEffect(() => {
@@ -45,7 +37,10 @@ function eventsPageLayout(props: Props) {
     setFirstClick("");
   }, [router]);
 
-  if (!tileData) return;
+  if (!tileData) {
+    return;
+  }
+
   return (
     <div className={classes.events_layout_container}>
       <div
@@ -165,19 +160,3 @@ function eventsPageLayout(props: Props) {
 }
 
 export default eventsPageLayout;
-
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const results = await client.query({
-    query: GET_EVENTS_PAGE,
-  });
-  if (!results) {
-    return { notFound: true };
-  }
-
-  return {
-    props: {
-      data: results.data,
-    },
-    revalidate: 600,
-  };
-};

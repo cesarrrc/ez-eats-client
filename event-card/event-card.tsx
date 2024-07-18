@@ -7,7 +7,7 @@ import { EventDetails } from "../lib/types";
 import BlockContent from "@sanity/block-content-to-react";
 
 type Props = {
-  event: EventDetails;
+  event: any;
   setCarousel: any;
 };
 
@@ -26,8 +26,8 @@ const EventCard = ({ event, setCarousel }: Props) => {
           infiniteLoop
           interval={6000}
         >
-          {event.flyer?.map((flyer) => (
-            <img src={flyer.asset.url} />
+          {event.flyer?.map((flyer: any, index: number) => (
+            <img key={(flyer._id, index)} src={flyer.asset.url} />
           ))}
         </Carousel>
         <div className={classes.past_event_content}>

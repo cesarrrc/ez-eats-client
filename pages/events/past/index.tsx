@@ -9,6 +9,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { AllEventsType, EventDetails } from "../../../lib/types";
 import EventCard from "../../../event-card/event-card";
 import EventCarouselModal from "../../../components/carousel/event-carousel-modal";
+import { GET_EVENTS_PAGE } from "../../../apollo/gql";
 
 type Props = {
   data: AllEventsType;
@@ -78,13 +79,18 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     query: GET_PAST_EVENTS,
     variables: { currentTime: new Date().toISOString() },
   });
+
   if (!results) {
     return { notFound: true };
   }
-  console.log(results);
+  const results2 = await client.query({
+    query: GET_EVENTS_PAGE,
+  });
+
   return {
     props: {
       data: results.data,
+      eventsPageTiles: results2.data.allEventsPage,
     },
     revalidate: 600,
   };

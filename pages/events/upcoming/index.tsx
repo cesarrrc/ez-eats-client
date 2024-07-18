@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import EventsPageLayout from "../../../components/layout/eventsPageLayout";
 import LottieControl from "../../../components/lottie/lottie";
 import noEvent from "../../../lib/lottie/no_event_calender.json";
@@ -11,15 +11,13 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 import EventCard from "../../../event-card/event-card";
 import EventCarouselModal from "../../../components/carousel/event-carousel-modal";
 import classes from "../past/past.module.css";
+import { GET_EVENTS_PAGE } from "../../../apollo/gql";
 
 type Props = {
   data: AllEventsType;
 };
 
 const UpcomingEvents = ({ data }: Props) => {
-  useEffect(() => {
-    console.log(data.allEvents);
-  }, []);
   const [carousel, setCarousel] = useState<any>({});
   if (!data.allEvents.length) {
     return (
@@ -106,10 +104,20 @@ const GET_EVENTS = gql`
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const currentTime = await new Date().toISOString();
+
   const results = await client.query({
     query: GET_EVENTS,
     variables: { currentTime },
   });
+
+  const results2 = await client.query({
+    query: GET_EVENTS_PAGE,
+  });
+
+  if (!results) {
+    return { notFound: true };
+  }
+
   if (!results) {
     return { notFound: true };
   }
@@ -117,6 +125,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   return {
     props: {
       data: results.data,
+      eventsPageTiles: results2.data.allEventsPage,
     },
     revalidate: 600,
   };
