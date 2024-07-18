@@ -12,6 +12,9 @@ import * as errorLottie from "../../../lib/lottie/error.json";
 import Head from "next/head";
 import LottieControl from "../../../components/lottie/lottie";
 import { Button } from "@mui/material";
+import { GetStaticProps } from "next";
+import client from "../../../lib/apollo";
+import { GET_EVENTS_PAGE } from "../../../apollo/gql";
 
 type Props = {};
 
@@ -195,3 +198,19 @@ const BookAnEvent = (props: Props) => {
 BookAnEvent.PageLayout = EventsPageLayout;
 
 export default BookAnEvent;
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const results = await client.query({
+    query: GET_EVENTS_PAGE,
+  });
+  if (!results) {
+    return { notFound: true };
+  }
+
+  return {
+    props: {
+      eventsPageTiles: results.data.allEventsPage,
+    },
+    revalidate: 600,
+  };
+};

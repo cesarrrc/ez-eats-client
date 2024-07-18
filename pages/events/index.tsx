@@ -11,7 +11,6 @@ type Props = {
 };
 
 const Events = ({ data }: Props) => {
-
   return (
     <div>
       <Head>
@@ -42,7 +41,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   return {
     props: {
-      data: results.data,
+      eventsPageTiles: results.data.allEventsPage,
     },
     revalidate: 600,
   };
